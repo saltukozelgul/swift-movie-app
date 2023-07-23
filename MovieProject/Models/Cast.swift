@@ -7,6 +7,11 @@
 
 import Foundation
 
-struct Cast {
-    
+struct Cast: Codable {
+    let name: String?
+    let profilePath: String?
+    let biography: String?
+    let birthday: String?
+    let deathday: String?
+    let placeOfBirth: String?
 }
