@@ -16,39 +16,16 @@ class NetworkManager {
     
     private init () {}
     
-    // Get popular movies with AF
-    func getPopularMovies(page: Int, completion: @escaping ([Movie]?, Int?) -> Void) {
+    func fetchData<T: Decodable>(url: String, completion: @escaping (T?) -> Void) {
         
         let dataDecoder = JSONDecoder()
         dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        let url = NetworkConstants.popularMoviesUrl + "&page=\(page)"
-        AF.request(url).responseDecodable(of: PopularMovies.self, decoder: dataDecoder) { (response) in
-            
-            guard let movies = response.value?.results else {
-                completion(nil, nil)
-                return
-            }
-            guard let maxPage = response.value?.totalPages else {
-                completion(nil, nil)
-                return
-            }
-            completion(movies,maxPage)
-        }
-    }
-    
-    func getMovieDetail(movieId: Int, completion: @escaping (Movie?) -> Void) {
-        
-        let dataDecoder = JSONDecoder()
-        dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        let url = NetworkConstants.movieDetailUrl + "\(movieId)" + NetworkConstants.suffixUrl
-        AF.request(url).responseDecodable(of: Movie.self, decoder: dataDecoder) { (response) in
-            
-            guard let movie = response.value else {
+        AF.request(url).responseDecodable(of: T.self, decoder: dataDecoder) { (response) in
+            guard let data = response.value else {
                 completion(nil)
                 return
             }
-            completion(movie)
+            completion(data)
         }
     }
-    
 }

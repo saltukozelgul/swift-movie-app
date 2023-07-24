@@ -14,6 +14,13 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var moviePosterImageView: UIImageView!
     
+    @IBOutlet weak var voteAverageLabel: UILabel!
+    @IBOutlet weak var movieOverviewLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var genresLabel: UILabel!
+    @IBOutlet weak var budgetLabel: UILabel!
+    @IBOutlet weak var revenueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,7 +32,9 @@ class MovieDetailViewController: UIViewController {
     
     func fetchMovie() {
         if let movieId {
-            NetworkManager.shared.getMovieDetail(movieId: movieId) { movie in
+            let url = NetworkConstants.movieDetailUrl + "\(movieId)" + NetworkConstants.suffixUrl
+            // use fetch data generic
+            NetworkManager.shared.fetchData(url: url) { (movie: Movie?) in
                 self.detailedMovie = movie
                 self.updateUI()
             }
@@ -34,9 +43,12 @@ class MovieDetailViewController: UIViewController {
     
     func updateUI() {
         movieNameLabel.text = detailedMovie?.title
+        movieOverviewLabel.text = detailedMovie?.overview
+        voteAverageLabel.text = String(detailedMovie?.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
+        releaseDateLabel.text = detailedMovie?.releaseDate?.convertToLocalizedDateString()
+        genresLabel.text = detailedMovie?.genres?.map { $0.name ?? "" }.joined(separator: ", ")
         moviePosterImageView.setImageFromPath(path: detailedMovie?.backdropPath ?? "unknown")
-        
+        budgetLabel.text = String(detailedMovie?.budget ?? 0).convertToCurrency()
+        revenueLabel.text = String(detailedMovie?.revenue ?? 0).convertToCurrency()
     }
-    
-
 }

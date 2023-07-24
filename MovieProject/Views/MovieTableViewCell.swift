@@ -32,10 +32,7 @@ class MovieTableViewCell: UITableViewCell {
         movieTitleLabel.text = movie.title
         movieOverviewLabel.text = movie.overview
         movieRelaseDateLabel.text = String(movie.releaseDate?.prefix(4) ?? "")
-        movieVoteAverageLabel.text = String(movie.voteAverage ?? 0) + " / 10"
+        movieVoteAverageLabel.text = String(movie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
         movieImageView.setImageFromPath(path: movie.posterPath ?? "")
     }
-    
-    
-    
 }

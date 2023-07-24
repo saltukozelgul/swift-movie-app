@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  MovieProject
+
+  Created by Saltuk Bugra OZELGUL on 24.07.2023.
+  
+*/
+
+"isoCode" = "en-US";
+
+"january" = "January";
+"february" = "February";
+"march" = "March";
+"april" = "April";
+"may" = "May";
+"june" = "June";
+"july" = "July";
+"august" = "August";
+"september" = "September";
+"october" = "October";
+"november" = "November";
+"december" = "December";
+

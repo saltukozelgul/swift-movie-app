@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9N8-gj-Ba1"; */
+"9N8-gj-Ba1.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Popular Movies"; ObjectID = "9yp-S2-wAv"; */
+"9yp-S2-wAv.title" = "Popular Movies";
+
+/* Class = "UIViewController"; title = "Movies"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "Movies";
+
+/* Class = "UITabBarItem"; title = "Movies"; ObjectID = "afr-od-DBq"; */
+"afr-od-DBq.title" = "Movies";
+
+/* Class = "UIViewController"; title = "DetailedMovie"; ObjectID = "yxM-27-BBj"; */
+"yxM-27-BBj.title" = "DetailedMovie";

@@ -27,19 +27,16 @@ class MovieListViewController: UIViewController {
     }
     
     @objc func fetchData() {
-        NetworkManager.shared.getPopularMovies(page: currentPage) { movies, maxPage in
-            guard let movies else {
+        let url = NetworkConstants.popularMoviesUrl + "&page=\(currentPage)"
+        NetworkManager.shared.fetchData(url: url) { (movies: PopularMovies?) in
+            guard let movies = movies else {
                 return
             }
-            if let maxPage {
-                self.totalPages = maxPage
-            }
-            self.listedMovies.append(contentsOf: movies)
+            self.listedMovies.append(contentsOf: movies.results ?? [])
+            self.totalPages = movies.totalPages ?? 1
             self.tableView.reloadData()
-            // search bar disappers?
-            
+            self.currentPage += 1
         }
-        currentPage += 1
     }
 }
 

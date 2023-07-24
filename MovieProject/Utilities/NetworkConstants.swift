@@ -11,7 +11,9 @@ struct NetworkConstants {
     static let apiKey = "e17c0c151bd8b342a611a49b92e038bc"
     static let baseUrl = "https://api.themoviedb.org/3"
     static let baseImageUrl = "https://image.tmdb.org/t/p/w500"
-    static let suffixUrl = "?api_key=\(apiKey)&language=en-US"
+    // get from Localizable.strings key isoCode
+    static let isoCode = NSLocalizedString("isoCode", comment: "iso code for api for localization")
+    static let suffixUrl = "?api_key=\(apiKey)&language=\(isoCode)"
     static let popularMoviesUrl = "\(baseUrl)/movie/popular\(suffixUrl)"
     static let movieDetailUrl = "\(baseUrl)/movie/"
 }
