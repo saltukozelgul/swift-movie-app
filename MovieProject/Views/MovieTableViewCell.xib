@@ -17,15 +17,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="533" height="294"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ukP-M2-1Sa" customClass="Image">
-                        <rect key="frame" x="10" y="10" width="530" height="274"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ukP-M2-1Sa" customClass="Image">
+                        <rect key="frame" x="10" y="0.0" width="520" height="284"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="RSI-FB-uo0">
                                 <rect key="frame" x="40" y="-42" width="240" height="127.66666666666669"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AdY-hA-EeJ">
-                                <rect key="frame" x="290" y="-42" width="240" height="63"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AdY-hA-EeJ">
+                                <rect key="frame" x="280" y="-24.333333333333332" width="240" height="92.333333333333329"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="TheMovieName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfd-dP-MKv" userLabel="Title">
                                         <rect key="frame" x="0.0" y="0.0" width="138.33333333333334" height="24"/>
@@ -34,22 +34,42 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRN-AZ-pzJ" userLabel="OverView">
-                                        <rect key="frame" x="0.0" y="39" width="37.333333333333336" height="24"/>
+                                        <rect key="frame" x="0.0" y="39" width="37.333333333333336" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="systemGrayColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HCE-5t-Sty">
+                                        <rect key="frame" x="0.0" y="72" width="142.66666666666666" height="20.333333333333329"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M9O-CA-Gkl">
+                                                <rect key="frame" x="0.0" y="1.6666666666666643" width="20.666666666666668" height="17.333333333333336"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="176 dk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0I-Ra-USs">
+                                                <rect key="frame" x="25.666666666666686" y="1.3333333333333357" width="45" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="G2D-Gz-VQI">
+                                                <rect key="frame" x="75.666666666666686" y="-0.33333333333333215" width="22" height="19.999999999999996"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.5/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmi-Fg-gaG">
+                                                <rect key="frame" x="102.66666666666669" y="1.3333333333333357" width="40" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="200" id="3Ei-Hi-gcX"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ukP-M2-1Sa" secondAttribute="trailing" constant="10" id="9hw-6z-qXl"/>
-                    <constraint firstItem="ukP-M2-1Sa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FEy-rz-DzH"/>
+                    <constraint firstItem="ukP-M2-1Sa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FEy-rz-DzH"/>
                     <constraint firstItem="ukP-M2-1Sa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PHu-Qq-fjD"/>
                     <constraint firstAttribute="bottom" secondItem="ukP-M2-1Sa" secondAttribute="bottom" constant="10" id="iu7-Kp-6l5"/>
                 </constraints>
@@ -58,12 +78,16 @@
             <connections>
                 <outlet property="movieImageView" destination="RSI-FB-uo0" id="ZgO-fc-NUR"/>
                 <outlet property="movieOverviewLabel" destination="kRN-AZ-pzJ" id="QMU-oG-QFb"/>
+                <outlet property="movieRelaseDateLabel" destination="s0I-Ra-USs" id="DXC-Vr-bUh"/>
                 <outlet property="movieTitleLabel" destination="gfd-dP-MKv" id="jbg-T8-J19"/>
+                <outlet property="movieVoteAverageLabel" destination="Zmi-Fg-gaG" id="hfV-TO-eWw"/>
             </connections>
             <point key="canvasLocation" x="248.09160305343511" y="51.408450704225352"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="calendar" catalog="system" width="128" height="107"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

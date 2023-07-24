@@ -35,4 +35,20 @@ class NetworkManager {
             completion(movies,maxPage)
         }
     }
+    
+    func getMovieDetail(movieId: Int, completion: @escaping (Movie?) -> Void) {
+        
+        let dataDecoder = JSONDecoder()
+        dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        let url = NetworkConstants.movieDetailUrl + "\(movieId)" + NetworkConstants.suffixUrl
+        AF.request(url).responseDecodable(of: Movie.self, decoder: dataDecoder) { (response) in
+            
+            guard let movie = response.value else {
+                completion(nil)
+                return
+            }
+            completion(movie)
+        }
+    }
+    
 }

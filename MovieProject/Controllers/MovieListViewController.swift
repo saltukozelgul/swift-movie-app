@@ -36,6 +36,8 @@ class MovieListViewController: UIViewController {
             }
             self.listedMovies.append(contentsOf: movies)
             self.tableView.reloadData()
+            // search bar disappers?
+            
         }
         currentPage += 1
     }
@@ -61,6 +63,17 @@ extension MovieListViewController: UITableViewDelegate {
                 fetchData()
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.heightForPopularMovieRow
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = listedMovies[indexPath.row]
+        navigateToMovieDetail(movie: movie)
+        // deselect row again
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 

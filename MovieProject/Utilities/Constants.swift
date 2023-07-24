@@ -9,5 +9,5 @@ import Foundation
 
 
 struct Constants {
-    
+    static let heightForPopularMovieRow: CGFloat = 200
 }
