@@ -8,10 +8,12 @@
 import Foundation
 
 struct Cast: Codable {
+    let id: Int?
     let name: String?
     let profilePath: String?
     let biography: String?
     let birthday: String?
     let deathday: String?
     let placeOfBirth: String?
+    let character: String?
 }

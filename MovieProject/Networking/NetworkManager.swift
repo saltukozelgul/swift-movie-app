@@ -17,7 +17,6 @@ class NetworkManager {
     private init () {}
     
     func fetchData<T: Decodable>(url: String, completion: @escaping (T?) -> Void) {
-        
         let dataDecoder = JSONDecoder()
         dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
         AF.request(url).responseDecodable(of: T.self, decoder: dataDecoder) { (response) in
