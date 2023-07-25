@@ -8,25 +8,24 @@
 import UIKit
 
 class MovieListViewController: UIViewController {
-    var listedMovies = [Movie]()
+    private var listedMovies = [Movie]()
     
     // Page variables
-    var currentPage = 1
-    var totalPages = 1
+    private var currentPage = 1
+    private var totalPages = 1
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: String(describing: MovieTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MovieTableViewCell.self))
-        
+        tableView.registerNib(with: String(describing: MovieTableViewCell.self))
         fetchData()
     }
     
     @objc func fetchData() {
-        let url = NetworkConstants.popularMoviesUrl + "&page=\(currentPage)"
+        let url = NetworkUrlBuilder.getPopularMoviesUrl(page: currentPage)
         NetworkManager.shared.fetchData(url: url) { (movies: PopularMovies?) in
             guard let movies = movies else {
                 return

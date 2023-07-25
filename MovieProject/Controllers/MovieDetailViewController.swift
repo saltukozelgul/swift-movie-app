@@ -11,46 +11,50 @@ import FlagKit
 class MovieDetailViewController: UIViewController {
     // private tanımlamak daha mantıklı
     var movieId: Int?
-    var detailedMovie: Movie?
-    var cast: [Cast]?
+    private var detailedMovie: Movie?
+    private var cast: [Cast]?
     
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var movieNameLabel: UILabel!
-    @IBOutlet weak var moviePosterImageView: UIImageView!
-    @IBOutlet weak var voteAverageLabel: UILabel!
-    @IBOutlet weak var movieOverviewLabel: UILabel!
-    @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var genresLabel: UILabel!
-    @IBOutlet weak var budgetLabel: UILabel!
-    @IBOutlet weak var revenueLabel: UILabel!
-    @IBOutlet weak var runtimeLabel: UILabel!
-    @IBOutlet weak var flagImageView: UIImageView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var loadingView: UIView!
+    @IBOutlet private weak var movieNameLabel: UILabel!
+    @IBOutlet private weak var moviePosterImageView: UIImageView!
+    @IBOutlet private weak var voteAverageLabel: UILabel!
+    @IBOutlet private weak var movieOverviewLabel: UILabel!
+    @IBOutlet private weak var releaseDateLabel: UILabel!
+    @IBOutlet private weak var genresLabel: UILabel!
+    @IBOutlet private weak var budgetLabel: UILabel!
+    @IBOutlet private weak var revenueLabel: UILabel!
+    @IBOutlet private weak var runtimeLabel: UILabel!
+    @IBOutlet private weak var flagImageView: UIImageView!
     
-    // Scroll view outlets
-    @IBOutlet weak var castStackView: UIStackView!
+    // CollectionView
+    @IBOutlet private weak var castStackView: UIStackView!
+    @IBOutlet private weak var castCollectionView: UICollectionView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        castCollectionView.delegate = self
+        castCollectionView.dataSource = self
+        castCollectionView.registerNib(with: String(describing: CastCollectionViewCell.self))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.showLoading()
         fetchMovie()
     }
     
     func fetchMovie() {
         if let movieId {
-            // loadingler daha generic olabilir e
-            loadingIndicator.startAnimating()
-            let url = NetworkConstants.getMovieDetailUrl(movieId: movieId)
+            let url = NetworkUrlBuilder.getMovieDetailUrl(movieId: movieId)
             // use fetch data generic
             NetworkManager.shared.fetchData(url: url) { (movie: Movie?) in
                 if let movie {
                     self.detailedMovie = movie
                     self.updateUI()
-                    self.loadingIndicator.stopAnimating()
-                    self.loadingView.isHidden = true
+                    self.view.hideLoading()
                 } else {
                     // error alert will implemented
                 }
@@ -58,13 +62,13 @@ class MovieDetailViewController: UIViewController {
             let castUrl = NetworkConstants.getMovieCastUrl(movieId: movieId)
             NetworkManager.shared.fetchData(url: castUrl) { (credits: MovieCredit?) in
                 self.cast = credits?.cast
-                if let cast = self.cast {
-                    self.addToCastStackView(cast: cast)
+                if let _ = self.cast {
+                    self.castCollectionView.reloadData()
                 }
             }
         }
     }
- 
+    
     func updateUI() {
         guard let detailedMovie = detailedMovie else { return }
         
@@ -80,17 +84,28 @@ class MovieDetailViewController: UIViewController {
     }
 }
 
+// MARK: CollectionView Methods
 
-
-// MARK: Cast Section
-
-extension MovieDetailViewController {
-    func addToCastStackView(cast: [Cast]) {
-        for castMember in cast {
-            // CastView has set method that accept Cast Model
-            let castView = CastView()
-            castView.set(cast: castMember)
-            castStackView?.addArrangedSubview(castView)
+extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.cast?.count ?? 0
+    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cast = self.cast?[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as! CastCollectionViewCell
+        if let cast {
+            cell.configure(with: cast)
         }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: Cast detay sayfasına gidecek fonksiyon implement edilecek
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: Constants.widthForCastCell , height: Constants.heightForCastCell)
     }
 }

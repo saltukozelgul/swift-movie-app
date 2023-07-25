@@ -10,11 +10,11 @@ import Kingfisher
 
 class MovieTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var movieImageView: UIImageView!
-    @IBOutlet weak var movieTitleLabel: UILabel!
-    @IBOutlet weak  var movieOverviewLabel: UILabel!
-    @IBOutlet weak var movieRelaseDateLabel: UILabel!
-    @IBOutlet weak var movieVoteAverageLabel: UILabel!
+    @IBOutlet private weak var movieImageView: UIImageView!
+    @IBOutlet private weak var movieTitleLabel: UILabel!
+    @IBOutlet private weak var movieOverviewLabel: UILabel!
+    @IBOutlet private weak var movieRelaseDateLabel: UILabel!
+    @IBOutlet private weak var movieVoteAverageLabel: UILabel!
     
     
     override func awakeFromNib() {

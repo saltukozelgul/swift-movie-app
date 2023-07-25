@@ -26,6 +26,8 @@ struct NetworkConstants {
     static func getMovieCastUrl(movieId: Int) -> String {
         return "\(movieDetailUrl)\(movieId)\(creditSuffix)"
     }
-
     
+    static func getPopularMoviesUrl(page: Int) -> String {
+        return "\(popularMoviesUrl)" + "&page=\(page)"
+    }
 }
