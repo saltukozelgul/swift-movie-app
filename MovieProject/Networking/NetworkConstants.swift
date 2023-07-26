@@ -16,6 +16,7 @@ struct NetworkConstants {
     static let suffixUrl = "?api_key=\(apiKey)&language=\(isoCode)"
     static let popularMoviesUrl = "\(baseUrl)/movie/popular\(suffixUrl)"
     static let movieDetailUrl = "\(baseUrl)/movie/"
+    static let personDetailUrl = "\(baseUrl)/person/"
     static let creditSuffix = "/credits\(suffixUrl)"
     
     

@@ -19,4 +19,9 @@ struct NetworkUrlBuilder {
     static func getPopularMoviesUrl(page: Int) -> String {
         return "\(NetworkConstants.popularMoviesUrl)" + "&page=\(page)"
     }
+    
+    static func getPersonDetailUrl(personId: Int) -> String {
+        return "\(NetworkConstants.personDetailUrl)\(personId)\(NetworkConstants.suffixUrl)"
+    }
+    
 }

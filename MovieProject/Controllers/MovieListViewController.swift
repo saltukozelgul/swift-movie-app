@@ -46,6 +46,7 @@ extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as! MovieTableViewCell
         cell.configureCellForDisplay(movie: listedMovies[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -67,8 +68,6 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = listedMovies[indexPath.row]
         navigateToMovieDetail(movie: movie)
-        // deselect row again
-        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 

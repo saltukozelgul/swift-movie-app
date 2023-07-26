@@ -103,6 +103,9 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Cast detay sayfasına gidecek fonksiyon implement edilecek
+        if let cast = self.cast?[indexPath.row] {
+            navigateToCastDetail(cast: cast)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
