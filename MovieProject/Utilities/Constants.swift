@@ -14,4 +14,8 @@ struct Constants {
     static let widthForCastCell: CGFloat = 128
     static let heightForCastCellImage: CGFloat = 90
     static let widthForCastCellImage: CGFloat = 90
+    static let entityNameForFavouriteCheck: String = "FavouriteMovie"
+    static let keyValueForFavoriteCheck: String = "movieId"
+    static let iconNameForFavouriteMovie: String = "heart.fill"
+    static let iconNameForNotFavouriteMovie: String = "heart"
 }

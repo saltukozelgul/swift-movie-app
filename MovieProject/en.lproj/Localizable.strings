@@ -23,4 +23,5 @@
 "shortMin" = " min";
 "ok" = "OK";
 "error" = "Error";
+"addFavErrorMsg" = "An error occurred while adding to favorites.";
 
