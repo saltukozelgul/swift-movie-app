@@ -12,8 +12,8 @@ struct Cast: Codable {
     let name: String?
     let profilePath: String?
     let biography: String?
-    let birthday: String?
-    let deathday: String?
+    let birthday: Date?
+    let deathday: Date?
     let placeOfBirth: String?
     let character: String?
 }

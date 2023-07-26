@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="533" height="255"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ukP-M2-1Sa" customClass="Image">
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ukP-M2-1Sa" customClass="Image">
                         <rect key="frame" x="10" y="0.0" width="513" height="245"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkc-YF-YNd">
@@ -41,7 +41,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AdY-hA-EeJ">
-                                <rect key="frame" x="135" y="61.333333333333336" width="378" height="122.33333333333331"/>
+                                <rect key="frame" x="150" y="61.333333333333336" width="363" height="122.33333333333331"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="TheMovieName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfd-dP-MKv" userLabel="Title">
                                         <rect key="frame" x="0.0" y="0.0" width="138.33333333333334" height="24"/>
@@ -71,7 +71,7 @@
                                                 <rect key="frame" x="75.666666666666657" y="14.666666666666666" width="22" height="19.999999999999996"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.5/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmi-Fg-gaG">
-                                                <rect key="frame" x="102.66666666666666" y="16.333333333333314" width="40" height="18"/>
+                                                <rect key="frame" x="102.66666666666669" y="16.333333333333314" width="40" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
                                                 <nil key="highlightedColor"/>
@@ -79,7 +79,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVr-M7-mXH">
                                                 <rect key="frame" x="147.66666666666669" y="0.0" width="66.666666666666686" height="50.333333333333336"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title="" buttonSize="large"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title="" buttonSize="large">
+                                                    <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="addFavouriteButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1gY-yT-Kia"/>
                                                 </connections>
@@ -119,6 +121,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

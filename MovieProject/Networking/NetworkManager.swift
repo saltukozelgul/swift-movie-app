@@ -16,9 +16,13 @@ class NetworkManager {
     
     private init () {}
         
-        func fetchData<T: Decodable>(url: String, completion: @escaping (Result<T, AFError>) -> Void) {
+        func fetchData<T: Decodable>(url: URL, completion: @escaping (Result<T, AFError>) -> Void) {
             let dataDecoder = JSONDecoder()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-mm-dd"
             dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
+            // date coming from format is yyyy-mm-dd
+            dataDecoder.dateDecodingStrategy = .formatted(dateFormatter)
             AF.request(url).responseDecodable(of: T.self, decoder: dataDecoder) { (response) in
                 guard let data = response.value else {
                     completion(.failure(response.error ?? AFError.explicitlyCancelled))

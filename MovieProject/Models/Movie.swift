@@ -14,7 +14,7 @@ struct Movie: Codable {
     let backdropPath: String?
     let originalTitle: String?
     let originalLanguage: String?
-    let releaseDate: String?
+    let releaseDate: Date?
     let budget: Int?
     let revenue: Int?
     let homepage: String?

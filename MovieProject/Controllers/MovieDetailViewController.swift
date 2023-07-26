@@ -48,8 +48,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func fetchMovie() {
-        if let movieId {
-            let url = NetworkUrlBuilder.getMovieDetailUrl(movieId: movieId)
+        if let movieId, let url = APIManager.shared.getMovieDetailUrl(movieId: movieId)  {
             NetworkManager.shared.fetchData(url: url) { (result: Result<Movie, AFError>) in
                 switch result {
                     case .success(let movie):
@@ -60,16 +59,18 @@ class MovieDetailViewController: UIViewController {
                         ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                 }
             }
-            let castUrl = NetworkConstants.getMovieCastUrl(movieId: movieId)
-            NetworkManager.shared.fetchData(url: castUrl) { (result: Result<MovieCredit, AFError>) in
-                switch result {
-                    case .success(let credits):
-                        self.castList = credits.cast
-                        self.castCollectionView.reloadData()
-                    case .failure(let error):
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+            if let castUrl = APIManager.shared.getMovieCastUrl(movieId: movieId) {
+                NetworkManager.shared.fetchData(url: castUrl) { (result: Result<MovieCredit, AFError>) in
+                    switch result {
+                        case .success(let credits):
+                            self.castList = credits.cast
+                            self.castCollectionView.reloadData()
+                        case .failure(let error):
+                            ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                    }
                 }
             }
+            
         }
     }
     
@@ -79,7 +80,7 @@ class MovieDetailViewController: UIViewController {
         movieNameLabel.text = (detailedMovie.originalTitle ?? "")
         movieOverviewLabel.text = detailedMovie.overview
         voteAverageLabel.text = String(detailedMovie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
-        releaseDateLabel.text = detailedMovie.releaseDate?.convertToLocalizedDateString()
+        releaseDateLabel.text = detailedMovie.releaseDate?.getMonthAndYearWithLocale()
         genresLabel.text = detailedMovie.genres?.map { $0.name ?? "" }.joined(separator: ", ")
         moviePosterImageView.setImageFromPath(path: detailedMovie.backdropPath ?? "unknown")
         budgetLabel.text = String(detailedMovie.budget ?? 0).convertToCurrency()
@@ -93,7 +94,7 @@ class MovieDetailViewController: UIViewController {
 extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.castList?.count ?? 0
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -111,7 +112,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
             navigateToCastDetail(cast: cast)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: Constants.widthForCastCell , height: Constants.heightForCastCell)
     }

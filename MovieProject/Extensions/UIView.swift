@@ -19,4 +19,9 @@ extension UIView {
         }
     }
     
+    func setCornerRadius(_ value: CGFloat) {
+        self.layer.cornerRadius = value
+        self.layer.masksToBounds = true
+    }
+    
 }

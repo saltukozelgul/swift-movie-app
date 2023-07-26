@@ -26,16 +26,17 @@ class MovieListViewController: UIViewController {
     }
     
     @objc func fetchData() {
-        let url = NetworkUrlBuilder.getPopularMoviesUrl(page: currentPage)
-        NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
-            switch result {
-                case .success(let movies):
-                    self.listedMovies.append(contentsOf: movies.results ?? [])
-                    self.totalPages = movies.totalPages ?? 1
-                    self.tableView.reloadData()
-                    self.currentPage += 1
-                case .failure(let error):
-                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+        if let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) {
+            NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
+                switch result {
+                    case .success(let movies):
+                        self.listedMovies.append(contentsOf: movies.results ?? [])
+                        self.totalPages = movies.totalPages ?? 1
+                        self.tableView.reloadData()
+                        self.currentPage += 1
+                    case .failure(let error):
+                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                }
             }
         }
     }

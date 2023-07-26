@@ -19,16 +19,17 @@ class CastDetailViewController: UIViewController {
     @IBOutlet private weak var birthdayLabel: UILabel!
     @IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet weak var bottomCardView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showLoading()
+        bottomCardView.setCornerRadius(30)
         fetchPerson()
     }
     
     func fetchPerson() {
-        if let personId {
-            let url = NetworkUrlBuilder.getPersonDetailUrl(personId: personId)
+        if let personId, let url = APIManager.shared.getPersonDetailUrl(personId: personId)   {
             NetworkManager.shared.fetchData(url: url) { (result: Result<Cast, AFError>) in
                 switch result {
                     case .success(let person):
@@ -47,9 +48,9 @@ class CastDetailViewController: UIViewController {
         if let person = detailedCast {
             nameLabel.text = person.name
             bioLabel.text = person.biography
-            birthdayLabel.text = person.birthday?.convertToLocalizedDateString()
+            birthdayLabel.text = person.birthday?.getFullDateWithLocale()
             if let deathday = person.deathday {
-                deathdayLabel.text = deathday.convertToLocalizedDateString()
+                deathdayLabel.text = deathday.getFullDateWithLocale()
             } else {
                 deathdayHeaderLabel.isHidden = true
                 deathdayLabel.isHidden = true
