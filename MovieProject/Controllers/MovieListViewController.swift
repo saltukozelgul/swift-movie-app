@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MovieListViewController: UIViewController {
     private var listedMovies = [Movie]()
@@ -26,14 +27,16 @@ class MovieListViewController: UIViewController {
     
     @objc func fetchData() {
         let url = NetworkUrlBuilder.getPopularMoviesUrl(page: currentPage)
-        NetworkManager.shared.fetchData(url: url) { (movies: PopularMovies?) in
-            guard let movies = movies else {
-                return
+        NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
+            switch result {
+                case .success(let movies):
+                    self.listedMovies.append(contentsOf: movies.results ?? [])
+                    self.totalPages = movies.totalPages ?? 1
+                    self.tableView.reloadData()
+                    self.currentPage += 1
+                case .failure(let error):
+                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
             }
-            self.listedMovies.append(contentsOf: movies.results ?? [])
-            self.totalPages = movies.totalPages ?? 1
-            self.tableView.reloadData()
-            self.currentPage += 1
         }
     }
 }

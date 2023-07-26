@@ -21,3 +21,5 @@
 "november" = "Kasım";
 "december" = "Aralık";
 "shortMin" = " dk";
+"ok" = "Tamam";
+"error" = "Hata";

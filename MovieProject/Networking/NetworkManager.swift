@@ -15,16 +15,19 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     private init () {}
-    
-    func fetchData<T: Decodable>(url: String, completion: @escaping (T?) -> Void) {
-        let dataDecoder = JSONDecoder()
-        dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        AF.request(url).responseDecodable(of: T.self, decoder: dataDecoder) { (response) in
-            guard let data = response.value else {
-                completion(nil)
-                return
+        
+        func fetchData<T: Decodable>(url: String, completion: @escaping (Result<T, AFError>) -> Void) {
+            let dataDecoder = JSONDecoder()
+            dataDecoder.keyDecodingStrategy = .convertFromSnakeCase
+            AF.request(url).responseDecodable(of: T.self, decoder: dataDecoder) { (response) in
+                guard let data = response.value else {
+                    completion(.failure(response.error ?? AFError.explicitlyCancelled))
+                    return
+                }
+                completion(.success(data))
             }
-            completion(data)
         }
-    }
+    
 }
+
+

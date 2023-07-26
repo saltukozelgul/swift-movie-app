@@ -7,15 +7,16 @@
 
 import UIKit
 import FlagKit
+import Alamofire
+
+
 
 class MovieDetailViewController: UIViewController {
     // private tanımlamak daha mantıklı
     var movieId: Int?
     private var detailedMovie: Movie?
-    private var cast: [Cast]?
+    private var castList: [Cast]?
     
-    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet private weak var loadingView: UIView!
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet private weak var moviePosterImageView: UIImageView!
     @IBOutlet private weak var voteAverageLabel: UILabel!
@@ -49,21 +50,24 @@ class MovieDetailViewController: UIViewController {
     func fetchMovie() {
         if let movieId {
             let url = NetworkUrlBuilder.getMovieDetailUrl(movieId: movieId)
-            // use fetch data generic
-            NetworkManager.shared.fetchData(url: url) { (movie: Movie?) in
-                if let movie {
-                    self.detailedMovie = movie
-                    self.updateUI()
-                    self.view.hideLoading()
-                } else {
-                    // error alert will implemented
+            NetworkManager.shared.fetchData(url: url) { (result: Result<Movie, AFError>) in
+                switch result {
+                    case .success(let movie):
+                        self.detailedMovie = movie
+                        self.updateUI()
+                        self.view.hideLoading()
+                    case .failure(let error):
+                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                 }
             }
             let castUrl = NetworkConstants.getMovieCastUrl(movieId: movieId)
-            NetworkManager.shared.fetchData(url: castUrl) { (credits: MovieCredit?) in
-                self.cast = credits?.cast
-                if let _ = self.cast {
-                    self.castCollectionView.reloadData()
+            NetworkManager.shared.fetchData(url: castUrl) { (result: Result<MovieCredit, AFError>) in
+                switch result {
+                    case .success(let credits):
+                        self.castList = credits.cast
+                        self.castCollectionView.reloadData()
+                    case .failure(let error):
+                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                 }
             }
         }
@@ -88,12 +92,12 @@ class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.cast?.count ?? 0
+        return self.castList?.count ?? 0
     
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cast = self.cast?[indexPath.row]
+        let cast = self.castList?[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as! CastCollectionViewCell
         if let cast {
             cell.configure(with: cast)
@@ -103,7 +107,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Cast detay sayfasına gidecek fonksiyon implement edilecek
-        if let cast = self.cast?[indexPath.row] {
+        if let cast = self.castList?[indexPath.row] {
             navigateToCastDetail(cast: cast)
         }
     }

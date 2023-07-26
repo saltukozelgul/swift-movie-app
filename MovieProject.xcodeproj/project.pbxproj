@@ -45,6 +45,7 @@
 		E2B8256C2A6E953C0013FA90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E2B8256E2A6E953C0013FA90 /* Localizable.strings */; };
 		E2B825752A6E9CF80013FA90 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B825742A6E9CF80013FA90 /* Double.swift */; };
 		E2B825772A6E9D520013FA90 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B825762A6E9D520013FA90 /* String.swift */; };
+		E2FF095E2A710F9700A0E82A /* ErrorAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FF095D2A710F9700A0E82A /* ErrorAlertManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		E2B825712A6E956C0013FA90 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E2B825742A6E9CF80013FA90 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E2B825762A6E9D520013FA90 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		E2FF095D2A710F9700A0E82A /* ErrorAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E2713D402A6D4A2500D0FF8D /* FavouriteManager.swift */,
+				E2FF095D2A710F9700A0E82A /* ErrorAlertManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				E2713D512A6D75DC00D0FF8D /* PopularMovies.swift in Sources */,
 				E2713D532A6D765900D0FF8D /* MovieSearchResults.swift in Sources */,
 				E2713D322A6D46D300D0FF8D /* Movie.swift in Sources */,
+				E2FF095E2A710F9700A0E82A /* ErrorAlertManager.swift in Sources */,
 				E2713D292A6D455100D0FF8D /* MovieSearchViewController.swift in Sources */,
 				E2AA20EF2A6FEECE00905FE1 /* NetworkUrlBuilder.swift in Sources */,
 			);
