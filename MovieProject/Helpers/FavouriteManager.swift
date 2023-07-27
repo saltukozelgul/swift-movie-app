@@ -79,5 +79,19 @@ class FavouriteManager {
             return addFavourite(movieId: movieId) ? completion(true, true) : completion(false, false)
         }
     }
+    
+    func getFavouriteMovies(completion: @escaping ([Int]) -> Void) {
+        guard let context = context else { return }
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        if let result = try? context.fetch(fetchRequest) {
+            var movieIds = [Int]()
+            for object in result {
+                movieIds.append((object as? NSManagedObject)?.value(forKey: keyValue) as? Int ?? 0)
+            }
+            completion(movieIds)
+        }
+    }
+    
+
 }
 

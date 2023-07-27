@@ -9,6 +9,56 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--FavMovies-->
+        <scene sceneID="Zks-uB-t7j">
+            <objects>
+                <viewController title="FavMovies" id="wCu-2w-hjB" customClass="FavoriteMoviesViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5z4-FL-IcB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-3X-TrG">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="OpT-Mr-WEQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="wCu-2w-hjB" id="n8r-FY-rpK"/>
+                                    </connections>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3Js-fY-hzD">
+                                        <rect key="frame" x="0.0" y="94" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Js-fY-hzD" id="2OO-kk-JMf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="teE-iK-Cv4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZZn-3X-TrG" firstAttribute="leading" secondItem="teE-iK-Cv4" secondAttribute="leading" id="8uY-oW-BGs"/>
+                            <constraint firstItem="teE-iK-Cv4" firstAttribute="bottom" secondItem="ZZn-3X-TrG" secondAttribute="bottom" id="DZk-dr-nqF"/>
+                            <constraint firstItem="teE-iK-Cv4" firstAttribute="trailing" secondItem="ZZn-3X-TrG" secondAttribute="trailing" id="JBc-9I-wdZ"/>
+                            <constraint firstItem="ZZn-3X-TrG" firstAttribute="top" secondItem="teE-iK-Cv4" secondAttribute="top" id="l5J-SO-9Cd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Favourites" id="KU3-sr-JKd"/>
+                    <connections>
+                        <outlet property="searchBar" destination="ZZn-3X-TrG" id="XNs-wZ-vtD"/>
+                        <outlet property="tableView" destination="ZZn-3X-TrG" id="aX0-JU-Cu0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XYE-2f-qrU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1802.8985507246377" y="-646.20535714285711"/>
+        </scene>
         <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -426,6 +476,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Geh-zH-xfi" kind="relationship" relationship="viewControllers" id="es5-Lh-dnL"/>
+                        <segue destination="MEa-H3-cn2" kind="relationship" relationship="viewControllers" id="3Zv-fZ-mmM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOP-4t-qwk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -449,13 +500,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M10-s0-OsR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901.52671755725191" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="894" y="3"/>
+        </scene>
+        <!--Favourites-->
+        <scene sceneID="q4P-6R-q8M">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MEa-H3-cn2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favourites" image="heart.fill" catalog="system" selectedImage="heart.fill" id="Asa-a9-akf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J9q-Gm-fnw">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wCu-2w-hjB" kind="relationship" relationship="rootViewController" id="QLx-zr-1h9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0z-Sy-32K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892.75362318840587" y="-646.20535714285711"/>
         </scene>
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="dollarsign" catalog="system" width="89" height="128"/>
         <image name="dollarsign.arrow.circlepath" catalog="system" width="128" height="112"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="play.rectangle.on.rectangle.fill" catalog="system" width="128" height="98"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">

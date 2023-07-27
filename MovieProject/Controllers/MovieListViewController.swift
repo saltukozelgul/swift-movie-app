@@ -16,6 +16,11 @@ class MovieListViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -25,6 +30,7 @@ class MovieListViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.keyboardDismissMode = .onDrag
         tableView.registerNib(with: String(describing: MovieTableViewCell.self))
     }
     
@@ -99,9 +105,13 @@ extension MovieListViewController: UISearchBarDelegate {
         })
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     private func performSearch(_ query: String, _ searchPage: Int) {
         guard let url = APIManager.shared.getSearchUrl(query: query, page: searchPage) else { return }
-        NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<PopularMovies, AFError>) in
+        NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<MovieSearchResult, AFError>) in
             guard let self = self else { return }
             switch result {
                 case .success(let response):

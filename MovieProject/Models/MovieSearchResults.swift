@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct MovieSearchResult {
+struct MovieSearchResult: Codable{
     let page: Int?
     let totalResults: Int?
     let totalPages: Int?
-    let movies: [Movie]?
+    let results: [Movie]?
 }
