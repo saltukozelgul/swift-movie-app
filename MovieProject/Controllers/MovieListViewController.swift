@@ -1,27 +1,16 @@
-//
-//  ViewController.swift
-//  MovieProject
-//
-//  Created by Saltuk Bugra OZELGUL on 23.07.2023.
-//
-
 import UIKit
 import Alamofire
 
 class MovieListViewController: UIViewController {
     private var listedMovies = [Movie]()
-    
-    // Page variables
     private var currentPage = 1
     private var totalPages = 1
     
-    // Search Page Variables
+    // Search variables
     private var searchPage = 1
     private var totalSearchPage = 1
     private var userIsSearching = false
     private var previousSearchQuery = ""
-    
-    // Timer for search
     private var searchTimer: Timer?
     
     @IBOutlet private weak var tableView: UITableView!
@@ -29,30 +18,34 @@ class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+        setupTableView()
         fetchData()
     }
     
-    func fetchData() {
-        if let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) {
-            NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
-                switch result {
-                    case .success(let movies):
-                        self.listedMovies.append(contentsOf: movies.results ?? [])
-                        self.totalPages = movies.totalPages ?? 1
-                        self.tableView.reloadData()
-                        self.currentPage += 1
-                    case .failure(let error):
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
-                }
+    private func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+    }
+    
+    private func fetchData() {
+        guard let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) else { return }
+        NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<PopularMovies, AFError>) in
+            guard let self = self else { return }
+            switch result {
+                case .success(let movies):
+                    self.listedMovies.append(contentsOf: movies.results ?? [])
+                    self.totalPages = movies.totalPages ?? 1
+                    self.tableView.reloadData()
+                    self.currentPage += 1
+                case .failure(let error):
+                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
             }
         }
     }
 }
 
-// MARK: TableView Methods
+// MARK: - TableView DataSource
 
 extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,8 +58,9 @@ extension MovieListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
 }
+
+// MARK: - TableView Delegate
 
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -75,10 +69,10 @@ extension MovieListViewController: UITableViewDelegate {
                 if searchPage <= totalSearchPage {
                     performSearch(previousSearchQuery, searchPage)
                 }
-                return
-            }
-            if currentPage <= totalPages {
-                fetchData()
+            } else {
+                if currentPage <= totalPages {
+                    fetchData()
+                }
             }
         }
     }
@@ -93,35 +87,35 @@ extension MovieListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: Search Bar Methods
+// MARK: - Search Bar Delegate
 
 extension MovieListViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTimer?.invalidate()
-        searchTimer = Timer.scheduledTimer(withTimeInterval: Constants.searchTimerInterval, repeats: false, block: { (_) in
+        searchTimer = Timer.scheduledTimer(withTimeInterval: Constants.searchTimerInterval, repeats: false, block: { [weak self] (_) in
+            guard let self = self else { return }
             let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
             self.clearTableAndSearchWithText(with: query)
         })
     }
     
-    func performSearch(_ query: String, _ searchPage: Int) {
-        if let url = APIManager.shared.getSearchUrl(query: query, page: searchPage) {
-            NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
-                switch result {
-                    case .success(let response):
-                        self.listedMovies.append(contentsOf: response.results ?? [])
-                        self.totalSearchPage = response.totalPages ?? 1
-                        self.tableView.reloadData()
-                        self.searchPage += 1
-                    case .failure(let error):
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
-                }
+    private func performSearch(_ query: String, _ searchPage: Int) {
+        guard let url = APIManager.shared.getSearchUrl(query: query, page: searchPage) else { return }
+        NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<PopularMovies, AFError>) in
+            guard let self = self else { return }
+            switch result {
+                case .success(let response):
+                    self.listedMovies.append(contentsOf: response.results ?? [])
+                    self.totalSearchPage = response.totalPages ?? 1
+                    self.tableView.reloadData()
+                    self.searchPage += 1
+                case .failure(let error):
+                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
             }
         }
     }
     
-    func clearTableAndSearchWithText(with query: String) {
+    private func clearTableAndSearchWithText(with query: String) {
         if query.isEmpty {
             clearTableAndFetchPopularMovies()
         } else {
@@ -159,5 +153,3 @@ extension MovieListViewController: UISearchBarDelegate {
         }
     }
 }
-
-
