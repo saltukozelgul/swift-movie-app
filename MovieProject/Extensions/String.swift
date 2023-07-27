@@ -9,23 +9,22 @@ import Foundation
 
 extension String {
     
-    func convertToCurrency() -> String {
-        // 1000 to K
-        // 1000000 to M
-        
+    func convertToShortNumberFormat() -> String {
         guard let number = Double(self) else {
             return "0"
         }
-            
+        
         var convertedString = ""
-        if number >= 1000000 {
-            convertedString = String(format: "%.1f", number/1000000) + "M"
-        } else if number >= 1000 {
-            convertedString = String(format: "%.1f", number/1000) + "K"
-        } else {
-            convertedString = self
+        let suffixes = ["", "K", "M", "B", "T", "P", "E", "Z", "Y"]
+        
+        var index = 0
+        var num = number
+        while num >= 1000 && index < suffixes.count - 1 {
+            num /= 1000
+            index += 1
         }
         
+        convertedString = String(format: "%.1f", num) + suffixes[index]
         return convertedString
     }
 }

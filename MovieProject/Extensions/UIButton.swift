@@ -9,12 +9,10 @@ import UIKit
 
 extension UIButton {
     
-    func setFavouriteButtonImage(isFavourite: Bool) {
-        if isFavourite {
-            self.setImage(UIImage(systemName: Constants.iconNameForFavouriteMovie), for: .normal)
-        } else {
-            self.setImage(UIImage(systemName: Constants.iconNameForNotFavouriteMovie), for: .normal)
-        }
+    func setImageForFavouriteButton(with condition: Bool, for state: UIControl.State = .normal) {
+        let imageName = condition ? Constants.iconNameForFavouriteMovie : Constants.iconNameForNotFavouriteMovie
+        self.setImage(UIImage(systemName: imageName), for: state)
     }
     
 }
+

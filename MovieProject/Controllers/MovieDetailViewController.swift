@@ -83,8 +83,8 @@ class MovieDetailViewController: UIViewController {
         releaseDateLabel.text = detailedMovie.releaseDate?.getMonthAndYearWithLocale()
         genresLabel.text = detailedMovie.genres?.map { $0.name ?? "" }.joined(separator: ", ")
         moviePosterImageView.setImageFromPath(path: detailedMovie.backdropPath ?? "unknown")
-        budgetLabel.text = String(detailedMovie.budget ?? 0).convertToCurrency()
-        revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToCurrency()
+        budgetLabel.text = String(detailedMovie.budget ?? 0).convertToShortNumberFormat()
+        revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToShortNumberFormat()
         runtimeLabel.text = String(detailedMovie.runtime ?? 0) + NSLocalizedString("shortMin", comment: "that describes minutes")
     }
 }

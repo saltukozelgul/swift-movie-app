@@ -122,27 +122,41 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     func clearTableAndSearchWithText(with query: String) {
-        
-        // If the query is empty, clear the table and fetch popular movies
-        guard query != "" else {
-            userIsSearching = false
-            listedMovies.removeAll()
-            currentPage = 1
-            totalPages = 1
-            fetchData()
-            return
+        if query.isEmpty {
+            clearTableAndFetchPopularMovies()
+        } else {
+            performSearchAndUpdateResults(with: query)
         }
-        // New text is searching
+    }
+    
+    private func clearTableAndFetchPopularMovies() {
+        userIsSearching = false
+        listedMovies.removeAll()
+        currentPage = 1
+        totalPages = 1
+        fetchData()
+    }
+    
+    private func performSearchAndUpdateResults(with query: String) {
         if query != previousSearchQuery {
             userIsSearching = true
-            // Cancel previous AF request because no need anymore
-            AF.cancelAllRequests()
+            cancelPreviousSearchRequests()
             previousSearchQuery = query
             listedMovies.removeAll()
             searchPage = 1
             totalSearchPage = 1
         }
         performSearch(query, searchPage)
+    }
+    
+    private func cancelPreviousSearchRequests() {
+        AF.withAllRequests { requests in
+            requests.forEach { request in
+                if request.request?.url?.absoluteString.contains("search") ?? false {
+                    request.cancel()
+                }
+            }
+        }
     }
 }
 

@@ -9,35 +9,25 @@ import Foundation
 
 extension Date {
     
-    func getOnlyYear() -> String {
+    private func formatDate(with format: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: NSLocalizedString("isoCode", comment: "language code"))
         if (self == Date.distantPast) {
             return NSLocalizedString("notReleased", comment: "not released")
         }
         return dateFormatter.string(from: self)
+    }
+    
+    func getOnlyYear() -> String {
+        return formatDate(with: "yyyy")
     }
     
     func getFullDateWithLocale() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateFormatter.locale = Locale(identifier: NSLocalizedString("isoCode", comment: "language code"))
-        if (self == Date.distantPast) {
-            return NSLocalizedString("notReleased", comment: "not released")
-        }
-        return dateFormatter.string(from: self)
+        return formatDate(with: "dd MMMM yyyy")
     }
     
     func getMonthAndYearWithLocale() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
-        dateFormatter.locale = Locale(identifier: NSLocalizedString("isoCode", comment: "language code"))
-        if (self == Date.distantPast) {
-            return NSLocalizedString("notReleased", comment: "not released")
-        }
-        return dateFormatter.string(from: self)
+        return formatDate(with: "MMMM yyyy")
     }
-    
-    
-    
 }

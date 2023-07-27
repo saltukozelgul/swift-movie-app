@@ -21,7 +21,7 @@ class MovieTableViewCell: UITableViewCell {
         guard let movieId = movieId else { return }
         FavouriteManager.shared.toggleFavourite(movieId: movieId) { isSuccess, newState in
             if isSuccess {
-                addFavouriteButton.setFavouriteButtonImage(isFavourite: newState)
+                addFavouriteButton.setImageForFavouriteButton(with: newState)
             }
         }
     }
@@ -51,6 +51,6 @@ class MovieTableViewCell: UITableViewCell {
     
     func checkFavouriteState() {
         guard let movieId = movieId else { return }
-        addFavouriteButton.setFavouriteButtonImage(isFavourite: FavouriteManager.shared.isFavourite(movieId: movieId))
+        addFavouriteButton.setImageForFavouriteButton(with: FavouriteManager.shared.isFavourite(movieId: movieId))
     }
 }

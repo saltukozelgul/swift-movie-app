@@ -36,53 +36,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0E31C497-69F9-45D5-9756-DBBC1164A699"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieProject/Networking/APIManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "getSearchUrl(query:page:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0E31C497-69F9-45D5-9756-DBBC1164A699 - df4e748f0b71d2ff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MovieProject.APIManager.getSearchUrl(query: Swift.String, page: Swift.Int) -&gt; Swift.Optional&lt;Foundation.URL&gt;"
-                  moduleName = "MovieProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/saltuk/Desktop/ios_course/MovieProject/MovieProject/Networking/APIManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "1532">
-               </Location>
-               <Location
-                  uuid = "0E31C497-69F9-45D5-9756-DBBC1164A699 - cc3a36d9d0b53f19"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "$defer() -&gt; ()"
-                  moduleName = "MovieProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/saltuk/Desktop/ios_course/MovieProject/MovieProject/Networking/APIManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "102">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
