@@ -12,6 +12,7 @@ class CastDetailViewController: UIViewController {
     var personId: Int?
     private var detailedCast: Cast?
     
+    
     @IBOutlet private weak var castImageView: UIImageView!
     @IBOutlet private weak var placeOfBirthLabel: UILabel!
     @IBOutlet private weak var deathdayHeaderLabel: UILabel!

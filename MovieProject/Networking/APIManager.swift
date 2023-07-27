@@ -21,7 +21,16 @@ class APIManager {
         ]
     }
     
+    func resetUrlComponents() {
+        self.components.queryItems?.removeAll()
+        self.components.queryItems = [
+            URLQueryItem(name: "api_key", value: NetworkConstants.apiKey),
+            URLQueryItem(name: "language", value: NetworkConstants.isoCode)
+        ]
+    }
+    
     func getMovieDetailUrl(movieId: Int) -> URL? {
+        resetUrlComponents()
         self.components.path = "/3/movie/\(movieId)"
         if let componentsUrl = self.components.url {
             return componentsUrl
@@ -30,6 +39,7 @@ class APIManager {
     }
     
     func getMovieCastUrl(movieId: Int) -> URL? {
+        resetUrlComponents()
         self.components.path = "/3/movie/\(movieId)/credits"
         if let componentsUrl = self.components.url {
             return componentsUrl
@@ -38,6 +48,7 @@ class APIManager {
     }
     
     func getPopularMoviesUrl(page: Int) -> URL? {
+        resetUrlComponents()
         self.components.path = "/3/movie/popular"
         self.components.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
         if let componentsUrl = self.components.url {
@@ -50,6 +61,7 @@ class APIManager {
     }
     
     func getPersonDetailUrl(personId: Int) -> URL? {
+        resetUrlComponents()
         self.components.path = "/3/person/\(personId)"
         if let componentsUrl = self.components.url {
             return componentsUrl
@@ -57,4 +69,18 @@ class APIManager {
         return URL(string: "")
     }
     
+    func getSearchUrl(query: String, page: Int) -> URL? {
+        resetUrlComponents()
+        self.components.path = "/3/search/movie"
+        self.components.queryItems?.append(URLQueryItem(name: "query", value: query))
+        self.components.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
+        if let componentsUrl = self.components.url {
+            return componentsUrl
+        }
+        defer {
+            self.components.queryItems?.removeLast()
+            self.components.queryItems?.removeLast()
+        }
+        return URL(string: "")
+    }
 }

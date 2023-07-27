@@ -12,15 +12,15 @@ import UIKit
 class FavouriteManager {
     
     static let shared = FavouriteManager()
-    private var appDelegate: AppDelegate?
     private var context: NSManagedObjectContext?
     private var entityName = Constants.entityNameForFavouriteCheck
     private var keyValue = Constants.keyValueForFavoriteCheck
     
     
     private init() {
-        self.appDelegate = UIApplication.shared.delegate as? AppDelegate
-        self.context = appDelegate?.persistentContainer.viewContext
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            self.context = appDelegate.persistentContainer.viewContext
+        }
     }
     
     func isFavourite(movieId: Int?) -> Bool {

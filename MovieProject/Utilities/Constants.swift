@@ -18,4 +18,5 @@ struct Constants {
     static let keyValueForFavoriteCheck: String = "movieId"
     static let iconNameForFavouriteMovie: String = "heart.fill"
     static let iconNameForNotFavouriteMovie: String = "heart"
+    static let searchTimerInterval: CGFloat = 0.5
 }

@@ -15,7 +15,17 @@ class MovieListViewController: UIViewController {
     private var currentPage = 1
     private var totalPages = 1
     
+    // Search Page Variables
+    private var searchPage = 1
+    private var totalSearchPage = 1
+    private var userIsSearching = false
+    private var previousSearchQuery = ""
+    
+    // Timer for search
+    private var searchTimer: Timer?
+    
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +35,7 @@ class MovieListViewController: UIViewController {
         fetchData()
     }
     
-    @objc func fetchData() {
+    func fetchData() {
         if let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) {
             NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
                 switch result {
@@ -41,6 +51,8 @@ class MovieListViewController: UIViewController {
         }
     }
 }
+
+// MARK: TableView Methods
 
 extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,6 +71,12 @@ extension MovieListViewController: UITableViewDataSource {
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == listedMovies.count - 1 {
+            if userIsSearching {
+                if searchPage <= totalSearchPage {
+                    performSearch(previousSearchQuery, searchPage)
+                }
+                return
+            }
             if currentPage <= totalPages {
                 fetchData()
             }
@@ -72,6 +90,59 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = listedMovies[indexPath.row]
         navigateToMovieDetail(movie: movie)
+    }
+}
+
+// MARK: Search Bar Methods
+
+extension MovieListViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: Constants.searchTimerInterval, repeats: false, block: { (_) in
+            let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            self.clearTableAndSearchWithText(with: query)
+        })
+    }
+    
+    func performSearch(_ query: String, _ searchPage: Int) {
+        if let url = APIManager.shared.getSearchUrl(query: query, page: searchPage) {
+            NetworkManager.shared.fetchData(url: url) { (result: Result<PopularMovies, AFError>) in
+                switch result {
+                    case .success(let response):
+                        self.listedMovies.append(contentsOf: response.results ?? [])
+                        self.totalSearchPage = response.totalPages ?? 1
+                        self.tableView.reloadData()
+                        self.searchPage += 1
+                    case .failure(let error):
+                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                }
+            }
+        }
+    }
+    
+    func clearTableAndSearchWithText(with query: String) {
+        
+        // If the query is empty, clear the table and fetch popular movies
+        guard query != "" else {
+            userIsSearching = false
+            listedMovies.removeAll()
+            currentPage = 1
+            totalPages = 1
+            fetchData()
+            return
+        }
+        // New text is searching
+        if query != previousSearchQuery {
+            userIsSearching = true
+            // Cancel previous AF request because no need anymore
+            AF.cancelAllRequests()
+            previousSearchQuery = query
+            listedMovies.removeAll()
+            searchPage = 1
+            totalSearchPage = 1
+        }
+        performSearch(query, searchPage)
     }
 }
 

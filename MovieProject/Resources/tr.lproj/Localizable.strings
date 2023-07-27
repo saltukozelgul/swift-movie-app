@@ -24,3 +24,4 @@
 "ok" = "Tamam";
 "error" = "Hata";
 "addFavErrorMsg" = "Film favorilere eklenemedi";
+"notReleased" = "Yayınlanmadı";
