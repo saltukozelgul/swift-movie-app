@@ -3,8 +3,10 @@ import Alamofire
 
 class MovieListViewController: UIViewController {
     private var listedMovies = [Movie]()
+    private var searchedMovies = [Movie]()
     private var currentPage = 1
     private var totalPages = 1
+    private var lastPreservedRow = 0
     
     // Search variables
     private var searchPage = 1
@@ -55,12 +57,12 @@ class MovieListViewController: UIViewController {
 
 extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listedMovies.count
+        return userIsSearching ? searchedMovies.count : listedMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as! MovieTableViewCell
-        cell.configureCellForDisplay(movie: listedMovies[indexPath.row])
+        cell.configureCellForDisplay(movie: userIsSearching ? searchedMovies[indexPath.row] : listedMovies[indexPath.row])
         cell.selectionStyle = .none
         return cell
     }
@@ -73,7 +75,7 @@ extension MovieListViewController: UITableViewDelegate {
         if indexPath.row == listedMovies.count - 1 {
             if userIsSearching {
                 if searchPage <= totalSearchPage {
-                    performSearch(previousSearchQuery, searchPage)
+                    performSearch(previousSearchQuery)
                 }
             } else {
                 if currentPage <= totalPages {
@@ -81,6 +83,7 @@ extension MovieListViewController: UITableViewDelegate {
                 }
             }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -109,13 +112,26 @@ extension MovieListViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    private func performSearch(_ query: String, _ searchPage: Int) {
-        guard let url = APIManager.shared.getSearchUrl(query: query, page: searchPage) else { return }
+    private func performSearch(_ query: String) {
+        // If the search query is new so the first search attempt
+        if query != previousSearchQuery {
+            self.userIsSearching = true
+            self.cancelPreviousSearchRequests()
+            self.searchedMovies.removeAll()
+            self.searchPage = 1
+            self.totalSearchPage = 1
+        }
+        guard let url = APIManager.shared.getSearchUrl(query: query, page: self.searchPage) else { return }
         NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<MovieSearchResult, AFError>) in
             guard let self = self else { return }
             switch result {
                 case .success(let response):
-                    self.listedMovies.append(contentsOf: response.results ?? [])
+                    // If the search is new we have to update query and scroll to top
+                    if (query != self.previousSearchQuery) {
+                        self.previousSearchQuery = query
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    }
+                    self.searchedMovies.append(contentsOf: response.results ?? [])
                     self.totalSearchPage = response.totalPages ?? 1
                     self.tableView.reloadData()
                     self.searchPage += 1
@@ -135,22 +151,16 @@ extension MovieListViewController: UISearchBarDelegate {
     
     private func clearTableAndFetchPopularMovies() {
         userIsSearching = false
-        listedMovies.removeAll()
-        currentPage = 1
-        totalPages = 1
-        fetchData()
+        tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: lastPreservedRow, section: 0), at: .bottom, animated: false)
     }
     
     private func performSearchAndUpdateResults(with query: String) {
-        if query != previousSearchQuery {
-            userIsSearching = true
-            cancelPreviousSearchRequests()
-            previousSearchQuery = query
-            listedMovies.removeAll()
-            searchPage = 1
-            totalSearchPage = 1
+        // When user delete the search bar we have to scroll previous last visible row
+        if (!userIsSearching) {
+            lastPreservedRow = tableView.indexPathsForVisibleRows?.last?.row ?? 0
         }
-        performSearch(query, searchPage)
+        performSearch(query)
     }
     
     private func cancelPreviousSearchRequests() {

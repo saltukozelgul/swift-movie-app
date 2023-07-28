@@ -67,30 +67,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RYk-2U-EsZ">
+                                <rect key="frame" x="0.0" y="92" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="juY-yW-kUm"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KPY-8W-sl2">
-                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="RB8-OP-s8O">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="BYZ-38-t0r" id="t0v-ie-X4y"/>
-                                    </connections>
-                                </searchBar>
+                                <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KPY-8W-sl2" secondAttribute="bottom" id="6lH-t3-w5o"/>
+                            <constraint firstItem="RYk-2U-EsZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QFj-7P-L8G"/>
+                            <constraint firstItem="RYk-2U-EsZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fum-xj-Pgp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KPY-8W-sl2" secondAttribute="trailing" id="g1r-c8-yIW"/>
-                            <constraint firstItem="KPY-8W-sl2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jfQ-QB-tJA"/>
                             <constraint firstItem="KPY-8W-sl2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="n2H-qR-wPX"/>
+                            <constraint firstItem="KPY-8W-sl2" firstAttribute="top" secondItem="RYk-2U-EsZ" secondAttribute="bottom" id="tkB-1Y-pq4"/>
+                            <constraint firstItem="RYk-2U-EsZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="z6R-Mw-576"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Popular Movies" id="9yp-S2-wAv"/>
                     <connections>
-                        <outlet property="searchBar" destination="RB8-OP-s8O" id="MbK-6Y-uXe"/>
+                        <outlet property="searchBar" destination="RYk-2U-EsZ" id="mkC-vW-0QE"/>
                         <outlet property="tableView" destination="KPY-8W-sl2" id="YG8-9J-ykm"/>
                     </connections>
                 </viewController>
