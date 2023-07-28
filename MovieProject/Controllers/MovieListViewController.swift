@@ -34,6 +34,8 @@ class MovieListViewController: UIViewController {
         tableView.delegate = self
         tableView.keyboardDismissMode = .onDrag
         tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+        
+        
     }
     
     private func fetchData() {
