@@ -98,6 +98,10 @@ extension FavoriteMoviesViewController: UITableViewDelegate,UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.heightForPopularMovieRow
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == listedMovies.count - 1 && listedMovies.count < favouriteMovies.count  {
                 fetchFavouriteMovies()

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E237F17B2A77963E00419537 /* WatchProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237F17A2A77963E00419537 /* WatchProviders.swift */; };
+		E237F17D2A77A42700419537 /* WatchProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E237F17C2A77A42700419537 /* WatchProviderView.swift */; };
 		E2713D132A6D425200D0FF8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2713D122A6D425200D0FF8D /* AppDelegate.swift */; };
 		E2713D152A6D425200D0FF8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2713D142A6D425200D0FF8D /* SceneDelegate.swift */; };
 		E2713D172A6D425200D0FF8D /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2713D162A6D425200D0FF8D /* MovieListViewController.swift */; };
@@ -44,6 +46,7 @@
 		E2B8256C2A6E953C0013FA90 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E2B8256E2A6E953C0013FA90 /* Localizable.strings */; };
 		E2B825752A6E9CF80013FA90 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B825742A6E9CF80013FA90 /* Double.swift */; };
 		E2B825772A6E9D520013FA90 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B825762A6E9D520013FA90 /* String.swift */; };
+		E2D358A82A73E5C3007D5C4D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D358A72A73E5C3007D5C4D /* UIImage.swift */; };
 		E2FF095E2A710F9700A0E82A /* ErrorAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FF095D2A710F9700A0E82A /* ErrorAlertManager.swift */; };
 		E2FF09612A7133C400A0E82A /* FavouriteMovie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2FF095F2A7133C400A0E82A /* FavouriteMovie.xcdatamodeld */; };
 		E2FF09632A7147CA00A0E82A /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FF09622A7147CA00A0E82A /* UIButton.swift */; };
@@ -53,6 +56,8 @@
 /* Begin PBXFileReference section */
 		E23192EA2A7009D100D40F63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E23192EB2A7009D900D40F63 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		E237F17A2A77963E00419537 /* WatchProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviders.swift; sourceTree = "<group>"; };
+		E237F17C2A77A42700419537 /* WatchProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderView.swift; sourceTree = "<group>"; };
 		E2713D0F2A6D425200D0FF8D /* MovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2713D122A6D425200D0FF8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2713D142A6D425200D0FF8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +96,7 @@
 		E2B825712A6E956C0013FA90 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E2B825742A6E9CF80013FA90 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E2B825762A6E9D520013FA90 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		E2D358A72A73E5C3007D5C4D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E2FF095D2A710F9700A0E82A /* ErrorAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertManager.swift; sourceTree = "<group>"; };
 		E2FF09602A7133C400A0E82A /* FavouriteMovie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavouriteMovie.xcdatamodel; sourceTree = "<group>"; };
 		E2FF09622A7147CA00A0E82A /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 				E2713D502A6D75DC00D0FF8D /* PopularMovies.swift */,
 				E2713D522A6D765900D0FF8D /* MovieSearchResults.swift */,
 				E2713D542A6D770D00D0FF8D /* MovieCredit.swift */,
+				E237F17A2A77963E00419537 /* WatchProviders.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -234,6 +241,7 @@
 				E2AA20E42A6FD9E000905FE1 /* CastCollectionViewCell.swift */,
 				E2AA20E52A6FD9E000905FE1 /* CastCollectionViewCell.xib */,
 				E2AA20EC2A6FEBC800905FE1 /* LoadingView.swift */,
+				E237F17C2A77A42700419537 /* WatchProviderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 				E2AA20EA2A6FEB4F00905FE1 /* UIView.swift */,
 				E2FF09622A7147CA00A0E82A /* UIButton.swift */,
 				E2FF09642A71649E00A0E82A /* Date.swift */,
+				E2D358A72A73E5C3007D5C4D /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E237F17B2A77963E00419537 /* WatchProviders.swift in Sources */,
 				E2713D4F2A6D72F800D0FF8D /* ProductionCompany.swift in Sources */,
 				E2AA20E62A6FD9E100905FE1 /* CastCollectionViewCell.swift in Sources */,
 				E2713D2F2A6D45D800D0FF8D /* CastDetailViewController.swift in Sources */,
@@ -359,6 +369,7 @@
 				E2AA20EB2A6FEB4F00905FE1 /* UIView.swift in Sources */,
 				E2713D5C2A6DA36500D0FF8D /* NetworkConstants.swift in Sources */,
 				E2713D552A6D770D00D0FF8D /* MovieCredit.swift in Sources */,
+				E237F17D2A77A42700419537 /* WatchProviderView.swift in Sources */,
 				E2FF09632A7147CA00A0E82A /* UIButton.swift in Sources */,
 				E2B825692A6E8B620013FA90 /* UIViewController.swift in Sources */,
 				E2713D2D2A6D45B500D0FF8D /* MovieDetailViewController.swift in Sources */,
@@ -369,6 +380,7 @@
 				E2713D322A6D46D300D0FF8D /* Movie.swift in Sources */,
 				E2FF095E2A710F9700A0E82A /* ErrorAlertManager.swift in Sources */,
 				E2713D292A6D455100D0FF8D /* MovieSearchViewController.swift in Sources */,
+				E2D358A82A73E5C3007D5C4D /* UIImage.swift in Sources */,
 				E2AA20EF2A6FEECE00905FE1 /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

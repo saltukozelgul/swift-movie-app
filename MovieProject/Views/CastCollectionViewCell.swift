@@ -32,7 +32,9 @@ class CastCollectionViewCell: UICollectionViewCell {
         
         castNameLabel.text = cast.name
         castCharacterLabel.text = cast.character
-        castImageView.setImageFromPath(path: cast.profilePath ?? "")
+        castImageView.setImageFromPath(path: cast.profilePath ?? "") { image in
+            return
+        }
     }
 
 }

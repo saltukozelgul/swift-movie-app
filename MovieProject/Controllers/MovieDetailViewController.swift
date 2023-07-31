@@ -27,18 +27,23 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet private weak var revenueLabel: UILabel!
     @IBOutlet private weak var runtimeLabel: UILabel!
     @IBOutlet private weak var flagImageView: UIImageView!
+    @IBOutlet private weak var gradientView: UIView!
     
     // CollectionView
-    @IBOutlet private weak var castStackView: UIStackView!
     @IBOutlet private weak var castCollectionView: UICollectionView!
+    @IBOutlet private weak var watchProvidersView: WatchProviderView!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         castCollectionView.delegate = self
         castCollectionView.dataSource = self
         castCollectionView.registerNib(with: String(describing: CastCollectionViewCell.self))
+        if let color = UIColor(named: "gradientBackground") {
+            gradientView.setGradientBackground(colors: [color.withAlphaComponent(0.0).cgColor, color.cgColor])
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,18 +81,23 @@ class MovieDetailViewController: UIViewController {
     
     func updateUI() {
         guard let detailedMovie = detailedMovie else { return }
-        
+        self.watchProvidersView.addWatchProviderIcon(watchProviders: detailedMovie.watchProviders)
         movieNameLabel.text = (detailedMovie.originalTitle ?? "")
         movieOverviewLabel.text = detailedMovie.overview
         voteAverageLabel.text = String(detailedMovie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
         releaseDateLabel.text = detailedMovie.releaseDate?.getMonthAndYearWithLocale()
         genresLabel.text = detailedMovie.genres?.map { $0.name ?? "" }.joined(separator: ", ")
-        moviePosterImageView.setImageFromPath(path: detailedMovie.backdropPath ?? "unknown")
+        moviePosterImageView.setImageFromPath(path: detailedMovie.posterPath ?? "") { image in
+            
+        }
         budgetLabel.text = String(detailedMovie.budget ?? 0).convertToShortNumberFormat()
         revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToShortNumberFormat()
         runtimeLabel.text = String(detailedMovie.runtime ?? 0) + NSLocalizedString("shortMin", comment: "that describes minutes")
     }
+
+    
 }
+
 
 // MARK: CollectionView Methods
 

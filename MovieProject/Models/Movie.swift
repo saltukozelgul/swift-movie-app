@@ -24,7 +24,30 @@ struct Movie: Codable {
     let productionCompanies: [ProductionCompany]?
     let recommendations: [Movie]?
     let voteAverage: Double?
+    let watchProviders: WatchProviders?
+    
+    //Api is returnin watch/providers we have to convert it to watchProviders
+    enum CodingKeys: String, CodingKey {
+        case id
+        case posterPath
+        case title
+        case backdropPath
+        case originalTitle
+        case originalLanguage
+        case releaseDate
+        case budget
+        case revenue
+        case homepage
+        case overview
+        case runtime
+        case genres
+        case productionCompanies
+        case recommendations
+        case voteAverage
+        case watchProviders = "watch/providers"
+    }
 }
+
 
 struct Genre: Codable {
     let id: Int?

@@ -93,7 +93,7 @@ extension MovieListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = listedMovies[indexPath.row]
+        let movie = userIsSearching ? searchedMovies[indexPath.row] : listedMovies[indexPath.row]
         navigateToMovieDetail(movie: movie)
     }
 }
@@ -131,7 +131,9 @@ extension MovieListViewController: UISearchBarDelegate {
                     // If the search is new we have to update query and scroll to top
                     if (query != self.previousSearchQuery) {
                         self.previousSearchQuery = query
-                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                        if self.tableView.numberOfRows(inSection: 0) > 0 {
+                            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                        }
                     }
                     self.searchedMovies.append(contentsOf: response.results ?? [])
                     self.totalSearchPage = response.totalPages ?? 1

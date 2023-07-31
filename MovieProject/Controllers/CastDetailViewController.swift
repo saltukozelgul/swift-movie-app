@@ -58,7 +58,9 @@ class CastDetailViewController: UIViewController {
             }
             placeOfBirthLabel.text = person.placeOfBirth
             if let profilePath = person.profilePath {
-                castImageView.setImageFromPath(path: profilePath)
+                castImageView.setImageFromPath(path: profilePath) { image in
+                    return
+                }
             }
         }
     

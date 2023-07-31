@@ -44,7 +44,9 @@ class MovieTableViewCell: UITableViewCell {
         movieOverviewLabel.text = movie.overview
         movieRelaseDateLabel.text = movie.releaseDate?.getOnlyYear()
         movieVoteAverageLabel.text = String(movie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
-        movieImageView.setImageFromPath(path: movie.posterPath ?? "")
+        movieImageView.setImageFromPath(path: movie.posterPath ?? "") { image in
+            return
+        }
         checkFavouriteState()
     }
     

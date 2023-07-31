@@ -22,7 +22,11 @@ class APIManager {
     }
     
     func getMovieDetailUrl(movieId: Int) -> URL? {
+        defer {
+            self.components.queryItems?.removeLast()
+        }
         self.components.path = "/3/movie/\(movieId)"
+        self.components.queryItems?.append(URLQueryItem(name: "append_to_response", value: "watch/providers"))
         if let componentsUrl = self.components.url {
             return componentsUrl
         }
@@ -45,9 +49,6 @@ class APIManager {
         self.components.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
         if let componentsUrl = self.components.url {
             return componentsUrl
-        }
-        defer {
-            self.components.queryItems?.removeLast()
         }
         return URL(string: "")
     }
