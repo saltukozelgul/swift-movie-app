@@ -128,7 +128,7 @@ class MovieDetailViewController: UIViewController {
         voteAverageLabel.text = String(detailedMovie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
         releaseDateLabel.text = detailedMovie.releaseDate?.getMonthAndYearWithLocale()
         genresLabel.text = detailedMovie.genres?.map { $0.name ?? "" }.joined(separator: ", ")
-        moviePosterImageView.setImageFromPath(path: detailedMovie.backdropPath ?? "") { image in }
+        moviePosterImageView.setImageFromPath(isOriginalSize: true, path: detailedMovie.backdropPath ?? "") { image in }
         budgetLabel.text = String(detailedMovie.budget ?? 0).convertToShortNumberFormat()
         revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToShortNumberFormat()
         runtimeLabel.text = String(detailedMovie.runtime ?? 0) + NSLocalizedString("shortMin", comment: "that describes minutes")
