@@ -22,7 +22,7 @@ struct Movie: Codable {
     let runtime: Int?
     let genres: [Genre]?
     let productionCompanies: [ProductionCompany]?
-    let recommendations: RecommendedMovieResults?
+    var recommendations: RecommendedMovieResults?
     let voteAverage: Double?
     let watchProviders: WatchProviders?
     

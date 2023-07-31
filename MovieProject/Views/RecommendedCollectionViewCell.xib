@@ -4,21 +4,29 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendedCollectionViewCell" id="gTV-IL-0wX" customClass="RecommendedCollectionViewCell" customModule="MovieProject" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suv.side.front.open.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="FKC-rE-wK0">
-                        <rect key="frame" x="0.0" y="2.3333333333333321" width="50" height="45"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKC-rE-wK0">
+                        <rect key="frame" x="0.0" y="2.3333333333333286" width="100" height="145.33333333333331"/>
+                        <color key="tintColor" systemColor="placeholderTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="150" id="QxF-MY-SvC"/>
+                            <constraint firstAttribute="width" constant="100" id="TL2-KZ-1k8"/>
+                        </constraints>
+                        <imageReference key="image" image="circle.dotted" catalog="system" symbolScale="small"/>
                     </imageView>
                 </subviews>
             </view>
@@ -29,10 +37,17 @@
                 <constraint firstItem="FKC-rE-wK0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SUr-jw-4ei"/>
                 <constraint firstAttribute="trailing" secondItem="FKC-rE-wK0" secondAttribute="trailing" id="uad-sY-SgM"/>
             </constraints>
-            <point key="canvasLocation" x="9" y="21"/>
+            <size key="customSize" width="100" height="150"/>
+            <connections>
+                <outlet property="posterImageView" destination="FKC-rE-wK0" id="qjD-U3-t0h"/>
+            </connections>
+            <point key="canvasLocation" x="45.801526717557252" y="55.633802816901408"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="suv.side.front.open.fill" catalog="system" width="128" height="58"/>
+        <image name="circle.dotted" catalog="system" width="128" height="123"/>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

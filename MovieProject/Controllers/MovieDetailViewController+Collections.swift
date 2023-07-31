@@ -19,6 +19,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.restorationIdentifier {
         case Constants.castCollectionViewRestorationId:
@@ -40,9 +41,15 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: Cast detay sayfasına gidecek fonksiyon implement edilecek
-        if let cast = self.castList?[indexPath.row] {
-            navigateToCastDetail(cast: cast)
+        if collectionView.restorationIdentifier == Constants.recommendedCollectionViewRestorationId {
+            if let recommendation = self.detailedMovie?.recommendations?.results?[indexPath.row] {
+                navigateToMovieDetail(movie: recommendation)
+            }
+        }
+        else {
+            if let cast = self.castList?[indexPath.row] {
+                navigateToCastDetail(cast: cast)
+            }
         }
     }
     

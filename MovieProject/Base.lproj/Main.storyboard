@@ -108,10 +108,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-aK-94X">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-aK-94X">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgb-Ga-B4i">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgb-Ga-B4i" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ap-Py-ugh">
@@ -157,7 +157,7 @@
                                                 <rect key="frame" x="0.0" y="345" width="414" height="517"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KeZ-a6-7YF">
-                                                        <rect key="frame" x="15" y="15" width="384" height="419"/>
+                                                        <rect key="frame" x="15" y="15" width="384" height="393.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="MGk-He-sD1" userLabel="Watch Providers">
                                                                 <rect key="frame" x="0.0" y="0.0" width="384" height="0.0"/>
@@ -294,16 +294,16 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ckC-nH-G2u" userLabel="Recommendation Stack View">
-                                                                <rect key="frame" x="0.0" y="265.5" width="384" height="153.5"/>
+                                                                <rect key="frame" x="0.0" y="265.5" width="384" height="128"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommendations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V55-yC-UbN" userLabel="Recommendtations">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="20.5"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommendations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V55-yC-UbN" userLabel="Recommendtations">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="0.0"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="recommendedForMovie" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4eR-rR-uqU">
-                                                                        <rect key="frame" x="0.0" y="25.5" width="384" height="128"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="128"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="128" id="FCP-5g-hBC"/>
@@ -348,8 +348,8 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Lgb-Ga-B4i" firstAttribute="leading" secondItem="tbU-Rd-R2a" secondAttribute="leading" id="H6S-bH-vWZ"/>
-                                    <constraint firstItem="Lgb-Ga-B4i" firstAttribute="top" secondItem="tbU-Rd-R2a" secondAttribute="top" id="Ju1-lr-K5h"/>
+                                    <constraint firstItem="tbU-Rd-R2a" firstAttribute="leading" secondItem="Lgb-Ga-B4i" secondAttribute="leading" id="H6S-bH-vWZ"/>
+                                    <constraint firstItem="tbU-Rd-R2a" firstAttribute="top" secondItem="Lgb-Ga-B4i" secondAttribute="top" id="Ju1-lr-K5h"/>
                                     <constraint firstItem="Lgb-Ga-B4i" firstAttribute="width" secondItem="mNY-WB-kF6" secondAttribute="width" id="P2y-LC-qPn"/>
                                     <constraint firstItem="tbU-Rd-R2a" firstAttribute="trailing" secondItem="Lgb-Ga-B4i" secondAttribute="trailing" id="c0S-SW-RQC"/>
                                     <constraint firstItem="tbU-Rd-R2a" firstAttribute="bottom" secondItem="Lgb-Ga-B4i" secondAttribute="bottom" id="i1g-cj-rPP"/>
@@ -377,6 +377,7 @@
                         <outlet property="movieOverviewLabel" destination="EnL-3w-16e" id="ky1-An-Y9F"/>
                         <outlet property="moviePosterImageView" destination="1Ap-Py-ugh" id="ftW-eS-oao"/>
                         <outlet property="recommendationCollectionView" destination="4eR-rR-uqU" id="Mw2-B1-vta"/>
+                        <outlet property="recommendationLabel" destination="V55-yC-UbN" id="0RZ-we-BwM"/>
                         <outlet property="releaseDateLabel" destination="tos-1m-qqh" id="QeS-2i-ri5"/>
                         <outlet property="revenueLabel" destination="hr1-IT-DKb" id="Nd3-tz-toZ"/>
                         <outlet property="runtimeLabel" destination="RmY-jN-hds" id="p7N-p6-h5W"/>

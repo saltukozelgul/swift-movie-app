@@ -10,10 +10,8 @@ import Foundation
 
 struct Constants {
     static let heightForPopularMovieRow: CGFloat = 210
-    static let heightForCastCell: CGFloat = 128
-    static let widthForCastCell: CGFloat = 128
-    static let heightForCastCellImage: CGFloat = 90
-    static let widthForCastCellImage: CGFloat = 90
+    static let heightForCastCell: CGFloat = 135
+    static let widthForCastCell: CGFloat = 135
     static let entityNameForFavouriteCheck: String = "FavouriteMovie"
     static let keyValueForFavoriteCheck: String = "movieId"
     static let iconNameForFavouriteMovie: String = "heart.fill"

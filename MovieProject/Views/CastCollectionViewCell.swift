@@ -24,9 +24,7 @@ class CastCollectionViewCell: UICollectionViewCell {
         castImageView.translatesAutoresizingMaskIntoConstraints = false
         castImageView.layer.cornerRadius = 10
         castImageView.clipsToBounds = true
-        castImageView.heightAnchor.constraint(equalToConstant: Constants.heightForCastCellImage).isActive = true
-        castImageView.widthAnchor.constraint(equalToConstant: Constants.widthForCastCellImage).isActive = true
-        NSLayoutConstraint.activate([
+       NSLayoutConstraint.activate([
             castImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
         

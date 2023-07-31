@@ -39,6 +39,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
     // RecommendationView
+    @IBOutlet private(set) weak var recommendationLabel: UILabel!
     @IBOutlet private weak var recommendationCollectionView: UICollectionView! {
         didSet {
             recommendationCollectionView.delegate = self
@@ -99,7 +100,12 @@ class MovieDetailViewController: UIViewController {
     }
     
     func updateUI() {
-        guard let detailedMovie = detailedMovie else { return }
+        guard var detailedMovie = detailedMovie else { return }
+        // If the movie has any recommendation set isHidden false for label
+        if detailedMovie.recommendations?.results?.count ?? 0 > 0 {
+            self.recommendationLabel.isHidden = false
+        }
+        
         // The movie is ready so we can update the recommendatations
         recommendationCollectionView.reloadData()
         
