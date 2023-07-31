@@ -20,12 +20,15 @@ class CastDetailViewController: UIViewController {
     @IBOutlet private weak var birthdayLabel: UILabel!
     @IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet weak var bottomCardView: UIView!
+    @IBOutlet weak var bottomCardView: UIView! {
+        didSet {
+            bottomCardView.setCornerRadius(30)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showLoading()
-        bottomCardView.setCornerRadius(30)
         fetchPerson()
     }
     

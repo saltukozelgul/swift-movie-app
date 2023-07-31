@@ -10,6 +10,7 @@ import UIKit
 class WatchProviderView: UIStackView {
     private var watchProviders: WatchProviders?
     func addWatchProviderIcon(watchProviders: WatchProviders?) {
+        self.watchProviders = watchProviders
         let isoCode = String(NSLocalizedString("isoCode", comment: "").suffix(2))
         guard let provider = watchProviders?.results?[isoCode] else {
             return
@@ -32,13 +33,13 @@ class WatchProviderView: UIStackView {
             imageView.addGestureRecognizer(tapGesture)
             imageView.isUserInteractionEnabled = true
             
-            
             // Set normal icon size
             imageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
             imageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageView.setCornerRadius(10)
             imageView.setImageFromPath(path: logoPath) { image in
                 self.addArrangedSubview(imageView)
+                self.superview?.isHidden = false
             }
         }
     }

@@ -12,7 +12,15 @@ class FavoriteMoviesViewController: UIViewController {
     private var listedMovies = [Movie]()
     private var favouriteMovies = [Int:Bool]()
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            tableView.refreshControl = self.refreshController
+            tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+            tableView.delegate = self
+            tableView.dataSource = self
+            refreshController.addTarget(self, action: #selector(reloadTheMovies), for: .valueChanged)
+        }
+    }
     @IBOutlet private weak var searchBar: UITableView!
     private var refreshController = UIRefreshControl()
     
@@ -23,17 +31,8 @@ class FavoriteMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
     }
-    
-    func setupTableView() {
-        tableView.refreshControl = self.refreshController
-        tableView.registerNib(with: String(describing: MovieTableViewCell.self))
-        tableView.delegate = self
-        tableView.dataSource = self
-        refreshController.addTarget(self, action: #selector(reloadTheMovies), for: .valueChanged)
-    }
-    
+
     @objc func reloadTheMovies() {
         FavouriteManager.shared.getFavouriteMovies { idList in
             self.favouriteMovies = idList.reduce(into: [:]) { (dict, id) in

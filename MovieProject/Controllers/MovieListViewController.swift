@@ -15,7 +15,14 @@ class MovieListViewController: UIViewController {
     private var previousSearchQuery = ""
     private var searchTimer: Timer?
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.keyboardDismissMode = .onDrag
+            tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+        }
+    }
     @IBOutlet private weak var searchBar: UISearchBar!
     
     
@@ -25,17 +32,7 @@ class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         fetchData()
-    }
-    
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.keyboardDismissMode = .onDrag
-        tableView.registerNib(with: String(describing: MovieTableViewCell.self))
-        
-        
     }
     
     private func fetchData() {
@@ -155,6 +152,7 @@ extension MovieListViewController: UISearchBarDelegate {
     
     private func clearTableAndFetchPopularMovies() {
         userIsSearching = false
+        previousSearchQuery = ""
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: lastPreservedRow, section: 0), at: .bottom, animated: false)
     }
