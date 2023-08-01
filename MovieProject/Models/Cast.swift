@@ -16,4 +16,5 @@ struct Cast: Codable {
     let deathday: Date?
     let placeOfBirth: String?
     let character: String?
+    let movieCredits: CastMovieCredit?
 }

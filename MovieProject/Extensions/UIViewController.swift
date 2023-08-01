@@ -34,6 +34,7 @@ extension UIViewController {
     
     func navigateToCastDetail(cast: Cast) {
         presentViewController(withIdentifier: String(describing: CastDetailViewController.self)) { (vc: CastDetailViewController) in
+            vc.delegate = self as? MovieDetailViewController
             vc.personId = cast.id
             vc.title = cast.name
         }

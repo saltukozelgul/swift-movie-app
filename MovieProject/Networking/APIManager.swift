@@ -54,7 +54,11 @@ class APIManager {
     }
     
     func getPersonDetailUrl(personId: Int) -> URL? {
+        defer {
+            self.components.queryItems?.removeLast()
+        }
         self.components.path = "/3/person/\(personId)"
+        self.components.queryItems?.append(URLQueryItem(name: "append_to_response", value: "movie_credits"))
         if let componentsUrl = self.components.url {
             return componentsUrl
         }

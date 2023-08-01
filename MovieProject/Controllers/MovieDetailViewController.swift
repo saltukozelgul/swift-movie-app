@@ -154,5 +154,16 @@ class MovieDetailViewController: UIViewController {
 }
 
 
-// MARK: CollectionView Methods
+// MARK: Custom Delegate Methods
 
+extension MovieDetailViewController: ViewControllerNavigationHandlerDelegate {
+    func dismissAndNavigateToMovieDetail(movie: Movie) {
+        if let presentedViewController {
+            presentedViewController.dismiss(animated: true) {
+                self.navigateToMovieDetail(movie: movie)
+            }
+        }
+    }
+    
+    
+}

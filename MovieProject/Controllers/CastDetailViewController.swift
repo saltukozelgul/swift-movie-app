@@ -11,6 +11,7 @@ import Alamofire
 class CastDetailViewController: UIViewController {
     var personId: Int?
     private var detailedCast: Cast?
+    var delegate: ViewControllerNavigationHandlerDelegate?
     
     
     @IBOutlet private weak var castImageView: UIImageView!
@@ -20,6 +21,13 @@ class CastDetailViewController: UIViewController {
     @IBOutlet private weak var birthdayLabel: UILabel!
     @IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var moviesCollectionView: UICollectionView! {
+        didSet {
+            moviesCollectionView.delegate = self
+            moviesCollectionView.dataSource = self
+            moviesCollectionView.registerNib(with: String(describing: RecommendedCollectionViewCell.self))
+        }
+    }
     @IBOutlet weak var bottomCardView: UIView! {
         didSet {
             bottomCardView.setCornerRadius(30)
@@ -42,7 +50,7 @@ class CastDetailViewController: UIViewController {
                         self.view.hideLoading()
                     case .failure(let error):
                         ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
-                
+                        
                 }
             }
         }
@@ -65,7 +73,31 @@ class CastDetailViewController: UIViewController {
                     return
                 }
             }
+            moviesCollectionView.reloadData()
         }
-    
     }
 }
+
+
+extension CastDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return detailedCast?.movieCredits?.cast?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = moviesCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecommendedCollectionViewCell.self), for: indexPath) as? RecommendedCollectionViewCell {
+            if let movie = detailedCast?.movieCredits?.cast?[indexPath.row] {
+                cell.configure(movie)
+                return cell
+            }
+        }
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let movie = self.detailedCast?.movieCredits?.cast?[indexPath.row]  {
+            delegate?.dismissAndNavigateToMovieDetail(movie: movie)
+        }
+    }
+}
+
