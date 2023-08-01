@@ -21,6 +21,7 @@ class CastCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with cast: Cast) {
+        castImageView.showLoading()
         castImageView.translatesAutoresizingMaskIntoConstraints = false
         castImageView.layer.cornerRadius = 10
         castImageView.clipsToBounds = true
@@ -31,7 +32,7 @@ class CastCollectionViewCell: UICollectionViewCell {
         castNameLabel.text = cast.name
         castCharacterLabel.text = cast.character
         castImageView.setImageFromPath(path: cast.profilePath ?? "") { image in
-            return
+            self.castImageView.hideLoading()
         }
     }
 

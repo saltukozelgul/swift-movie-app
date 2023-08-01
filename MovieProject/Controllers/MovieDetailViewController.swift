@@ -9,26 +9,40 @@ import UIKit
 import FlagKit
 import Alamofire
 
-
-
 class MovieDetailViewController: UIViewController {
 
     // private tanımlamak daha mantıklı
     var movieId: Int?
-    private(set) var detailedMovie: Movie?
+    private(set) var detailedMovie: Movie? {
+        didSet {
+            recommendationCollectionView.reloadData()
+        }
+    }
     private(set) var castList: [Cast]?
     
     @IBOutlet private weak var movieNameLabel: UILabel!
-    @IBOutlet private weak var moviePosterImageView: UIImageView!
+    @IBOutlet private weak var moviePosterImageView: UIImageView! {
+        didSet {
+            moviePosterImageView.showLoading()
+        }
+    }
     @IBOutlet private weak var voteAverageLabel: UILabel!
     @IBOutlet private weak var movieOverviewLabel: UILabel!
     @IBOutlet private weak var releaseDateLabel: UILabel!
-    @IBOutlet private weak var genresLabel: UILabel!
+    @IBOutlet private weak var genresStackView: UIStackView!
     @IBOutlet private weak var budgetLabel: UILabel!
     @IBOutlet private weak var revenueLabel: UILabel!
     @IBOutlet private weak var runtimeLabel: UILabel!
     @IBOutlet private weak var flagImageView: UIImageView!
-    @IBOutlet private weak var gradientView: UIView!
+    @IBOutlet private weak var flagLabel: UILabel!
+    @IBOutlet private weak var bottomStackView: UIStackView!
+    @IBOutlet private weak var gradientView: UIView! {
+        didSet {
+            if let color = UIColor(named: "gradientBackground") {
+                gradientView.setGradientBackground(colors: [color.withAlphaComponent(0.0).cgColor, color.cgColor])
+            }
+        }
+    }
     
     // CastCollectionView
     @IBOutlet private weak var castCollectionView: UICollectionView! {
@@ -100,22 +114,14 @@ class MovieDetailViewController: UIViewController {
     }
     
     func updateUI() {
-        guard var detailedMovie = detailedMovie else { return }
+        guard let detailedMovie else { return }
         // If the movie has any recommendation set isHidden false for label
         if detailedMovie.recommendations?.results?.count ?? 0 > 0 {
             self.recommendationLabel.isHidden = false
         }
         
-        // The movie is ready so we can update the recommendatations
-        recommendationCollectionView.reloadData()
-        
         // Add watchProviders if there is any
         self.watchProvidersView.addWatchProviderIcon(watchProviders: detailedMovie.watchProviders)
-        
-        // Smooth transiton between image and bottomView
-        if let color = UIColor(named: "gradientBackground") {
-            gradientView.setGradientBackground(colors: [color.withAlphaComponent(0.0).cgColor, color.cgColor])
-        }
         
         // update navbar item if already favourited
         if FavouriteManager.shared.isFavourite(movieId: detailedMovie.id ?? 0) {
@@ -125,10 +131,20 @@ class MovieDetailViewController: UIViewController {
         // UI Labels
         movieNameLabel.text = (detailedMovie.originalTitle ?? "")
         movieOverviewLabel.text = detailedMovie.overview
+        bottomStackView.setCustomSpacing(15, after: movieOverviewLabel)
         voteAverageLabel.text = String(detailedMovie.voteAverage?.rounded(toPlaces: 1) ?? 0) + " / 10"
         releaseDateLabel.text = detailedMovie.releaseDate?.getMonthAndYearWithLocale()
-        genresLabel.text = detailedMovie.genres?.map { $0.name ?? "" }.joined(separator: ", ")
-        moviePosterImageView.setImageFromPath(isOriginalSize: true, path: detailedMovie.backdropPath ?? "") { image in }
+        detailedMovie.genres?.forEach {
+            let genreView = GenreView()
+            genreView.configure(genre: $0)
+            self.genresStackView.addArrangedSubview(genreView)
+        }
+        flagLabel.text = detailedMovie.originalLanguage?.uppercased()
+        flagImageView.image = Flag(countryCode: detailedMovie.productionCompanies?.first?.originCountry ?? "")?.image(style: .roundedRect)
+
+        moviePosterImageView.setImageFromPath(isOriginalSize: true, path: detailedMovie.backdropPath ?? "") { image in
+            self.moviePosterImageView.hideLoading()
+        }
         budgetLabel.text = String(detailedMovie.budget ?? 0).convertToShortNumberFormat()
         revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToShortNumberFormat()
         runtimeLabel.text = String(detailedMovie.runtime ?? 0) + NSLocalizedString("shortMin", comment: "that describes minutes")

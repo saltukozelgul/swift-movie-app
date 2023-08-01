@@ -22,22 +22,22 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.restorationIdentifier {
-        case Constants.castCollectionViewRestorationId:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as! CastCollectionViewCell
-            if let cast = self.castList?[indexPath.row] {
-                cell.configure(with: cast)
-            }
-            return cell
-        case Constants.recommendedCollectionViewRestorationId:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecommendedCollectionViewCell.self), for: indexPath) as! RecommendedCollectionViewCell
-            if let recommendation = self.detailedMovie?.recommendations?.results?[indexPath.row] {
-                cell.configure(recommendation)
-            }
-            return cell
-        default:
-            return UICollectionViewCell()
+            case Constants.castCollectionViewRestorationId:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as! CastCollectionViewCell
+                if let cast = self.castList?[indexPath.row] {
+                    cell.configure(with: cast)
+                }
+                return cell
+            case Constants.recommendedCollectionViewRestorationId:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecommendedCollectionViewCell.self), for: indexPath) as! RecommendedCollectionViewCell
+                if let recommendation = self.detailedMovie?.recommendations?.results?[indexPath.row] {
+                    cell.configure(recommendation)
+                }
+                return cell
+            default:
+                return UICollectionViewCell()
         }
-    
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

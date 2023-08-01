@@ -26,5 +26,5 @@ extension String {
         
         convertedString = String(format: "%.1f", num) + suffixes[index]
         return convertedString
-    }
+    }  
 }

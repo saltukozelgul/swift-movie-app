@@ -11,11 +11,9 @@ import UIKit
 extension UIImageView {
     
     func setImageFromPath(isOriginalSize: Bool = false, path: String, completion: @escaping (UIImage?) -> Void) {
-        var urlString = ""
+        var urlString = NetworkConstants.baseImageUrl + path
         if isOriginalSize {
             urlString = NetworkConstants.baseImageUrlForOriginalSize + path
-        } else {
-            urlString = NetworkConstants.baseImageUrl + path
         }
         guard let url = URL(string: urlString) else {
             return
