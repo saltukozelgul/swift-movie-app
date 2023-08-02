@@ -39,4 +39,13 @@ extension UIViewController {
             vc.title = cast.name
         }
     }
+    
+    func navigateToCustomListDetail(list: CustomList) {
+        navigateToViewController(withIdentifier: String(describing: CustomListViewController.self)) { (vc: CustomListViewController) in
+            if let name = list.customListName, let id = list.customListId {
+                vc.listName = name
+                vc.listId = id
+            }
+        }
+    }
 }

@@ -46,7 +46,7 @@ class MovieListViewController: UIViewController {
                     self.tableView.reloadData()
                     self.currentPage += 1
                 case .failure(let error):
-                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                    AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
             }
         }
     }
@@ -137,7 +137,7 @@ extension MovieListViewController: UISearchBarDelegate {
                     self.tableView.reloadData()
                     self.searchPage += 1
                 case .failure(let error):
-                    ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                    AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
             }
         }
     }

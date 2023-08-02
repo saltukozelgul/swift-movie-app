@@ -11,4 +11,5 @@ struct CLConstants {
     static let entityNameForCustomList = "CustomList"
     static let keyValueForMovies = "movies"
     static let keyValueForCustomListId = "customListId"
+    static let keyValueForCustomListName = "customListName"
 }

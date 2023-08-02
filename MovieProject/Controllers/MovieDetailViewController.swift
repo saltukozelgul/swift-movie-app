@@ -117,7 +117,7 @@ class MovieDetailViewController: UIViewController {
                         self.updateUI()
                         self.view.hideLoading()
                     case .failure(let error):
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                        AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                 }
             }
             if let castUrl = APIManager.shared.getMovieCastUrl(movieId: movieId) {
@@ -127,7 +127,7 @@ class MovieDetailViewController: UIViewController {
                             self.castList = credits.cast
                             self.castCollectionView.reloadData()
                         case .failure(let error):
-                            ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                            AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                     }
                 }
             }

@@ -23,5 +23,10 @@
 "shortMin" = " dk";
 "ok" = "Tamam";
 "error" = "Hata";
+"save" = "Kaydet";
+"cancel" = "İptal";
 "addFavErrorMsg" = "Film favorilere eklenemedi";
 "notReleased" = "Yayınlanmadı";
+"newList" = "Yeni Liste";
+"newListMessage" = "Liste için bir isim girin";
+"newListPlaceholder" = "Liste adı";

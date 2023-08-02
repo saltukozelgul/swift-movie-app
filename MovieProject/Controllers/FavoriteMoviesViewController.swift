@@ -74,7 +74,7 @@ class FavoriteMoviesViewController: UIViewController {
                         self.tableView.reloadData()
                     case .failure(let error):
                         self.favouriteMovies[movieId] = false
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                        AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                 }
             }
         }

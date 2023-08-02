@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--FavMovies-->
+        <!--CustomLists-->
         <scene sceneID="Zks-uB-t7j">
             <objects>
-                <viewController title="FavMovies" id="wCu-2w-hjB" customClass="FavoriteMoviesViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CustomLists" id="wCu-2w-hjB" customClass="CustomListsViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5z4-FL-IcB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,7 +49,7 @@
                             <constraint firstItem="ZZn-3X-TrG" firstAttribute="top" secondItem="teE-iK-Cv4" secondAttribute="top" id="l5J-SO-9Cd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Favourites" id="KU3-sr-JKd"/>
+                    <navigationItem key="navigationItem" title="Lists" id="KU3-sr-JKd"/>
                     <connections>
                         <outlet property="searchBar" destination="ZZn-3X-TrG" id="XNs-wZ-vtD"/>
                         <outlet property="tableView" destination="ZZn-3X-TrG" id="aX0-JU-Cu0"/>
@@ -62,13 +62,13 @@
         <!--CustomListView-->
         <scene sceneID="fgH-B4-vx8">
             <objects>
-                <viewController title="CustomListView" id="ny6-KZ-hs4" customClass="CustomListViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomListViewController" title="CustomListView" id="ny6-KZ-hs4" customClass="CustomListViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rRY-nr-DzY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MN5-TY-8nf">
-                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="Wky-hH-1Mg">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -101,19 +101,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="CustomListName" id="FEq-lA-cpJ"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="gj1-zv-ABD" id="sPc-LN-h9P"/>
+                        <outlet property="tableView" destination="MN5-TY-8nf" id="v1d-W1-oM6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyC-Wb-PaO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="gj1-zv-ABD">
-                    <connections>
-                        <outlet property="delegate" destination="ny6-KZ-hs4" id="Pnn-yC-zX3"/>
-                        <outlet property="searchBar" destination="Wky-hH-1Mg" id="z5j-0j-gKM"/>
-                        <outlet property="searchContentsController" destination="ny6-KZ-hs4" id="tUC-4z-Nb0"/>
-                        <outlet property="searchResultsDataSource" destination="ny6-KZ-hs4" id="W2y-1I-hzZ"/>
-                        <outlet property="searchResultsDelegate" destination="ny6-KZ-hs4" id="k1U-Dc-Gcv"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1803" y="-1311"/>
         </scene>
@@ -353,7 +344,7 @@
                                                                         <rect key="frame" x="360" y="0.0" width="24" height="50"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homekit" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WKc-VH-xO1">
-                                                                                <rect key="frame" x="0.0" y="-1" width="24" height="50"/>
+                                                                                <rect key="frame" x="0.0" y="2" width="24" height="46"/>
                                                                             </imageView>
                                                                         </subviews>
                                                                     </stackView>
@@ -662,7 +653,6 @@
                     <connections>
                         <segue destination="Geh-zH-xfi" kind="relationship" relationship="viewControllers" id="es5-Lh-dnL"/>
                         <segue destination="MEa-H3-cn2" kind="relationship" relationship="viewControllers" id="3Zv-fZ-mmM"/>
-                        <segue destination="iOb-Mt-AjU" kind="relationship" relationship="viewControllers" id="Ct9-hL-ZqX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOP-4t-qwk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -706,25 +696,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0z-Sy-32K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="892.75362318840587" y="-646.20535714285711"/>
-        </scene>
-        <!--CustomLists-->
-        <scene sceneID="mBR-tN-Hjd">
-            <objects>
-                <navigationController title="CustomLists" automaticallyAdjustsScrollViewInsets="NO" id="iOb-Mt-AjU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="lUb-ZV-E1U"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N6i-fA-AIq">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ny6-KZ-hs4" kind="relationship" relationship="rootViewController" id="6qc-CI-Swo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1s7-qc-GKC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="893" y="-1311"/>
         </scene>
     </scenes>
     <resources>

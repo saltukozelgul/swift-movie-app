@@ -23,5 +23,10 @@
 "shortMin" = " min";
 "ok" = "OK";
 "error" = "Error";
+"save" = "Save";
+"cancel" = "Cancel";
 "addFavErrorMsg" = "An error occurred while adding to favorites.";
 "notReleased" = "Not Released";
+"newList" = "New List";
+"newListMessage" = "Enter a name for the list";
+"newListPlaceholder" = "List Name";

@@ -6,30 +6,33 @@
 //
 
 import UIKit
+import Alamofire
 
 class CustomListViewController: UIViewController {
-    let listId: Int
-    let listName: String
+    var listId: String = "" 
+    var listName: String = "" {
+        didSet {
+            self.title = self.listName
+        }
+    }
     private var listedMovies = [Movie]()
     private var fetchStatus = [Int: Bool]()
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        getCustomListMovies()
     }
     
-    init (listId: Int, listName: String) {
-        self.listId = listId
-        self.listName = listName
-        super.init(nibName: nil, bundle: nil)
-        self.title = self.listName
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func fetchCustomListMovies() {
+    func getCustomListMovies() {
         CustomListManager.shared.getCustomListMovies(customListId: listId) { (movieIds) in
+            print(movieIds)
             self.fetchStatus = movieIds.reduce(into: [:]) { (dict, id) in
                 if self.fetchStatus[id] == true {
                     dict[id] = true
@@ -44,5 +47,50 @@ class CustomListViewController: UIViewController {
         }
     }
     
+    func fetchCustomListMovies() {
+        // If the movie is not already fetched, we fetch it up to 10
+        let moviesToFetch = Array(fetchStatus.filter({ $0.value == false }).prefix(10))
+        print("I will fetch \(moviesToFetch.count) movies")
+        moviesToFetch.forEach { (id, _) in
+            fetchMovie(movieId: id)
+            // We set it true asap because of mutex, another request can come and this request should be perform
+            // for this specific movie
+            fetchStatus[id] = true
+        }
+    }
     
+    func fetchMovie(movieId: Int) {
+        // get movie by ID
+        if let url = APIManager.shared.getMovieDetailUrl(movieId: movieId)  {
+            NetworkManager.shared.fetchData(url: url) { (result: Result<Movie, AFError>) in
+                switch result {
+                    case .success(let movie):
+                        self.listedMovies.append(movie)
+                        self.tableView.reloadData()
+                    case .failure(let error):
+                        self.fetchStatus[movieId] = false
+                        AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                }
+            }
+        }
+    }
 }
+
+extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listedMovies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as! MovieTableViewCell
+        let movie = listedMovies[indexPath.row]
+        cell.configureCellForDisplay(movie: movie)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = listedMovies[indexPath.row]
+        navigateToMovieDetail(movie: movie)
+    }
+}
+

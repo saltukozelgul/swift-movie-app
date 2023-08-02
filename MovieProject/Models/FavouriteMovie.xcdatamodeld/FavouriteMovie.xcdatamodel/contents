@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G531" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CustomList" representedClassName="CustomList" syncable="YES" codeGenerationType="class">
-        <attribute name="customListId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="movies" optional="YES" attributeType="Transformable"/>
+        <attribute name="customListId" optional="YES" attributeType="String"/>
+        <attribute name="customListName" optional="YES" attributeType="String"/>
+        <attribute name="movies" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
     </entity>
     <entity name="FavouriteMovie" representedClassName="FavouriteMovie" syncable="YES" codeGenerationType="class">
         <attribute name="movieId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

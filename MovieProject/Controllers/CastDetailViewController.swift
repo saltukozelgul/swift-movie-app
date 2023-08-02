@@ -49,7 +49,7 @@ class CastDetailViewController: UIViewController {
                         self.updateUI()
                         self.view.hideLoading()
                     case .failure(let error):
-                        ErrorAlertManager.shared.showAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
+                        AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
                         
                 }
             }
