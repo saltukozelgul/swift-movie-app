@@ -25,6 +25,7 @@ struct Movie: Codable {
     var recommendations: RecommendedMovieResults?
     let voteAverage: Double?
     let watchProviders: WatchProviders?
+    let videos: MovieVideoResults?
     
     //Api is returnin watch/providers we have to convert it to watchProviders
     enum CodingKeys: String, CodingKey {
@@ -45,6 +46,7 @@ struct Movie: Codable {
         case recommendations
         case voteAverage
         case watchProviders = "watch/providers"
+        case videos
     }
 }
 

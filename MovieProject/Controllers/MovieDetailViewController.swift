@@ -62,11 +62,20 @@ class MovieDetailViewController: UIViewController {
         }
     }
     @IBOutlet private weak var watchProvidersView: WatchProviderView!
-    
+
+    @IBOutlet weak var trailerButton: UIImageView! {
+        didSet {
+            // add tapture gesture
+            trailerButton.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(trailerButtonTapped))
+            trailerButton.addGestureRecognizer(tapGesture)
+            
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showLoading()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         setupNavbarButtons()
         fetchMovie()
     }
@@ -75,6 +84,19 @@ class MovieDetailViewController: UIViewController {
         let favouriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favouriteButtonTapped))
         favouriteButton.tintColor = UIColor.systemPink
         self.navigationItem.rightBarButtonItem = favouriteButton
+    }
+    
+    @objc func trailerButtonTapped() {
+        guard let detailedMovie = detailedMovie else { return }
+        // look for detailedMovie.vides.results and if the site is youtube and key is not null get key
+        detailedMovie.videos?.results?.forEach({ (video) in
+            if video.site == "YouTube" && video.key != nil {
+                if let url = URL(string: "https://www.youtube.com/watch?v=\(video.key!)") {
+                    UIApplication.shared.open(url)
+                    return
+                }
+            }
+        })
     }
     
     @objc func favouriteButtonTapped() {
@@ -164,6 +186,4 @@ extension MovieDetailViewController: ViewControllerNavigationHandlerDelegate {
             }
         }
     }
-    
-    
 }
