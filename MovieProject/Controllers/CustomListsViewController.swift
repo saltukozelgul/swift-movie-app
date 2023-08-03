@@ -34,6 +34,11 @@ class CustomListsViewController: UIViewController {
         getCustomLists()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getCustomLists()
+    }
+    
     @objc func newListButtonTapped() {
         AlertManager.shared.showNewCustomListAlert(viewController: self) { status in
             if status {
@@ -67,6 +72,5 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigateToCustomListDetail(list: customLists[indexPath.row])
     }
-    
 }
 

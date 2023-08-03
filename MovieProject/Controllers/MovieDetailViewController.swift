@@ -72,6 +72,13 @@ class MovieDetailViewController: UIViewController {
             
         }
     }
+    @IBOutlet weak var addListButton: UIImageView! {
+        didSet {
+            addListButton.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addListButtonTapped))
+            addListButton.addGestureRecognizer(tapGesture)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +104,13 @@ class MovieDetailViewController: UIViewController {
                 }
             }
         })
+    }
+    
+    @objc func addListButtonTapped() {
+        AlertManager.shared.addMovieToCustomListAlert(viewController: self, movieId: detailedMovie?.id ?? 0) { result in
+            // will be implemented
+        
+        }
     }
     
     @objc func favouriteButtonTapped() {

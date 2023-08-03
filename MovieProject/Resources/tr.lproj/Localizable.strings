@@ -30,3 +30,6 @@
 "newList" = "Yeni Liste";
 "newListMessage" = "Liste için bir isim girin";
 "newListPlaceholder" = "Liste adı";
+"favList" = "Favoriler";
+"addMovieToList" = "Film Ekle";
+"addMovieToListMessage" = "Eklemek istediğiniz listeyi seçin";

@@ -23,7 +23,11 @@ class CustomListTableViewCell: UITableViewCell {
     }
     
     func configure(with list: CustomList) {
-        self.listName.text = list.customListName
+        if list.customListId == "fav" {
+            self.listName.text = NSLocalizedString("favList", comment: "a text for table name for favourites")
+        } else {
+            self.listName.text = list.customListName
+        }
         self.listMovieCount.text = String(list.movies?.count ?? 0)
     }
 }

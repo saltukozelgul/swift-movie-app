@@ -36,7 +36,7 @@ class CustomListManager {
     func checkMovieInCustomList(movieId: Int, customListId: String) -> Bool {
         let customList = checkCustomList(customListId: customListId)
         if let customList {
-            if let movies = customList.movies as? [Int] {
+            if let movies = customList.movies  {
                 if movies.contains(movieId) {
                     return true
                 }
@@ -50,9 +50,10 @@ class CustomListManager {
         guard let context else { return false }
         let customList = checkCustomList(customListId: customListId)
         if let customList {
-            if var movies = customList.movies as? [Int] {
+            if var movies = customList.movies {
                 if !movies.contains(movieId) {
-                    customList.setValue(movies.append(movieId), forKey: CLConstants.keyValueForMovies)
+                    movies.append(movieId)
+                    customList.setValue(movies, forKey: CLConstants.keyValueForMovies)
                     do {
                         try context.save()
                         return true
@@ -70,7 +71,7 @@ class CustomListManager {
         guard let context else { return false }
         let customList = checkCustomList(customListId: customListId)
         if let customList {
-            if var movies = customList.movies as? [Int] {
+            if var movies = customList.movies  {
                 if movies.contains(movieId) {
                     movies.remove(at: movies.firstIndex(of: movieId)!)
                     customList.setValue(movies, forKey: CLConstants.keyValueForMovies)
@@ -113,14 +114,12 @@ class CustomListManager {
         return completion([])
     }
     
-    func createCustomList(listName: String, completion: @escaping (Bool) -> Void) {
+    func createCustomList(listId: String = UUID().uuidString, listName: String, completion: @escaping (Bool) -> Void) {
         guard let context else { return completion(false) }
-        // create UUID and convert to string
-        let UUIDString = UUID().uuidString
         if let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) {
             let newCustomList = NSManagedObject(entity: entity, insertInto: context)
             newCustomList.setValue(listName, forKey: CLConstants.keyValueForCustomListName)
-            newCustomList.setValue(UUIDString, forKey: CLConstants.keyValueForCustomListId)
+            newCustomList.setValue(listId, forKey: CLConstants.keyValueForCustomListId)
             newCustomList.setValue([], forKey: CLConstants.keyValueForMovies)
             do {
                 try context.save()

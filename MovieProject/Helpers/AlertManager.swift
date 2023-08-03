@@ -42,6 +42,33 @@ class AlertManager {
         viewController.present(alert, animated: true, completion: nil)
     }
     
+    func addMovieToCustomListAlert(viewController: UIViewController, movieId: Int, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: NSLocalizedString("addMovieToList", comment: "add movie title"), message: NSLocalizedString("addMovieToListMessage", comment: "add movie message"), preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: "cancel"), style: .cancel, handler: nil)
+        // Get all custom lists and add an option for every one
+        CustomListManager.shared.getAllCustomLists { customLists in
+            // Remove the fav custom lists from this section and create new array
+            var customLists = customLists.filter { $0.customListId != "fav" }
+            for customList in customLists {
+                switch CustomListManager.shared.checkMovieInCustomList(movieId: movieId, customListId: customList.customListId ?? "") {
+                case true:
+                    let action = UIAlertAction(title: customList.customListName, style: .destructive) { (action) in
+                        CustomListManager.shared.removeMovieFromCustomList(movieId: movieId, customListId: customList.customListId ?? "")
+                    }
+                    alert.addAction(action)
+                case false:
+                    let action = UIAlertAction(title: customList.customListName, style: .default) { (action) in
+                        CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: customList.customListId ?? "")
+                    }
+                    alert.addAction(action)
+                }          
+            }
+        }
+        alert.addAction(cancelAction)
+        viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
 }
 

@@ -30,3 +30,6 @@
 "newList" = "New List";
 "newListMessage" = "Enter a name for the list";
 "newListPlaceholder" = "List Name";
+"favList" = "Favorites";
+"addMovieToList" = "Add to List";
+"addMovieToListMessage" = "Select a list to add the movie";
