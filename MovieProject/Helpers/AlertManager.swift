@@ -48,7 +48,7 @@ class AlertManager {
         // Get all custom lists and add an option for every one
         CustomListManager.shared.getAllCustomLists { customLists in
             // Remove the fav custom lists from this section and create new array
-            var customLists = customLists.filter { $0.customListId != "fav" }
+            let customLists = customLists.filter { $0.customListId != CLConstants.idForFavouritesList }
             for customList in customLists {
                 switch CustomListManager.shared.checkMovieInCustomList(movieId: movieId, customListId: customList.customListId ?? "") {
                 case true:
@@ -69,6 +69,22 @@ class AlertManager {
     }
     
     
-    
+    func editCustomListAlert(viewController: UIViewController, customListId: String, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: NSLocalizedString("editList", comment: "edit list title"), message: NSLocalizedString("editListMessage", comment: "edit list message"), preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = NSLocalizedString("editListPlaceholder", comment: "edit list placeholder")
+        }
+        let saveAction = UIAlertAction(title: NSLocalizedString("save", comment: "save"), style: .default) { (action) in
+            if let listName = alert.textFields?.first?.text, !listName.isEmpty {
+                CustomListManager.shared.updateCustomList(customListId: customListId, customListName: listName) { result in
+                    return completion(result)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: "cancel"), style: .cancel, handler: nil)
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        viewController.present(alert, animated: true, completion: nil)
+    }
 }
 

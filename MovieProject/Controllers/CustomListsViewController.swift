@@ -72,5 +72,43 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigateToCustomListDetail(list: customLists[indexPath.row])
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TableConstants.heightForCustomListCell
+    }
+    
+    // disable delete for first row which is favs
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let list = customLists[indexPath.row]
+        return list.customListId == CLConstants.idForFavouritesList ? false : true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let list = customLists[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            CustomListManager.shared.deleteCustomList(customListId: list.customListId ?? "") { result in
+                if result {
+                    self.customLists.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+                }
+            }
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+            AlertManager.shared.editCustomListAlert(viewController: self, customListId: list.customListId ?? "") { result in
+                if result {
+                    self.getCustomLists()
+                }
+            }
+            completionHandler(true)
+        }
+        editAction.image = UIImage(systemName: "pencil")
+        editAction.backgroundColor = .systemOrange
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
 }
 

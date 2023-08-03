@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-3X-TrG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-3X-TrG">
                                 <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="OpT-Mr-WEQ">
@@ -30,10 +30,10 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3Js-fY-hzD">
-                                        <rect key="frame" x="0.0" y="94" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="94" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Js-fY-hzD" id="2OO-kk-JMf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -689,11 +689,11 @@
             </objects>
             <point key="canvasLocation" x="894" y="3"/>
         </scene>
-        <!--Favourites-->
+        <!--Lists-->
         <scene sceneID="q4P-6R-q8M">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MEa-H3-cn2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" image="heart.fill" catalog="system" selectedImage="heart.fill" id="Asa-a9-akf"/>
+                    <tabBarItem key="tabBarItem" title="Lists" image="list.bullet" catalog="system" selectedImage="list.bullet" id="Asa-a9-akf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J9q-Gm-fnw">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -714,8 +714,8 @@
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="dollarsign" catalog="system" width="89" height="128"/>
         <image name="dollarsign.arrow.circlepath" catalog="system" width="128" height="112"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.rectangle.on.rectangle.fill" catalog="system" width="128" height="98"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>

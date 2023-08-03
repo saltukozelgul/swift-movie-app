@@ -25,21 +25,21 @@ class FavouriteManager {
     
     func isFavourite(movieId: Int?) -> Bool {
         guard let movieId else { return false }
-        if let _ = CustomListManager.shared.checkCustomList(customListId: "fav") {
-            return CustomListManager.shared.checkMovieInCustomList(movieId: movieId, customListId: "fav")
+        if let _ = CustomListManager.shared.checkCustomList(customListId: CLConstants.idForFavouritesList) {
+            return CustomListManager.shared.checkMovieInCustomList(movieId: movieId, customListId: CLConstants.idForFavouritesList)
         }
         return false
     }
     
     func addFavourite(movieId: Int?) -> Bool {
         guard let movieId else { return false }
-        if let _ = CustomListManager.shared.checkCustomList(customListId: "fav") {
-            return CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: "fav")
+        if let _ = CustomListManager.shared.checkCustomList(customListId: CLConstants.idForFavouritesList) {
+            return CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: CLConstants.idForFavouritesList)
             
         } else {
-            CustomListManager.shared.createCustomList(listId: "fav", listName: "fav") { result in
+            CustomListManager.shared.createCustomList(listId: CLConstants.idForFavouritesList, listName: CLConstants.nameForFavouritesList) { result in
                 if result {
-                    CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: "fav")
+                    CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: CLConstants.idForFavouritesList)
                 }
             }
         }
@@ -48,8 +48,8 @@ class FavouriteManager {
     
     func removeFavourite(movieId: Int?) -> Bool {
         guard let movieId else { return false }
-        if let _ = CustomListManager.shared.checkCustomList(customListId: "fav") {
-            return CustomListManager.shared.removeMovieFromCustomList(movieId: movieId, customListId: "fav")
+        if let _ = CustomListManager.shared.checkCustomList(customListId: CLConstants.idForFavouritesList) {
+            return CustomListManager.shared.removeMovieFromCustomList(movieId: movieId, customListId: CLConstants.idForFavouritesList)
         }
         return false
     }

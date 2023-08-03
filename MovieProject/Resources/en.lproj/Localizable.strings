@@ -33,3 +33,6 @@
 "favList" = "Favorites";
 "addMovieToList" = "Add to List";
 "addMovieToListMessage" = "Select a list to add the movie";
+"editList" = "Edit List";
+"editListMessage" = "Enter a new name for the list";
+"editListPlaceholder" = "List Name";

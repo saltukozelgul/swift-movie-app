@@ -33,3 +33,6 @@
 "favList" = "Favoriler";
 "addMovieToList" = "Film Ekle";
 "addMovieToListMessage" = "Eklemek istediğiniz listeyi seçin";
+"editList" = "Listeyi Düzenle";
+"editListMessage" = "Liste için bir isim girin";
+"editListPlaceholder" = "Liste adı";

@@ -12,4 +12,6 @@ struct CLConstants {
     static let keyValueForMovies = "movies"
     static let keyValueForCustomListId = "customListId"
     static let keyValueForCustomListName = "customListName"
+    static let nameForFavouritesList = "fav"
+    static let idForFavouritesList = "fav"
 }

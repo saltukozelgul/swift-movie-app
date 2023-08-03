@@ -43,7 +43,7 @@ extension UIViewController {
     func navigateToCustomListDetail(list: CustomList) {
         navigateToViewController(withIdentifier: String(describing: CustomListViewController.self)) { (vc: CustomListViewController) in
             if let name = list.customListName, let id = list.customListId {
-                if id == "fav" {
+                if id == CLConstants.idForFavouritesList {
                     vc.title = NSLocalizedString("favList", comment: "a text for table name for favourites")
                 } else {
                     vc.title = name

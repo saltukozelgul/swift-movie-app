@@ -129,8 +129,23 @@ class CustomListManager {
                 completion(false)
             }
         }
-
     }
+    
+    func deleteCustomList(customListId: String, completion: @escaping (Bool) -> Void) {
+        guard let context else { return completion(false) }
+        if let customList = checkCustomList(customListId: customListId) {
+            context.delete(customList)
+            do {
+                try context.save()
+                completion(true)
+            } catch {
+                print("Error while deleting custom list")
+                completion(false)
+            }
+        
+        }
+    }
+    
     
     func getAllCustomLists(completion: @escaping ([CustomList]) -> Void) {
         guard let context else { return completion([]) }
@@ -144,6 +159,20 @@ class CustomListManager {
         return completion([])
     }
     
+    func updateCustomList(customListId: String, customListName: String, completion: @escaping (Bool) -> Void) {
+        guard let context else { return completion(false) }
+        if let customList = checkCustomList(customListId: customListId) {
+            customList.setValue(customListName, forKey: CLConstants.keyValueForCustomListName)
+            do {
+                try context.save()
+                completion(true)
+            } catch {
+                print("Error while updating custom list")
+                completion(false)
+            }
+        }
+    }
+
     
     
 }

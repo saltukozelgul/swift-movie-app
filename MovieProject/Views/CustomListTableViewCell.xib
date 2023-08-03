@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,12 +22,22 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ebb-It-E7x">
                         <rect key="frame" x="15" y="0.0" width="290" height="80"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ListName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4X-Jc-vtx">
-                                <rect key="frame" x="0.0" y="0.0" width="72" height="80"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qIU-rT-Ret">
+                                <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="80"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DLe-Dj-1Je">
+                                        <rect key="frame" x="0.0" y="-1.3333333333333357" width="26.666666666666668" height="83.333333333333343"/>
+                                        <color key="tintColor" systemColor="systemPinkColor"/>
+                                        <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ListName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4X-Jc-vtx">
+                                        <rect key="frame" x="31.666666666666657" y="0.0" width="72" height="80"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="CustomListTableViewCell" text="MovieCount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyq-hM-bRm">
                                 <rect key="frame" x="198.33333333333334" y="0.0" width="91.666666666666657" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -44,10 +56,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="listIconImageView" destination="DLe-Dj-1Je" id="CCf-xk-VhU"/>
                 <outlet property="listMovieCount" destination="cyq-hM-bRm" id="ONa-pq-A4y"/>
                 <outlet property="listName" destination="f4X-Jc-vtx" id="8jn-Nh-aFQ"/>
             </connections>
             <point key="canvasLocation" x="51.908396946564885" y="32.394366197183103"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
