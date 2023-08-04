@@ -13,8 +13,6 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var castNameLabel: UILabel!
     @IBOutlet private weak var castCharacterLabel: UILabel!
     
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,5 +33,4 @@ class CastCollectionViewCell: UICollectionViewCell {
             self.castImageView.hideLoading()
         }
     }
-
 }

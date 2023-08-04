@@ -26,6 +26,8 @@ class CustomListTableViewCell: UITableViewCell {
     func configure(with list: CustomList) {
         if list.customListId == CLConstants.idForFavouritesList {
             self.listName.text = NSLocalizedString("favList", comment: "a text for table name for favourites")
+            self.listIconImageView.image = UIImage(systemName: "heart.fill")
+            self.listIconImageView.tintColor = .systemPink
         } else {
             self.listIconImageView.image = UIImage(systemName: "bookmark")
            // symbol scale
