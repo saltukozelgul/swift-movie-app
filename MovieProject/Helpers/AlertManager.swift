@@ -24,7 +24,7 @@ class AlertManager {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    func showNewCustomListAlert(viewController: UIViewController, completion: @escaping (Bool) -> Void) {
+    func showNewCustomListAlert(viewController: UIViewController, completion: @escaping (String) -> Void) {
         let alert = UIAlertController(title: NSLocalizedString("newList", comment: "new list title"), message: NSLocalizedString("newListMessage", comment: "new list message"), preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = NSLocalizedString("newListPlaceholder", comment: "list name")
@@ -32,7 +32,9 @@ class AlertManager {
         let saveAction = UIAlertAction(title: NSLocalizedString("save", comment: "save"), style: .default) { (action) in
             if let listName = alert.textFields?.first?.text, !listName.isEmpty {
                 CustomListManager.shared.createCustomList(listName: listName) { result in
-                    return completion(result)
+                    if let listId = result {
+                        completion(listId)
+                    }
                 }
             }
         }
@@ -51,17 +53,29 @@ class AlertManager {
             let customLists = customLists.filter { $0.customListId != CLConstants.idForFavouritesList }
             for customList in customLists {
                 switch CustomListManager.shared.checkMovieInCustomList(movieId: movieId, customListId: customList.customListId ?? "") {
-                case true:
-                    let action = UIAlertAction(title: customList.customListName, style: .destructive) { (action) in
-                        CustomListManager.shared.removeMovieFromCustomList(movieId: movieId, customListId: customList.customListId ?? "")
+                    case true:
+                        let action = UIAlertAction(title: customList.customListName, style: .destructive) { (action) in
+                            CustomListManager.shared.removeMovieFromCustomList(movieId: movieId, customListId: customList.customListId ?? "")
+                        }
+                        alert.addAction(action)
+                    case false:
+                        let action = UIAlertAction(title: customList.customListName, style: .default) { (action) in
+                            CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: customList.customListId ?? "")
+                        }
+                        alert.addAction(action)
+                }
+            }
+            if customLists.isEmpty {
+                // Create an action that triggers showNewCustomAlert if there is no list
+                let action = UIAlertAction(title: NSLocalizedString("createNewList", comment: "create new list"), style: .default) { (action) in
+                    self.showNewCustomListAlert(viewController: viewController) { createdListId in
+                        
+                        CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: createdListId)
+                        
+                        return completion(true)
                     }
-                    alert.addAction(action)
-                case false:
-                    let action = UIAlertAction(title: customList.customListName, style: .default) { (action) in
-                        CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: customList.customListId ?? "")
-                    }
-                    alert.addAction(action)
-                }          
+                }
+                alert.addAction(action)
             }
         }
         alert.addAction(cancelAction)

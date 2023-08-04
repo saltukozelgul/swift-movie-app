@@ -3,7 +3,7 @@
     <entity name="CustomList" representedClassName="CustomList" syncable="YES" codeGenerationType="class">
         <attribute name="customListId" optional="YES" attributeType="String"/>
         <attribute name="customListName" optional="YES" attributeType="String"/>
-        <attribute name="movies" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="movies" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[Int]"/>
     </entity>
     <entity name="FavouriteMovie" representedClassName="FavouriteMovie" syncable="YES" codeGenerationType="class">
         <attribute name="movieId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

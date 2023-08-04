@@ -114,8 +114,8 @@ class CustomListManager {
         return completion([])
     }
     
-    func createCustomList(listId: String = UUID().uuidString, listName: String, completion: @escaping (Bool) -> Void) {
-        guard let context else { return completion(false) }
+    func createCustomList(listId: String = UUID().uuidString, listName: String, completion: @escaping (String?) -> Void) {
+        guard let context else { return completion(nil) }
         if let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) {
             let newCustomList = NSManagedObject(entity: entity, insertInto: context)
             newCustomList.setValue(listName, forKey: CLConstants.keyValueForCustomListName)
@@ -123,10 +123,10 @@ class CustomListManager {
             newCustomList.setValue([], forKey: CLConstants.keyValueForMovies)
             do {
                 try context.save()
-                completion(true)
+                completion(listId)
             } catch {
                 print("Error while saving custom list")
-                completion(false)
+                completion(nil)
             }
         }
     }

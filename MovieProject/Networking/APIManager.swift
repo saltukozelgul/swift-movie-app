@@ -77,4 +77,48 @@ class APIManager {
         }
         return URL(string: "")
     }
+    
+    //relase date.gte/lte vote_average.gte/lte witn_genres with_runtime.lte/gte
+    func getDiscoverMoviesUrl(page: Int, genre: String, releaseDateGte: String, releaseDateLte: String, voteAverageGte: String, voteAverageLte: String, sorting: MovieListSortingOptions = .popularity) -> URL? {
+        defer {
+            self.components.queryItems?.removeLast(7)
+        }
+        switch sorting {
+            case .popularity:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "popularity.desc"))
+            case .voteCount:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_count.desc"))
+            case .releaseDate:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.desc"))
+            case .voteAverage:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_average.desc"))
+        }
+        self.components.path = "/3/discover/movie"
+        self.components.queryItems?.append(URLQueryItem(name: "page", value: String(page)))
+        self.components.queryItems?.append(URLQueryItem(name: "with_genres", value: genre))
+        self.components.queryItems?.append(URLQueryItem(name: "release_date.gte", value: releaseDateGte))
+        self.components.queryItems?.append(URLQueryItem(name: "release_date.lte", value: releaseDateLte))
+        self.components.queryItems?.append(URLQueryItem(name: "vote_average.gte", value: voteAverageGte))
+        self.components.queryItems?.append(URLQueryItem(name: "vote_average.lte", value: voteAverageLte))
+        
+        if let componentsUrl = self.components.url {
+            return componentsUrl
+        }
+        return URL(string: "")
+    }
+    
+    func getGenreUrl() -> URL? {
+        defer {
+            self.components.queryItems?.removeLast()
+        }
+        self.components.path = "/3/genre/movie/list"
+        // update language component with prefix of previous language
+        self.components.queryItems?.append(URLQueryItem(name: "language", value: String(NetworkConstants.isoCode.prefix(2))))
+        if let componentsUrl = self.components.url {
+            return componentsUrl
+        }
+        return URL(string: "")
+    }
+    
+    
 }

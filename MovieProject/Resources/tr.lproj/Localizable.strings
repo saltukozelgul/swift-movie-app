@@ -36,3 +36,6 @@
 "editList" = "Listeyi Düzenle";
 "editListMessage" = "Liste için bir isim girin";
 "editListPlaceholder" = "Liste adı";
+"addGenre" = "Kategori Ekle";
+"addGenreMessage" = "Eklemek istediğiniz kategoriyi seçin";
+"createNewList" = "Yeni Liste +";

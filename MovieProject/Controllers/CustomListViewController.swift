@@ -22,6 +22,7 @@ class CustomListViewController: UIViewController {
             tableView.registerNib(with: String(describing: MovieTableViewCell.self))
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.keyboardDismissMode = .onDrag
         }
     }
         
@@ -57,6 +58,13 @@ class CustomListViewController: UIViewController {
             // for this specific movie
             fetchStatus[id] = true
         }
+        checkForLoadingStatus()
+    }
+    
+    func checkForLoadingStatus() {
+        if !fetchStatus.values.contains(false) {
+            self.tableView.reloadData()
+        }
     }
     
     func fetchMovie(movieId: Int) {
@@ -85,6 +93,7 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as! MovieTableViewCell
         let movie = listedMovies[indexPath.row]
         cell.configureCellForDisplay(movie: movie)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -92,5 +101,26 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
         let movie = listedMovies[indexPath.row]
         navigateToMovieDetail(movie: movie)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if fetchStatus.values.contains(false) {
+            if indexPath.row == listedMovies.count - 1 {
+                fetchCustomListMovies()
+            }
+        }
+    }
+    
 }
 
+//MARK: - Search Bar Delegate
+
+extension CustomListViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}

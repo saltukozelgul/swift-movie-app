@@ -11,11 +11,14 @@ import Alamofire
 
 class MovieDetailViewController: UIViewController {
 
-    // private tanımlamak daha mantıklı
     var movieId: Int?
     private(set) var detailedMovie: Movie? {
         didSet {
             recommendationCollectionView.reloadData()
+            // If there is no trailer, hide trailer button
+            if detailedMovie?.videos?.results?.isEmpty ?? true {
+                trailerButton.isHidden = true
+            }
         }
     }
     private(set) var castList: [Cast]?
@@ -108,7 +111,7 @@ class MovieDetailViewController: UIViewController {
     
     @objc func addListButtonTapped() {
         AlertManager.shared.addMovieToCustomListAlert(viewController: self, movieId: detailedMovie?.id ?? 0) { result in
-            // will be implemented
+
         
         }
     }

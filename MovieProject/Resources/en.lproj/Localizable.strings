@@ -36,3 +36,6 @@
 "editList" = "Edit List";
 "editListMessage" = "Enter a new name for the list";
 "editListPlaceholder" = "List Name";
+"addGenre" = "Add Genre";
+"addGenreMessage" = "Select a genre to add";
+"createNewList" = "New List +";

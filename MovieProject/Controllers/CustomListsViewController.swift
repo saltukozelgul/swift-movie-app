@@ -21,6 +21,7 @@ class CustomListsViewController: UIViewController {
             tableView.registerNib(with: String(describing: CustomListTableViewCell.self))
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.keyboardDismissMode = .onDrag
             refreshController.addTarget(self, action: #selector(getCustomLists), for: .valueChanged)
         }
     }
@@ -41,7 +42,7 @@ class CustomListsViewController: UIViewController {
     
     @objc func newListButtonTapped() {
         AlertManager.shared.showNewCustomListAlert(viewController: self) { status in
-            if status {
+            if status != nil {
                 self.getCustomLists()
             }
         }
@@ -64,6 +65,7 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CustomListTableViewCell.self), for: indexPath) as? CustomListTableViewCell {
             cell.configure(with: customLists[indexPath.row])
+            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
@@ -112,3 +114,14 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+
+// MARK: Search Bar Delegate
+extension CustomListsViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //TODO: Will be implemented
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}

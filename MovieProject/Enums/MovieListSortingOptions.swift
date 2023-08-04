@@ -12,8 +12,4 @@ enum MovieListSortingOptions {
     case voteCount
     case voteAverage
     case releaseDate
-    case revenue
-    case primaryReleaseDate
-    case originalTitle
-    case random
 }

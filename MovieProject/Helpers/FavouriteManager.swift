@@ -38,7 +38,7 @@ class FavouriteManager {
             
         } else {
             CustomListManager.shared.createCustomList(listId: CLConstants.idForFavouritesList, listName: CLConstants.nameForFavouritesList) { result in
-                if result {
+                if result != nil {
                     CustomListManager.shared.addMovieToCustomList(movieId: movieId, customListId: CLConstants.idForFavouritesList)
                 }
             }
