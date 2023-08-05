@@ -42,9 +42,7 @@ class CustomListsViewController: UIViewController {
     
     @objc func newListButtonTapped() {
         AlertManager.shared.showNewCustomListAlert(viewController: self) { status in
-            if status != nil {
                 self.getCustomLists()
-            }
         }
     }
     

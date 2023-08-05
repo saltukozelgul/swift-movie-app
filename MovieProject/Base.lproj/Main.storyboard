@@ -4,10 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -711,7 +709,7 @@
             </objects>
             <point key="canvasLocation" x="892.75362318840587" y="-646.20535714285711"/>
         </scene>
-        <!--Discover-->
+        <!--Discover View Controller-->
         <scene sceneID="8Pa-KU-GfQ">
             <objects>
                 <viewController id="YF1-A9-MJ7" customClass="DiscoverViewController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -720,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SND-Iv-apg" userLabel="RootStackView">
-                                <rect key="frame" x="15" y="92" width="384" height="491.5"/>
+                                <rect key="frame" x="15" y="92" width="384" height="724"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3qR-l5-PIn" userLabel="Release Date Title">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="31.5"/>
@@ -823,7 +821,7 @@
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="MRt-iC-mVn">
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="MRt-iC-mVn">
                                                         <rect key="frame" x="49" y="30.5" width="94" height="32"/>
                                                         <connections>
                                                             <action selector="minumumRatingStepperTapped:" destination="YF1-A9-MJ7" eventType="valueChanged" id="BJJ-Ni-Mx2"/>
@@ -835,20 +833,20 @@
                                                 <rect key="frame" x="192" y="0.0" width="192" height="62.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-ed-MrO">
-                                                        <rect key="frame" x="70.5" y="0.0" width="51" height="20.5"/>
+                                                        <rect key="frame" x="67" y="0.0" width="58.5" height="20.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ce-md-TDb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ce-md-TDb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="31.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CAO-bt-6mQ">
-                                                                <rect key="frame" x="29" y="0.0" width="22" height="20"/>
+                                                                <rect key="frame" x="36.5" y="0.0" width="22" height="20"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-fK-qHU">
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-fK-qHU">
                                                         <rect key="frame" x="49" y="30.5" width="94" height="32"/>
                                                         <connections>
                                                             <action selector="maximumRatingStepperTapped:" destination="YF1-A9-MJ7" eventType="valueChanged" id="JDb-So-OpX"/>
@@ -885,10 +883,10 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z0B-QY-MrW" userLabel="GenresCollectionView">
-                                        <rect key="frame" x="0.0" y="327" width="384" height="120"/>
+                                        <rect key="frame" x="0.0" y="327" width="384" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="ctV-OL-aEm"/>
+                                            <constraint firstAttribute="height" constant="80" id="ctV-OL-aEm"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZr-4B-18I">
                                             <size key="itemSize" width="150" height="30"/>
@@ -896,35 +894,10 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lad-bV-D8V">
-                                                <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="B4G-K4-wPZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7uH-Vx-kq4">
-                                                <rect key="frame" x="0.0" y="45" width="150" height="30"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2xv-SR-k9Q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gy4-bz-fYg">
-                                                <rect key="frame" x="0.0" y="90" width="150" height="30"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eyH-1a-eKg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOd-Ss-ih4">
-                                        <rect key="frame" x="0.0" y="457" width="384" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="417" width="384" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add new genre">
                                             <color key="baseForegroundColor" name="genreLabel"/>
@@ -934,6 +907,35 @@
                                             <action selector="addNewGenreButtonTapped:" destination="YF1-A9-MJ7" eventType="touchUpInside" id="vGB-GT-ggp"/>
                                         </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-jN-mO0" userLabel="Sort by Title">
+                                        <rect key="frame" x="0.0" y="461.5" width="384" height="36.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mj6-7Q-M7X">
+                                                <rect key="frame" x="0.0" y="0.0" width="102" height="25.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdy-wQ-Jip" userLabel="Sort by">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71" height="25.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-mL-jDD">
+                                                        <rect key="frame" x="81" y="2.5" width="21" height="20.5"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6V-aQ-dpE" userLabel="divider">
+                                                <rect key="frame" x="0.0" y="35.5" width="384" height="1"/>
+                                                <color key="backgroundColor" systemColor="separatorColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="vGO-VT-3gN"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02E-YY-8xO">
+                                        <rect key="frame" x="0.0" y="508" width="384" height="216"/>
+                                    </pickerView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="xl3-rR-dRi" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="2Qq-Rb-fz2"/>
@@ -947,30 +949,21 @@
                                     <constraint firstItem="nof-Es-mdr" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="Y3r-zB-yiL"/>
                                     <constraint firstItem="ZUA-es-Zg3" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="bOO-T2-yvI"/>
                                     <constraint firstAttribute="trailing" secondItem="nof-Es-mdr" secondAttribute="trailing" id="iyn-06-ih7"/>
+                                    <constraint firstItem="n6V-aQ-dpE" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="lgt-aX-nEb"/>
+                                    <constraint firstAttribute="trailing" secondItem="n6V-aQ-dpE" secondAttribute="trailing" id="wXs-nh-xHd"/>
                                     <constraint firstAttribute="trailing" secondItem="heI-2n-bP3" secondAttribute="trailing" id="zcQ-Cj-9OK"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTb-Tj-W7b">
-                                <rect key="frame" x="50" y="763.5" width="314" height="34.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Discover Movies"/>
-                                <connections>
-                                    <action selector="discoverButtonTapped:" destination="YF1-A9-MJ7" eventType="touchUpInside" id="EG0-fg-1px"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="W4t-7p-mCU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="W4t-7p-mCU" firstAttribute="trailing" secondItem="lTb-Tj-W7b" secondAttribute="trailing" constant="50" id="7Gk-Og-ysC"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="top" secondItem="W4t-7p-mCU" secondAttribute="top" id="L8K-bt-Qfd"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="trailing" secondItem="W4t-7p-mCU" secondAttribute="trailing" constant="-15" id="cSQ-yh-MTm"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="leading" secondItem="W4t-7p-mCU" secondAttribute="leading" constant="15" id="kcY-J8-D6z"/>
-                            <constraint firstItem="lTb-Tj-W7b" firstAttribute="leading" secondItem="W4t-7p-mCU" secondAttribute="leading" constant="50" id="kgv-2g-aaX"/>
-                            <constraint firstItem="W4t-7p-mCU" firstAttribute="bottom" secondItem="lTb-Tj-W7b" secondAttribute="bottom" constant="15" id="wd2-G3-hj9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Discover" leftItemsSupplementBackButton="YES" id="8rA-Jx-kha"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="8rA-Jx-kha"/>
                     <connections>
                         <outlet property="genresCollectionView" destination="Z0B-QY-MrW" id="cJe-QZ-Wj6"/>
                         <outlet property="maximumDatePicker" destination="uFf-NB-Lzt" id="9nW-9I-OHt"/>
@@ -979,11 +972,42 @@
                         <outlet property="minimumRatingStepper" destination="MRt-iC-mVn" id="fhl-H4-dKP"/>
                         <outlet property="minumumDatePicker" destination="mWd-EN-w3H" id="wtk-PN-2ws"/>
                         <outlet property="minumumRatingLabel" destination="cLp-qc-SVn" id="9YI-AH-vSj"/>
+                        <outlet property="sortingTypePicker" destination="02E-YY-8xO" id="vI5-DG-0lh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IZQ-Cg-QMv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1802.8985507246377" y="-1311.1607142857142"/>
+        </scene>
+        <!--Discover Movies List Controller-->
+        <scene sceneID="wpv-OG-KA5">
+            <objects>
+                <viewController storyboardIdentifier="DiscoverMoviesListController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="odO-1L-fkU" customClass="DiscoverMoviesListController" customModule="MovieProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MVT-An-evQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wDA-8l-KfB">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4un-7f-Kob"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4un-7f-Kob" firstAttribute="bottom" secondItem="wDA-8l-KfB" secondAttribute="bottom" id="65X-Lf-az4"/>
+                            <constraint firstItem="wDA-8l-KfB" firstAttribute="leading" secondItem="4un-7f-Kob" secondAttribute="leading" id="FsH-ZB-dS4"/>
+                            <constraint firstItem="4un-7f-Kob" firstAttribute="trailing" secondItem="wDA-8l-KfB" secondAttribute="trailing" id="HOe-rq-Qth"/>
+                            <constraint firstItem="wDA-8l-KfB" firstAttribute="top" secondItem="4un-7f-Kob" secondAttribute="top" id="RR3-n3-Jcs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="wDA-8l-KfB" id="RQb-b5-POW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YoD-6n-98d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2562" y="-1311"/>
         </scene>
         <!--Discover-->
         <scene sceneID="kRJ-3x-ieg">
@@ -1012,6 +1036,7 @@
         <image name="dollarsign.arrow.circlepath" catalog="system" width="128" height="112"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <image name="list.triangle" catalog="system" width="128" height="91"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.rectangle.on.rectangle.fill" catalog="system" width="128" height="98"/>

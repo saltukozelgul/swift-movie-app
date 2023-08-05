@@ -39,3 +39,12 @@
 "addGenre" = "Add Genre";
 "addGenreMessage" = "Select a genre to add";
 "createNewList" = "New List +";
+"discover" = "Discover";
+"popularityAsc" = "Popularity (Asc)";
+"popularityDesc" = "Popularity (Desc)";
+"releaseDateAsc" = "Release Date (Asc)";
+"releaseDateDesc" = "Release Date (Desc)";
+"voteAverageAsc" = "Vote Average (Asc)";
+"voteAverageDesc" = "Vote Average (Desc)";
+"voteCountAsc" = "Vote Count (Asc)";
+"voteCountDesc" = "Vote Count (Desc)";

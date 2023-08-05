@@ -8,8 +8,12 @@
 import Foundation
 
 enum MovieListSortingOptions {
-    case popularity
-    case voteCount
-    case voteAverage
-    case releaseDate
+    case popularityAsc
+    case voteCountAsc
+    case voteAverageAsc
+    case releaseDateAsc
+    case popularityDesc
+    case voteCountDesc
+    case voteAverageDesc
+    case releaseDateDesc
 }

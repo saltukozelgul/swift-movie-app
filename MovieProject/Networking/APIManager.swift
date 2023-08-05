@@ -79,19 +79,27 @@ class APIManager {
     }
     
     //relase date.gte/lte vote_average.gte/lte witn_genres with_runtime.lte/gte
-    func getDiscoverMoviesUrl(page: Int, genre: String, releaseDateGte: String, releaseDateLte: String, voteAverageGte: String, voteAverageLte: String, sorting: MovieListSortingOptions = .popularity) -> URL? {
+    func getDiscoverMoviesUrl(page: Int, genre: String, releaseDateGte: String, releaseDateLte: String, voteAverageGte: String, voteAverageLte: String, sorting: MovieListSortingOptions = .popularityDesc) -> URL? {
         defer {
             self.components.queryItems?.removeLast(7)
         }
         switch sorting {
-            case .popularity:
+            case .popularityDesc:
                 self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "popularity.desc"))
-            case .voteCount:
+            case .voteCountDesc:
                 self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_count.desc"))
-            case .releaseDate:
+            case .releaseDateDesc:
                 self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.desc"))
-            case .voteAverage:
+            case .voteAverageDesc:
                 self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_average.desc"))
+            case .popularityAsc:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "popularity.asc"))
+            case .voteCountAsc:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_count.asc"))
+            case .releaseDateAsc:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.asc"))
+            case .voteAverageAsc:
+                self.components.queryItems?.append(URLQueryItem(name: "sort_by", value: "vote_average.asc"))
         }
         self.components.path = "/3/discover/movie"
         self.components.queryItems?.append(URLQueryItem(name: "page", value: String(page)))

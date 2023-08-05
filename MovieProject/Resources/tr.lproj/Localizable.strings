@@ -39,3 +39,12 @@
 "addGenre" = "Kategori Ekle";
 "addGenreMessage" = "Eklemek istediğiniz kategoriyi seçin";
 "createNewList" = "Yeni Liste +";
+"discover" = "Keşfet";
+"popularityAsc" = "Popülerlik (Artan)";
+"popularityDesc" = "Popülerlik (Azalan)";
+"releaseDateAsc" = "Yayın Tarihi (Artan)";
+"releaseDateDesc" = "Yayın Tarihi (Azalan)";
+"voteAverageAsc" = "Puan (Artan)";
+"voteAverageDesc" = "Puan (Azalan)";
+"voteCountAsc" = "Oy Sayısı (Artan)";
+"voteCountDesc" = "Oy Sayısı (Azalan)";

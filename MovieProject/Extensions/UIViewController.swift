@@ -52,4 +52,16 @@ extension UIViewController {
             }
         }
     }
+    
+    func navigateToDiscoverMovies(genre: String, releaseDateGte: String, releaseDateLte: String, voteAverageGte: String, voteAverageLte: String, sortingType: String) {
+        navigateToViewController(withIdentifier: String(describing: DiscoverMoviesListController.self)) { (vc: DiscoverMoviesListController) in
+            vc.genreString = genre
+            vc.releaseDateLte = releaseDateLte
+            vc.releaseDateGte = releaseDateGte
+            vc.voteAverageLte = voteAverageLte
+            vc.voteAverageGte = voteAverageGte
+            vc.sortingTypeString = sortingType
+        }
+    }
+    
 }

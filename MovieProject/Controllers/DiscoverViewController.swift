@@ -24,18 +24,24 @@ class DiscoverViewController: UIViewController {
     @IBOutlet private weak var maximumRatingStepper: UIStepper!
     @IBOutlet private weak var minumumDatePicker: UIDatePicker!
     @IBOutlet private weak var maximumDatePicker: UIDatePicker!
+    @IBOutlet private weak var sortingTypePicker: UIPickerView! {
+        didSet {
+            sortingTypePicker.delegate = self
+            sortingTypePicker.dataSource = self
+            sortingTypePicker.selectRow(5, inComponent: 0, animated: false)
+        }
+    }
     @IBAction func minumumRatingStepperTapped(_ sender: Any) {
         minumumRatingLabel.text = String(minimumRatingStepper.value / 2.0)
     }
     @IBAction func maximumRatingStepperTapped(_ sender: Any) {
         maximumRatingLabel.text = String(maximumRatingStepper.value / 2.0)
     }
-    
     @IBAction func addNewGenreButtonTapped(_ sender: Any) {
         addGenreToCollectionView()
     }
     
-    @IBAction func discoverButtonTapped(_ sender: Any) {
+    @objc func discoverButtonTapped() {
         let genreString = selectedGenres?.map({ (genre) -> String in
             return String(genre.id ?? 0)
         }).joined(separator: ",") ?? ""
@@ -43,11 +49,8 @@ class DiscoverViewController: UIViewController {
         let releaseDateLte = maximumDatePicker.date.convertToApiFormat()
         let voteAverageGte = String(minimumRatingStepper.value / 2.0)
         let voteAverageLte = String(maximumRatingStepper.value / 2.0)
-        
-
-        if let url = APIManager.shared.getDiscoverMoviesUrl(page: currentPage, genre: genreString, releaseDateGte: releaseDateGte, releaseDateLte: releaseDateLte, voteAverageGte: voteAverageGte, voteAverageLte: voteAverageLte) {
-            // Will be implemented for navigate a new list screen
-        }
+        let sortingType = sortingTypes[sortingTypePicker.selectedRow(inComponent: 0)]
+        self.navigateToDiscoverMovies(genre: genreString, releaseDateGte: releaseDateGte, releaseDateLte: releaseDateLte, voteAverageGte: voteAverageGte, voteAverageLte: voteAverageLte, sortingType: sortingType)
     }
     
     // Variables
@@ -57,13 +60,30 @@ class DiscoverViewController: UIViewController {
             genresCollectionView.reloadData()
         }
     }
-    var currentPage = 1
-    var totalPage = 1
+    let sortingTypes = [
+        NSLocalizedString("releaseDateAsc", comment: ""),
+        NSLocalizedString("releaseDateDesc", comment: ""),
+        NSLocalizedString("voteAverageAsc", comment: ""),
+        NSLocalizedString("voteAverageDesc", comment: ""),
+        NSLocalizedString("popularityAsc", comment: ""),
+        NSLocalizedString("popularityDesc", comment: ""),
+        NSLocalizedString("voteCountAsc", comment: ""),
+        NSLocalizedString("voteCountDesc", comment: "")
+    ]
     
     // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Add navbar button that writes discover on it with search icon
+        createNavbarItem()
         fetchGenres()
+    }
+    
+    func createNavbarItem() {
+        let discoverButton = UIBarButtonItem(title: NSLocalizedString("discover", comment: ""), style: .plain, target: self, action: #selector(discoverButtonTapped))
+        discoverButton.image = UIImage(systemName: "magnifyingglass")
+        navigationItem.rightBarButtonItem = discoverButton
+        
     }
     
     // Extra methods
@@ -81,7 +101,7 @@ class DiscoverViewController: UIViewController {
     }
 }
 
-
+// MARK: Collectionv View Delegate Methods
 extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedGenres?.count ?? 0
@@ -128,6 +148,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
                 alert.addAction(action)
             }
         }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil)
+        alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -135,5 +157,22 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         if let selectedGenres = self.selectedGenres {
             self.selectedGenres = selectedGenres.filter { $0.id != genre.id }
         }
+    }
+}
+
+//MARK: PickerView Delagete Methods
+extension DiscoverViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sortingTypes.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // This method will return the title of the sorting type
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sortingTypes[row]
     }
 }
