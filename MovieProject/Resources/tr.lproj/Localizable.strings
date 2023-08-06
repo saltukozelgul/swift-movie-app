@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  MovieProject
-
-  Created by Saltuk Bugra OZELGUL on 24.07.2023.
-  
-*/
+/*
+ Localizable.strings
+ MovieProject
+ 
+ Created by Saltuk Bugra OZELGUL on 24.07.2023.
+ 
+ */
 
 "isoCode" = "tr-TR";
 
@@ -48,3 +48,7 @@
 "voteAverageDesc" = "Puan (Azalan)";
 "voteCountAsc" = "Oy Sayısı (Artan)";
 "voteCountDesc" = "Oy Sayısı (Azalan)";
+"noDataTitle" = "Üzgünüz";
+"noDataMessage" = "Kriterlere uygun film bulunamadı";
+"emptyListTitle" = "Liste Boş";
+"emptyListMessage" = "Listeye film eklemek için detay sayfasındaki yer işareti ikonunu kullanabilirsin";

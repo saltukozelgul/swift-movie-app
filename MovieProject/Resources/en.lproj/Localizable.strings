@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  MovieProject
-
-  Created by Saltuk Bugra OZELGUL on 24.07.2023.
-  
-*/
+/*
+ Localizable.strings
+ MovieProject
+ 
+ Created by Saltuk Bugra OZELGUL on 24.07.2023.
+ 
+ */
 
 "isoCode" = "en-US";
 
@@ -48,3 +48,7 @@
 "voteAverageDesc" = "Vote Average (Desc)";
 "voteCountAsc" = "Vote Count (Asc)";
 "voteCountDesc" = "Vote Count (Desc)";
+"noDataTitle" = "Sorry";
+"noDataMessage" = "We don't have any movies matching your selection.";
+"emptyListTitle" = "List is empty";
+"emptyListMessage" = "Add movies to the list by clicking the bookmark icon on the movie detail page";

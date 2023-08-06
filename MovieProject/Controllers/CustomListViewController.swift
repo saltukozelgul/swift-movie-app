@@ -86,6 +86,11 @@ class CustomListViewController: UIViewController {
 
 extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if fetchStatus.isEmpty {
+            tableView.setEmptyView(title: NSLocalizedString("emptyListTitle", comment: ""), message: NSLocalizedString("emptyListMessage", comment: ""), isCustomList: true)
+        } else {
+            tableView.restore()
+        }
         return listedMovies.count
     }
     

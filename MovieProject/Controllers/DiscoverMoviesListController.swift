@@ -11,6 +11,7 @@ import Alamofire
 class DiscoverMoviesListController: UIViewController {
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
+            self.tableView.showLoading()
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.keyboardDismissMode = .onDrag
@@ -73,6 +74,7 @@ class DiscoverMoviesListController: UIViewController {
                         self.movies.append(contentsOf: movies.results ?? [])
                         self.totalPage = movies.totalPages ?? 1
                         self.tableView.reloadData()
+                        self.tableView.hideLoading()
                         self.currentPage += 1
                     case .failure(let error):
                         AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
@@ -86,6 +88,11 @@ class DiscoverMoviesListController: UIViewController {
 extension DiscoverMoviesListController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if movies.count == 0 {
+            tableView.setEmptyView()
+        } else {
+            tableView.restore()
+        }
         return movies.count
     }
     
