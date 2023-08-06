@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import MultiSlider
 
 class DiscoverViewController: UIViewController {
     
@@ -18,10 +19,13 @@ class DiscoverViewController: UIViewController {
             genresCollectionView.registerNib(with: String(describing: GenreCollectionViewCell.self))
         }
     }
-    @IBOutlet private weak var minumumRatingLabel: UILabel!
-    @IBOutlet private weak var minimumRatingStepper: UIStepper!
-    @IBOutlet private weak var maximumRatingLabel: UILabel!
-    @IBOutlet private weak var maximumRatingStepper: UIStepper!
+    @IBOutlet private weak var ratingSliderLowerLabel: UILabel!
+    @IBOutlet private weak var ratingSliderUpperLabel: UILabel!
+    @IBOutlet private weak var ratingSliderView: UIView! {
+        didSet {
+            ratingSliderView.addSubview(rangeSlider)
+        }
+    }
     @IBOutlet private weak var minumumDatePicker: UIDatePicker!
     @IBOutlet private weak var maximumDatePicker: UIDatePicker!
     @IBOutlet private weak var sortingTypePicker: UIPickerView! {
@@ -30,12 +34,6 @@ class DiscoverViewController: UIViewController {
             sortingTypePicker.dataSource = self
             sortingTypePicker.selectRow(5, inComponent: 0, animated: false)
         }
-    }
-    @IBAction func minumumRatingStepperTapped(_ sender: Any) {
-        minumumRatingLabel.text = String(minimumRatingStepper.value / 2.0)
-    }
-    @IBAction func maximumRatingStepperTapped(_ sender: Any) {
-        maximumRatingLabel.text = String(maximumRatingStepper.value / 2.0)
     }
     @IBAction func addNewGenreButtonTapped(_ sender: Any) {
         addGenreToCollectionView()
@@ -47,8 +45,8 @@ class DiscoverViewController: UIViewController {
         }).joined(separator: ",") ?? ""
         let releaseDateGte = minumumDatePicker.date.convertToApiFormat()
         let releaseDateLte = maximumDatePicker.date.convertToApiFormat()
-        let voteAverageGte = String(minimumRatingStepper.value / 2.0)
-        let voteAverageLte = String(maximumRatingStepper.value / 2.0)
+        let voteAverageGte = ratingSliderLowerLabel.text ?? "0.0"
+        let voteAverageLte = ratingSliderUpperLabel.text ?? "10.0"
         let sortingType = sortingTypes[sortingTypePicker.selectedRow(inComponent: 0)]
         self.navigateToDiscoverMovies(genre: genreString, releaseDateGte: releaseDateGte, releaseDateLte: releaseDateLte, voteAverageGte: voteAverageGte, voteAverageLte: voteAverageLte, sortingType: sortingType)
     }
@@ -70,6 +68,7 @@ class DiscoverViewController: UIViewController {
         NSLocalizedString("voteCountAsc", comment: ""),
         NSLocalizedString("voteCountDesc", comment: "")
     ]
+    let rangeSlider = RangeSlider(frame: CGRect.zero)
     
     // Life cycle methods
     override func viewDidLoad() {
@@ -77,13 +76,20 @@ class DiscoverViewController: UIViewController {
         // Add navbar button that writes discover on it with search icon
         createNavbarItem()
         fetchGenres()
+        rangeSlider.addTarget(self, action: #selector(rangeSliderValueChanged), for: .valueChanged)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let margin: CGFloat = 15
+        let width = view.bounds.width - 2 * margin
+        rangeSlider.frame = CGRect(x: 0, y: 0, width: width, height: 30.0)
     }
     
     func createNavbarItem() {
         let discoverButton = UIBarButtonItem(title: NSLocalizedString("discover", comment: ""), style: .plain, target: self, action: #selector(discoverButtonTapped))
         discoverButton.image = UIImage(systemName: "magnifyingglass")
         navigationItem.rightBarButtonItem = discoverButton
-        
     }
     
     // Extra methods
@@ -98,6 +104,13 @@ class DiscoverViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc func rangeSliderValueChanged() {
+        let lowerValue = round(rangeSlider.lowerValue * 2) / 2
+        let upperValue = round(rangeSlider.upperValue * 2) / 2
+        ratingSliderLowerLabel.text = String(lowerValue)
+        ratingSliderUpperLabel.text = String(upperValue)
     }
 }
 

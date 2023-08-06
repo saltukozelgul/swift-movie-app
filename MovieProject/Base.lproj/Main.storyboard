@@ -718,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SND-Iv-apg" userLabel="RootStackView">
-                                <rect key="frame" x="15" y="92" width="384" height="724"/>
+                                <rect key="frame" x="15" y="92" width="384" height="712"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3qR-l5-PIn" userLabel="Release Date Title">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="31.5"/>
@@ -801,63 +801,53 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Jmx-oN-DsY" userLabel="RatingParent">
-                                        <rect key="frame" x="0.0" y="208" width="384" height="62.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Jmx-oN-DsY" userLabel="RatingParent">
+                                        <rect key="frame" x="0.0" y="208" width="384" height="60.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MlP-N7-ZeN" userLabel="RatingLeft">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="62.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ee-uC-SvE">
+                                                <rect key="frame" x="0.0" y="0.0" width="384" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="TPi-YK-e5d"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="GNc-kT-mjP">
+                                                <rect key="frame" x="0.0" y="40" width="384" height="20.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AUz-Mr-ASY">
-                                                        <rect key="frame" x="70.5" y="0.0" width="51" height="20.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="a50-dT-bmf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="20.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLp-qc-SVn">
-                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="20.5"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nuD-jt-n2T">
+                                                                <rect key="frame" x="0.0" y="-0.5" width="22" height="20.5"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4u-IH-tpm" userLabel="minVote">
+                                                                <rect key="frame" x="27" y="0.0" width="24" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-ZG-EPe">
-                                                                <rect key="frame" x="29" y="0.0" width="22" height="20"/>
-                                                            </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="MRt-iC-mVn">
-                                                        <rect key="frame" x="49" y="30.5" width="94" height="32"/>
-                                                        <connections>
-                                                            <action selector="minumumRatingStepperTapped:" destination="YF1-A9-MJ7" eventType="valueChanged" id="BJJ-Ni-Mx2"/>
-                                                        </connections>
-                                                    </stepper>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fs4-wK-p5b" userLabel="RatingRight">
-                                                <rect key="frame" x="192" y="0.0" width="192" height="62.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="z3T-ed-MrO">
-                                                        <rect key="frame" x="67" y="0.0" width="58.5" height="20.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="i4L-DW-dZo">
+                                                        <rect key="frame" x="325.5" y="0.0" width="58.5" height="20.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ce-md-TDb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="31.5" height="20.5"/>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qyY-1a-w0W">
+                                                                <rect key="frame" x="0.0" y="-0.5" width="22" height="20.5"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dme-0t-d7o" userLabel="maxVote">
+                                                                <rect key="frame" x="27" y="0.0" width="31.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CAO-bt-6mQ">
-                                                                <rect key="frame" x="36.5" y="0.0" width="22" height="20"/>
-                                                            </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-fK-qHU">
-                                                        <rect key="frame" x="49" y="30.5" width="94" height="32"/>
-                                                        <connections>
-                                                            <action selector="maximumRatingStepperTapped:" destination="YF1-A9-MJ7" eventType="valueChanged" id="JDb-So-OpX"/>
-                                                        </connections>
-                                                    </stepper>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pp3-Kq-K2v" userLabel="Genre Title">
-                                        <rect key="frame" x="0.0" y="280.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="278.5" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Oce-zR-ia0">
                                                 <rect key="frame" x="0.0" y="0.0" width="103.5" height="25.5"/>
@@ -883,10 +873,10 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z0B-QY-MrW" userLabel="GenresCollectionView">
-                                        <rect key="frame" x="0.0" y="327" width="384" height="80"/>
+                                        <rect key="frame" x="0.0" y="325" width="384" height="70"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="ctV-OL-aEm"/>
+                                            <constraint firstAttribute="height" constant="70" id="ctV-OL-aEm"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yZr-4B-18I">
                                             <size key="itemSize" width="150" height="30"/>
@@ -897,7 +887,7 @@
                                         <cells/>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOd-Ss-ih4">
-                                        <rect key="frame" x="0.0" y="417" width="384" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="405" width="384" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add new genre">
                                             <color key="baseForegroundColor" name="genreLabel"/>
@@ -908,7 +898,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-jN-mO0" userLabel="Sort by Title">
-                                        <rect key="frame" x="0.0" y="461.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="449.5" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mj6-7Q-M7X">
                                                 <rect key="frame" x="0.0" y="0.0" width="102" height="25.5"/>
@@ -934,7 +924,7 @@
                                         </subviews>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02E-YY-8xO">
-                                        <rect key="frame" x="0.0" y="508" width="384" height="216"/>
+                                        <rect key="frame" x="0.0" y="496" width="384" height="216"/>
                                     </pickerView>
                                 </subviews>
                                 <constraints>
@@ -967,11 +957,10 @@
                     <connections>
                         <outlet property="genresCollectionView" destination="Z0B-QY-MrW" id="cJe-QZ-Wj6"/>
                         <outlet property="maximumDatePicker" destination="uFf-NB-Lzt" id="9nW-9I-OHt"/>
-                        <outlet property="maximumRatingLabel" destination="9Ce-md-TDb" id="xFw-8e-IvG"/>
-                        <outlet property="maximumRatingStepper" destination="mfq-fK-qHU" id="x2e-cP-9ya"/>
-                        <outlet property="minimumRatingStepper" destination="MRt-iC-mVn" id="fhl-H4-dKP"/>
                         <outlet property="minumumDatePicker" destination="mWd-EN-w3H" id="wtk-PN-2ws"/>
-                        <outlet property="minumumRatingLabel" destination="cLp-qc-SVn" id="9YI-AH-vSj"/>
+                        <outlet property="ratingSliderLowerLabel" destination="r4u-IH-tpm" id="HjD-Na-YeO"/>
+                        <outlet property="ratingSliderUpperLabel" destination="dme-0t-d7o" id="YcO-rS-Gkj"/>
+                        <outlet property="ratingSliderView" destination="4ee-uC-SvE" id="KAZ-dD-wki"/>
                         <outlet property="sortingTypePicker" destination="02E-YY-8xO" id="vI5-DG-0lh"/>
                     </connections>
                 </viewController>
