@@ -30,8 +30,4 @@ extension Date {
     func getMonthAndYearWithLocale() -> String {
         return formatDate(with: "MMMM yyyy")
     }
-    
-    func convertToApiFormat() -> String {
-        return formatDate(with: "yyyy-01-dd")
-    }
 }

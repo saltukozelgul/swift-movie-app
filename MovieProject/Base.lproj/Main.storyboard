@@ -718,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SND-Iv-apg" userLabel="RootStackView">
-                                <rect key="frame" x="15" y="92" width="384" height="712"/>
+                                <rect key="frame" x="15" y="92" width="384" height="666"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3qR-l5-PIn" userLabel="Release Date Title">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="31.5"/>
@@ -746,36 +746,25 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZUA-es-Zg3" userLabel="minDateStackView">
-                                        <rect key="frame" x="0.0" y="41.5" width="384" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZUA-es-Zg3" userLabel="minDateStackView">
+                                        <rect key="frame" x="0.0" y="41.5" width="384" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minumum Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNv-tj-deo">
-                                                <rect key="frame" x="0.0" y="15" width="192" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" systemColor="systemGrayColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="mWd-EN-w3H">
-                                                <rect key="frame" x="192" y="0.0" width="192" height="50"/>
-                                            </datePicker>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VRp-oX-6fu" userLabel="maxDateStackView">
-                                        <rect key="frame" x="0.0" y="101.5" width="384" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZ2-KB-WEP" userLabel="Maximum Date">
-                                                <rect key="frame" x="0.0" y="15" width="192" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" systemColor="systemGrayColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="uFf-NB-Lzt">
-                                                <rect key="frame" x="192" y="0.0" width="192" height="50"/>
-                                            </datePicker>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9O4-Sf-IBL" userLabel="minumumPicker">
+                                                <rect key="frame" x="0.0" y="0.0" width="190" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="KQa-ss-Z1c" userLabel="height = 80"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSm-nn-w7N" userLabel="maximumPicker">
+                                                <rect key="frame" x="195" y="0.0" width="189" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="VZe-dV-1Ij"/>
+                                                </constraints>
+                                            </pickerView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fSJ-BP-EEX" userLabel="Rating Title">
-                                        <rect key="frame" x="0.0" y="161.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="151.5" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3He-qE-ETN">
                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="25.5"/>
@@ -802,7 +791,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Jmx-oN-DsY" userLabel="RatingParent">
-                                        <rect key="frame" x="0.0" y="208" width="384" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="198" width="384" height="60.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ee-uC-SvE">
                                                 <rect key="frame" x="0.0" y="0.0" width="384" height="40"/>
@@ -847,7 +836,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pp3-Kq-K2v" userLabel="Genre Title">
-                                        <rect key="frame" x="0.0" y="278.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="268.5" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Oce-zR-ia0">
                                                 <rect key="frame" x="0.0" y="0.0" width="103.5" height="25.5"/>
@@ -873,7 +862,7 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Z0B-QY-MrW" userLabel="GenresCollectionView">
-                                        <rect key="frame" x="0.0" y="325" width="384" height="70"/>
+                                        <rect key="frame" x="0.0" y="315" width="384" height="70"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="ctV-OL-aEm"/>
@@ -887,7 +876,7 @@
                                         <cells/>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOd-Ss-ih4">
-                                        <rect key="frame" x="0.0" y="405" width="384" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="395" width="384" height="34.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add new genre">
                                             <color key="baseForegroundColor" name="genreLabel"/>
@@ -898,7 +887,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-jN-mO0" userLabel="Sort by Title">
-                                        <rect key="frame" x="0.0" y="449.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="439.5" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mj6-7Q-M7X">
                                                 <rect key="frame" x="0.0" y="0.0" width="102" height="25.5"/>
@@ -924,7 +913,10 @@
                                         </subviews>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02E-YY-8xO">
-                                        <rect key="frame" x="0.0" y="496" width="384" height="216"/>
+                                        <rect key="frame" x="0.0" y="486" width="384" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="HkH-Yd-BMu"/>
+                                        </constraints>
                                     </pickerView>
                                 </subviews>
                                 <constraints>
@@ -934,8 +926,6 @@
                                     <constraint firstAttribute="trailing" secondItem="xl3-rR-dRi" secondAttribute="trailing" id="GtK-F1-qYf"/>
                                     <constraint firstAttribute="trailing" secondItem="ZUA-es-Zg3" secondAttribute="trailing" id="NBK-Nt-Hyl"/>
                                     <constraint firstAttribute="trailing" secondItem="Jmx-oN-DsY" secondAttribute="trailing" id="OIi-t7-B1N"/>
-                                    <constraint firstItem="VRp-oX-6fu" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="Okf-YO-NkB"/>
-                                    <constraint firstAttribute="trailing" secondItem="VRp-oX-6fu" secondAttribute="trailing" id="WVl-e5-0gq"/>
                                     <constraint firstItem="nof-Es-mdr" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="Y3r-zB-yiL"/>
                                     <constraint firstItem="ZUA-es-Zg3" firstAttribute="leading" secondItem="SND-Iv-apg" secondAttribute="leading" id="bOO-T2-yvI"/>
                                     <constraint firstAttribute="trailing" secondItem="nof-Es-mdr" secondAttribute="trailing" id="iyn-06-ih7"/>
@@ -944,20 +934,31 @@
                                     <constraint firstAttribute="trailing" secondItem="heI-2n-bP3" secondAttribute="trailing" id="zcQ-Cj-9OK"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iZ-7d-4up">
+                                <rect key="frame" x="15" y="763.5" width="384" height="34.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system" title="Discover"/>
+                                <connections>
+                                    <action selector="discoverButtonTapped:" destination="YF1-A9-MJ7" eventType="touchUpInside" id="HOv-ie-lxt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="W4t-7p-mCU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="W4t-7p-mCU" firstAttribute="trailing" secondItem="3iZ-7d-4up" secondAttribute="trailing" constant="15" id="7Fz-gv-IGp"/>
+                            <constraint firstItem="W4t-7p-mCU" firstAttribute="bottom" secondItem="3iZ-7d-4up" secondAttribute="bottom" constant="15" id="A31-9E-t7J"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="top" secondItem="W4t-7p-mCU" secondAttribute="top" id="L8K-bt-Qfd"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="trailing" secondItem="W4t-7p-mCU" secondAttribute="trailing" constant="-15" id="cSQ-yh-MTm"/>
+                            <constraint firstItem="3iZ-7d-4up" firstAttribute="leading" secondItem="W4t-7p-mCU" secondAttribute="leading" constant="15" id="e4a-mw-CyP"/>
                             <constraint firstItem="SND-Iv-apg" firstAttribute="leading" secondItem="W4t-7p-mCU" secondAttribute="leading" constant="15" id="kcY-J8-D6z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="8rA-Jx-kha"/>
                     <connections>
                         <outlet property="genresCollectionView" destination="Z0B-QY-MrW" id="cJe-QZ-Wj6"/>
-                        <outlet property="maximumDatePicker" destination="uFf-NB-Lzt" id="9nW-9I-OHt"/>
-                        <outlet property="minumumDatePicker" destination="mWd-EN-w3H" id="wtk-PN-2ws"/>
+                        <outlet property="maximumDatePicker" destination="cSm-nn-w7N" id="Pt4-cI-Ufb"/>
+                        <outlet property="minumumDatePicker" destination="9O4-Sf-IBL" id="wY8-vS-c96"/>
                         <outlet property="ratingSliderLowerLabel" destination="r4u-IH-tpm" id="HjD-Na-YeO"/>
                         <outlet property="ratingSliderUpperLabel" destination="dme-0t-d7o" id="YcO-rS-Gkj"/>
                         <outlet property="ratingSliderView" destination="4ee-uC-SvE" id="KAZ-dD-wki"/>

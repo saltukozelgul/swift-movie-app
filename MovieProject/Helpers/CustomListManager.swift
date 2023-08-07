@@ -34,55 +34,31 @@ class CustomListManager {
     }
     
     func checkMovieInCustomList(movieId: Int, customListId: String) -> Bool {
-        let customList = checkCustomList(customListId: customListId)
-        if let customList {
-            if let movies = customList.movies  {
-                if movies.contains(movieId) {
-                    return true
-                }
-            }
-            return false
+        if let customList = checkCustomList(customListId: customListId), let movies = customList.movies {
+            return movies.contains(movieId)
         }
         return false
     }
     
     func addMovieToCustomList(movieId: Int, customListId: String) -> Bool {
-        guard let context else { return false }
-        let customList = checkCustomList(customListId: customListId)
-        if let customList {
-            if var movies = customList.movies {
-                if !movies.contains(movieId) {
-                    movies.append(movieId)
-                    customList.setValue(movies, forKey: CLConstants.keyValueForMovies)
-                    do {
-                        try context.save()
-                        return true
-                    } catch {
-                        print("Error while saving custom list")
-                        return false
-                    }
-                }
+        guard let context = context else { return false }
+        if let customList = checkCustomList(customListId: customListId), var movies = customList.movies {
+            if !movies.contains(movieId) {
+                movies.append(movieId)
+                customList.movies = movies
+                return saveContext(context)
             }
         }
         return false
     }
     
     func removeMovieFromCustomList(movieId: Int, customListId: String) -> Bool {
-        guard let context else { return false }
-        let customList = checkCustomList(customListId: customListId)
-        if let customList {
-            if var movies = customList.movies  {
-                if movies.contains(movieId) {
-                    movies.remove(at: movies.firstIndex(of: movieId)!)
-                    customList.setValue(movies, forKey: CLConstants.keyValueForMovies)
-                    do {
-                        try context.save()
-                        return true
-                    } catch {
-                        print("Error while saving custom list")
-                        return false
-                    }
-                }
+        guard let context = context else { return false }
+        if let customList = checkCustomList(customListId: customListId), var movies = customList.movies {
+            if let index = movies.firstIndex(of: movieId) {
+                movies.remove(at: index)
+                customList.movies = movies
+                return saveContext(context)
             }
         }
         return false
@@ -135,15 +111,9 @@ class CustomListManager {
         guard let context else { return completion(false) }
         if let customList = checkCustomList(customListId: customListId) {
             context.delete(customList)
-            do {
-                try context.save()
-                completion(true)
-            } catch {
-                print("Error while deleting custom list")
-                completion(false)
-            }
-        
+            return completion(saveContext(context))
         }
+        return completion(false)
     }
     
     
@@ -163,16 +133,18 @@ class CustomListManager {
         guard let context else { return completion(false) }
         if let customList = checkCustomList(customListId: customListId) {
             customList.setValue(customListName, forKey: CLConstants.keyValueForCustomListName)
-            do {
-                try context.save()
-                completion(true)
-            } catch {
-                print("Error while updating custom list")
-                completion(false)
-            }
+            return completion(saveContext(context))
         }
     }
 
-    
+    private func saveContext(_ context: NSManagedObjectContext) -> Bool {
+        do {
+            try context.save()
+            return true
+        } catch {
+            print("Error while saving context: \(error)")
+            return false
+        }
+    }
     
 }

@@ -31,6 +31,11 @@ class CustomListViewController: UIViewController {
         getCustomListMovies()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getCustomListMovies()
+    }
+    
     func getCustomListMovies() {
         CustomListManager.shared.getCustomListMovies(customListId: listId) { (movieIds) in
             print(movieIds)

@@ -55,10 +55,17 @@ class FavouriteManager {
     }
     
     func toggleFavourite(movieId: Int?, completion: (Bool, Bool) -> Void) {
+        guard let movieId = movieId else {
+            completion(false, false)
+            return
+        }
+        
         if isFavourite(movieId: movieId) {
-            return removeFavourite(movieId: movieId) ? completion(true, false) : completion(false, false)
+            let success = removeFavourite(movieId: movieId)
+            completion(success, false)
         } else {
-            return addFavourite(movieId: movieId) ? completion(true, true) : completion(false, false)
+            let success = addFavourite(movieId: movieId)
+            completion(success, true)
         }
     }
 }

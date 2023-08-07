@@ -26,12 +26,26 @@ class DiscoverViewController: UIViewController {
             ratingSliderView.addSubview(rangeSlider)
         }
     }
-    @IBOutlet private weak var minumumDatePicker: UIDatePicker!
-    @IBOutlet private weak var maximumDatePicker: UIDatePicker!
+    @IBOutlet private weak var minumumDatePicker: UIPickerView! {
+        didSet {
+            minumumDatePicker.delegate = self
+            minumumDatePicker.dataSource = self
+            minumumDatePicker.selectRow(5, inComponent: 0, animated: false)
+            
+        }
+    }
+    @IBOutlet private weak var maximumDatePicker: UIPickerView! {
+        didSet {
+            maximumDatePicker.delegate = self
+            maximumDatePicker.dataSource = self
+            maximumDatePicker.selectRow(years.count - 3, inComponent: 0, animated: false)
+        }
+    }
     @IBOutlet private weak var sortingTypePicker: UIPickerView! {
         didSet {
             sortingTypePicker.delegate = self
             sortingTypePicker.dataSource = self
+            sortingTypePicker.accessibilityIdentifier = "sorting"
             sortingTypePicker.selectRow(5, inComponent: 0, animated: false)
         }
     }
@@ -39,20 +53,30 @@ class DiscoverViewController: UIViewController {
         addGenreToCollectionView()
     }
     
-    @objc func discoverButtonTapped() {
+    @IBAction func discoverButtonTapped(_ sender: Any) {
         let genreString = selectedGenres?.map({ (genre) -> String in
             return String(genre.id ?? 0)
         }).joined(separator: ",") ?? ""
-        let releaseDateGte = minumumDatePicker.date.convertToApiFormat()
-        let releaseDateLte = maximumDatePicker.date.convertToApiFormat()
+        let releaseDateGte = years[minumumDatePicker.selectedRow(inComponent: 0)].toApiDateFormat()
+        let releaseDateLte = years[maximumDatePicker.selectedRow(inComponent: 0)].toApiDateFormat()
         let voteAverageGte = ratingSliderLowerLabel.text ?? "0.0"
         let voteAverageLte = ratingSliderUpperLabel.text ?? "10.0"
         let sortingType = sortingTypes[sortingTypePicker.selectedRow(inComponent: 0)]
         self.navigateToDiscoverMovies(genre: genreString, releaseDateGte: releaseDateGte, releaseDateLte: releaseDateLte, voteAverageGte: voteAverageGte, voteAverageLte: voteAverageLte, sortingType: sortingType)
     }
     
+    
     // Variables
     var allGenres: [Genre]?
+    // from 1700 to today's years
+    var years: [String] = {
+        var years: [String] = []
+        let currentYear = Calendar.current.component(.year, from: Date())
+        for year in 1870...currentYear {
+            years.append(String(year))
+        }
+        return years
+    }()
     var selectedGenres: [Genre]? {
         didSet {
             genresCollectionView.reloadData()
@@ -73,8 +97,6 @@ class DiscoverViewController: UIViewController {
     // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Add navbar button that writes discover on it with search icon
-        createNavbarItem()
         fetchGenres()
         rangeSlider.addTarget(self, action: #selector(rangeSliderValueChanged), for: .valueChanged)
     }
@@ -84,12 +106,6 @@ class DiscoverViewController: UIViewController {
         let margin: CGFloat = 15
         let width = view.bounds.width - 2 * margin
         rangeSlider.frame = CGRect(x: 0, y: 0, width: width, height: 30.0)
-    }
-    
-    func createNavbarItem() {
-        let discoverButton = UIBarButtonItem(title: NSLocalizedString("discover", comment: ""), style: .plain, target: self, action: #selector(discoverButtonTapped))
-        discoverButton.image = UIImage(systemName: "magnifyingglass")
-        navigationItem.rightBarButtonItem = discoverButton
     }
     
     // Extra methods
@@ -141,6 +157,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     // This method will create an alert for adding genre
     func addGenreToCollectionView() {
         let alert = UIAlertController(title: NSLocalizedString("addGenre", comment: ""), message: NSLocalizedString("addGenreMessage", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil)
+        alert.addAction(cancelAction)
         // create an action for every genre for allGenres
         if let allGenres = self.allGenres {
             let unselectedGenrse = allGenres.filter { (genre) -> Bool in
@@ -161,8 +179,6 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
                 alert.addAction(action)
             }
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil)
-        alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -177,7 +193,7 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
 extension DiscoverViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sortingTypes.count
+        return pickerView.accessibilityIdentifier == "sorting" ? sortingTypes.count : years.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -186,6 +202,6 @@ extension DiscoverViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     // This method will return the title of the sorting type
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sortingTypes[row]
+        return pickerView.accessibilityIdentifier == "sorting" ? sortingTypes[row] : years[row]
     }
 }

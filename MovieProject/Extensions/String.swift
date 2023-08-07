@@ -26,5 +26,9 @@ extension String {
         
         convertedString = String(format: "%.1f", num) + suffixes[index]
         return convertedString
-    }  
+    }
+    
+    func toApiDateFormat(month: String = "01", day: String = "01") -> String {
+        return "\(self)-\(month)-\(day)"
+    }
 }

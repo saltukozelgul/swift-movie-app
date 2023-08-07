@@ -111,8 +111,7 @@ class MovieDetailViewController: UIViewController {
     
     @objc func addListButtonTapped() {
         AlertManager.shared.addMovieToCustomListAlert(viewController: self, movieId: detailedMovie?.id ?? 0) { result in
-
-        
+ 
         }
     }
     

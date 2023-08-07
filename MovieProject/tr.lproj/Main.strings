@@ -12,7 +12,15 @@
 "Rub-av-ujo.text" = "Ölüm Tarihi";
 
 /* Class = "UITabBarItem"; title = "Movies"; ObjectID = "afr-od-DBq"; */
-"afr-od-DBq.title" = "Filmer";
+"afr-od-DBq.title" = "Filmler";
+"Asa-a9-akf.title" = "Listeler";
+"tax-3V-lH7.title" = "Keşfet";
 
 /* Class = "UILabel"; text = "Place of Birth"; ObjectID = "xjv-l2-a8c"; */
 "xjv-l2-a8c.text" = "Doğum Yeri";
+
+"MaP-iG-bJZ.text" = "Çıkış Tarihi";
+"weM-Xw-pod.text" = "Puan";
+"BDt-QO-fhK.text" = "Kategori";
+"zdy-wQ-Jip.text" = "Sıralama Türü";
+"eOd-Ss-ih4.title" = "Yeni kategori ekle";
