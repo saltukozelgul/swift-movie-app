@@ -9,6 +9,7 @@ import UIKit
 
 class GenreCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var genreNameLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,7 +19,12 @@ class GenreCollectionViewCell: UICollectionViewCell {
     
     func configure(with genre: Genre?) {
         self.genreNameLabel.text = genre?.name
+        if (genre?.id == -1) {
+            self.iconImageView.image = UIImage(systemName: "plus.circle")
+        } else {
+            self.iconImageView.image = UIImage(systemName: "minus.circle")?.withTintColor(.red)
+        }
     }
-
-
+    
+    
 }

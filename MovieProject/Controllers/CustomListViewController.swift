@@ -95,6 +95,7 @@ class CustomListViewController: UIViewController {
     func checkForLoadingStatus() {
         if !fetchStatus.values.contains(false) {
             self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     

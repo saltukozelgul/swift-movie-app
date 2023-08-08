@@ -20,7 +20,7 @@ class DiscoverViewController: UIViewController {
         }
         return years
     }()
-    var selectedGenres: [Genre]? {
+    var selectedGenres: [Genre] = [Genre(id: -1, name: NSLocalizedString("addGenre", comment: ""))]  {
         didSet {
             genresCollectionView.reloadData()
         }
@@ -75,14 +75,19 @@ class DiscoverViewController: UIViewController {
             sortingTypePicker.selectRow(5, inComponent: 0, animated: false)
         }
     }
-    @IBAction func addNewGenreButtonTapped(_ sender: Any) {
-        addGenreToCollectionView()
-    }
     
+    @IBOutlet private weak var discoverButton: UIButton! {
+        didSet {
+            discoverButton.setCornerRadius(15)
+        }
+    }
     @IBAction func discoverButtonTapped(_ sender: Any) {
-        let genreString = selectedGenres?.map({ (genre) -> String in
-            return String(genre.id ?? 0)
-        }).joined(separator: ",") ?? ""
+        let genreString = selectedGenres.map({ (genre) -> String in
+            if genre.id != -1 {
+                return String(genre.id ?? 0)
+            }
+            return ""
+        }).joined(separator: ",")
         let releaseDateGte = years[minumumDatePicker.selectedRow(inComponent: 0)].toApiDateFormat()
         let releaseDateLte = years[maximumDatePicker.selectedRow(inComponent: 0)].toApiDateFormat()
         let voteAverageGte = ratingSliderLowerLabel.text ?? "0.0"
@@ -100,9 +105,13 @@ class DiscoverViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // Margin is the margin of rootstackView
         let margin: CGFloat = 15
-        let width = view.bounds.width - 2 * margin
-        rangeSlider.frame = CGRect(x: 0, y: 0, width: width, height: 30.0)
+        // widthForText is the width of the labels
+        let widthForText: CGFloat = 60
+        // we subtract margins and labels from screen width
+        let width = view.bounds.width - (2 * margin) - (2 * widthForText)
+        rangeSlider.frame = CGRect(x: widthForText, y: 0, width: width, height: 30.0)
     }
     
     // Custom methods
@@ -130,25 +139,28 @@ class DiscoverViewController: UIViewController {
 // MARK: Collectionv View Delegate Methods
 extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedGenres?.count ?? 0
+        return (selectedGenres.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let genreCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GenreCollectionViewCell.self), for: indexPath) as? GenreCollectionViewCell {
-            genreCell.configure(with: selectedGenres?[indexPath.row])
+            genreCell.configure(with: selectedGenres[indexPath.row])
             return genreCell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // We have 10 margin from left and right so we subtract 20
         return CGSize(width: (UIScreen.main.bounds.width / 2) - 20 , height: TableConstants.heightForGenreCell)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let selectedGenres = self.selectedGenres {
-            removeGenreFromCollectionView(genre: selectedGenres[indexPath.row])
+        if (indexPath.row == 0) {
+            addGenreToCollectionView()
+            return
         }
+        removeGenreFromCollectionView(genre: selectedGenres[indexPath.row])
     }
     
     // This method will create an alert for adding genre
@@ -156,22 +168,14 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
         let alert = UIAlertController(title: NSLocalizedString("addGenre", comment: ""), message: NSLocalizedString("addGenreMessage", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil)
         alert.addAction(cancelAction)
-        // create an action for every genre for allGenres
+        // creating an action for every genre for allGenres
         if let allGenres = self.allGenres {
             let unselectedGenrse = allGenres.filter { (genre) -> Bool in
-                if let selectedGenres = self.selectedGenres {
-                    return !selectedGenres.contains(where: { $0.id == genre.id })
-                }
-                return true
+                return !selectedGenres.contains(where: { $0.id == genre.id })
             }
             for genre in unselectedGenrse {
                 let action = UIAlertAction(title: genre.name, style: .default) { (action) in
-                    if self.selectedGenres != nil {
-                        self.selectedGenres?.append(genre)
-                    }
-                    else {
-                        self.selectedGenres = [genre]
-                    }
+                    self.selectedGenres.append(genre)
                 }
                 alert.addAction(action)
             }
@@ -180,15 +184,12 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func removeGenreFromCollectionView(genre: Genre) {
-        if let selectedGenres = self.selectedGenres {
-            self.selectedGenres = selectedGenres.filter { $0.id != genre.id }
-        }
+        self.selectedGenres = selectedGenres.filter { $0.id != genre.id }
     }
 }
 
 //MARK: PickerView Delagete Methods
 extension DiscoverViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerView.accessibilityIdentifier == "sorting" ? sortingTypes.count : years.count
     }

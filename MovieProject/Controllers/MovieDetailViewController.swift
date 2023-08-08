@@ -187,7 +187,6 @@ class MovieDetailViewController: UIViewController {
             self.productionCompaniesCollectionView.isHidden = false
         }
         
-        
         // Add watchProviders if there is any
         self.watchProvidersView.addWatchProviderIcon(watchProviders: detailedMovie.watchProviders)
         
