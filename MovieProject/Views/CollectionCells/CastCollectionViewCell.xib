@@ -25,8 +25,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlD-19-p2u">
                                 <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IBI-Ey-DJE">
-                                        <rect key="frame" x="0.0" y="1.6666666666666643" width="135" height="84.999999999999986"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="IBI-Ey-DJE">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="87.666666666666671"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LED-z3-l7e" userLabel="nameLabel">
                                         <rect key="frame" x="0.0" y="87.666666666666671" width="135" height="21"/>
@@ -78,7 +78,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="person" catalog="system" width="128" height="121"/>
+        <image name="noImage" width="680" height="566"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

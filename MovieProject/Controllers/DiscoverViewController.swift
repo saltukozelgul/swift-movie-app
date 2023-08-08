@@ -10,8 +10,34 @@ import Alamofire
 import MultiSlider
 
 class DiscoverViewController: UIViewController {
+    // Properties
+    var allGenres: [Genre]?
+    var years: [String] = {
+        var years: [String] = []
+        let currentYear = Calendar.current.component(.year, from: Date())
+        for year in 1870...currentYear {
+            years.append(String(year))
+        }
+        return years
+    }()
+    var selectedGenres: [Genre]? {
+        didSet {
+            genresCollectionView.reloadData()
+        }
+    }
+    let sortingTypes = [
+        NSLocalizedString("releaseDateAsc", comment: ""),
+        NSLocalizedString("releaseDateDesc", comment: ""),
+        NSLocalizedString("voteAverageAsc", comment: ""),
+        NSLocalizedString("voteAverageDesc", comment: ""),
+        NSLocalizedString("popularityAsc", comment: ""),
+        NSLocalizedString("popularityDesc", comment: ""),
+        NSLocalizedString("voteCountAsc", comment: ""),
+        NSLocalizedString("voteCountDesc", comment: "")
+    ]
+    let rangeSlider = RangeSlider(frame: CGRect.zero)
     
-    //IBOutlets and Actions
+    // IBOutlets and Actions
     @IBOutlet private weak var genresCollectionView: UICollectionView! {
         didSet {
             genresCollectionView.delegate = self
@@ -65,35 +91,6 @@ class DiscoverViewController: UIViewController {
         self.navigateToDiscoverMovies(genre: genreString, releaseDateGte: releaseDateGte, releaseDateLte: releaseDateLte, voteAverageGte: voteAverageGte, voteAverageLte: voteAverageLte, sortingType: sortingType)
     }
     
-    
-    // Variables
-    var allGenres: [Genre]?
-    // from 1700 to today's years
-    var years: [String] = {
-        var years: [String] = []
-        let currentYear = Calendar.current.component(.year, from: Date())
-        for year in 1870...currentYear {
-            years.append(String(year))
-        }
-        return years
-    }()
-    var selectedGenres: [Genre]? {
-        didSet {
-            genresCollectionView.reloadData()
-        }
-    }
-    let sortingTypes = [
-        NSLocalizedString("releaseDateAsc", comment: ""),
-        NSLocalizedString("releaseDateDesc", comment: ""),
-        NSLocalizedString("voteAverageAsc", comment: ""),
-        NSLocalizedString("voteAverageDesc", comment: ""),
-        NSLocalizedString("popularityAsc", comment: ""),
-        NSLocalizedString("popularityDesc", comment: ""),
-        NSLocalizedString("voteCountAsc", comment: ""),
-        NSLocalizedString("voteCountDesc", comment: "")
-    ]
-    let rangeSlider = RangeSlider(frame: CGRect.zero)
-    
     // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +105,7 @@ class DiscoverViewController: UIViewController {
         rangeSlider.frame = CGRect(x: 0, y: 0, width: width, height: 30.0)
     }
     
-    // Extra methods
+    // Custom methods
     func fetchGenres() {
         if let url = APIManager.shared.getGenreUrl() {
             NetworkManager.shared.fetchData(url: url) { (result: Result<GenreList, AFError>) in

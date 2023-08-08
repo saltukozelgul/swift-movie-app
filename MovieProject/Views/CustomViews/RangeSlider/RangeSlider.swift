@@ -15,9 +15,9 @@ class RangeSlider: UIControl {
     var lowerValue = 0.0
     var upperValue = 10.0
     
-    let trackLayer = RangeSliderTrackLayer()//= CALayer() defined in RangeSliderTrackLayer.swift
-    let lowerThumbLayer = RangeSliderThumbLayer()//CALayer()
-    let upperThumbLayer = RangeSliderThumbLayer()//CALayer()
+    let trackLayer = RangeSliderTrackLayer()
+    let lowerThumbLayer = RangeSliderThumbLayer()
+    let upperThumbLayer = RangeSliderThumbLayer()
     var previousLocation = CGPoint()
     
     var trackTintColor = UIColor(white: 0.9, alpha: 1.0)

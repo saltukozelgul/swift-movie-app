@@ -21,4 +21,5 @@
 "weM-Xw-pod.text" = "Rating";
 "BDt-QO-fhK.text" = "Genres";
 "zdy-wQ-Jip.text" = "Sort By";
-"eOd-Ss-ih4.title" = "Add new genre";
+"eOd-Ss-ih4.configuration.title" = "Add new genre";
+"3iZ-7d-4up.configuration.title" = "Discover";

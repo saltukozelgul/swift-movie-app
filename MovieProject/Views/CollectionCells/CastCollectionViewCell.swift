@@ -19,18 +19,19 @@ class CastCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with cast: Cast) {
-        castImageView.showLoading()
         castImageView.translatesAutoresizingMaskIntoConstraints = false
         castImageView.layer.cornerRadius = 10
         castImageView.clipsToBounds = true
-       NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
             castImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
         
         castNameLabel.text = cast.name
         castCharacterLabel.text = cast.character
         castImageView.setImageFromPath(path: cast.profilePath ?? "") { image in
-            self.castImageView.hideLoading()
+            if image == nil {
+                self.castImageView.image = UIImage(named: "noImage")
+            }
         }
     }
 }

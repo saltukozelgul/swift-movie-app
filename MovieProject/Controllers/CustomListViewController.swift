@@ -9,7 +9,8 @@ import UIKit
 import Alamofire
 
 class CustomListViewController: UIViewController {
-    var listId: String = "" 
+    // Properties
+    var listId: String = ""
     var listName: String = "" {
         didSet {
             self.title = self.listName
@@ -17,6 +18,8 @@ class CustomListViewController: UIViewController {
     }
     private var listedMovies = [Movie]()
     private var fetchStatus = [Int: Bool]()
+    
+    // IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.registerNib(with: String(describing: MovieTableViewCell.self))
@@ -25,7 +28,8 @@ class CustomListViewController: UIViewController {
             tableView.keyboardDismissMode = .onDrag
         }
     }
-        
+    
+    // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         getCustomListMovies()
@@ -36,6 +40,7 @@ class CustomListViewController: UIViewController {
         getCustomListMovies()
     }
     
+    // Custom methods
     func getCustomListMovies() {
         CustomListManager.shared.getCustomListMovies(customListId: listId) { (movieIds) in
             print(movieIds)
@@ -120,17 +125,4 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-}
-
-//MARK: - Search Bar Delegate
-
-extension CustomListViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
 }

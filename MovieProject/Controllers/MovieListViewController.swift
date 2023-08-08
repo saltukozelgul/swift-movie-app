@@ -2,6 +2,7 @@ import UIKit
 import Alamofire
 
 class MovieListViewController: UIViewController {
+    // Popular list variables
     private var listedMovies = [Movie]()
     private var searchedMovies = [Movie]()
     private var currentPage = 1
@@ -15,6 +16,7 @@ class MovieListViewController: UIViewController {
     private var previousSearchQuery = ""
     private var searchTimer: Timer?
     
+    // IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -25,7 +27,7 @@ class MovieListViewController: UIViewController {
     }
     @IBOutlet private weak var searchBar: UISearchBar!
     
-    
+    // Life cycle methods
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
@@ -35,6 +37,7 @@ class MovieListViewController: UIViewController {
         fetchData()
     }
     
+    // Custom methods
     private func fetchData() {
         guard let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) else { return }
         NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<PopularMovies, AFError>) in
@@ -151,6 +154,7 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     private func clearTableAndFetchPopularMovies() {
+        // When user delete the search bar we have to scroll previous last visible row
         userIsSearching = false
         previousSearchQuery = ""
         tableView.reloadData()
@@ -158,7 +162,6 @@ extension MovieListViewController: UISearchBarDelegate {
     }
     
     private func performSearchAndUpdateResults(with query: String) {
-        // When user delete the search bar we have to scroll previous last visible row
         if (!userIsSearching) {
             lastPreservedRow = tableView.indexPathsForVisibleRows?.last?.row ?? 0
         }

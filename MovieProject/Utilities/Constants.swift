@@ -16,4 +16,5 @@ struct Constants {
     static let searchTimerInterval: CGFloat = 0.5
     static let castCollectionViewRestorationId: String = "castForMovie"
     static let recommendedCollectionViewRestorationId: String = "recommendedForMovie"
+    static let productionCompaniesCollectionViewRestoreationId: String = "productionCompanies"
 }

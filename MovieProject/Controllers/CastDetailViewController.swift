@@ -9,11 +9,12 @@ import UIKit
 import Alamofire
 
 class CastDetailViewController: UIViewController {
+    // Properties
     var personId: Int?
     private var detailedCast: Cast?
     var delegate: ViewControllerNavigationHandlerDelegate?
     
-    
+    // IBOutlets
     @IBOutlet private weak var castImageView: UIImageView!
     @IBOutlet private weak var placeOfBirthLabel: UILabel!
     @IBOutlet private weak var deathdayHeaderLabel: UILabel!
@@ -34,12 +35,14 @@ class CastDetailViewController: UIViewController {
         }
     }
     
+    // Life cylce methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showLoading()
         fetchPerson()
     }
     
+    // custom methods
     func fetchPerson() {
         if let personId, let url = APIManager.shared.getPersonDetailUrl(personId: personId)   {
             NetworkManager.shared.fetchData(url: url) { (result: Result<Cast, AFError>) in

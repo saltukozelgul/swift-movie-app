@@ -10,11 +10,13 @@ import FlagKit
 import Alamofire
 
 class MovieDetailViewController: UIViewController {
-
+    
+    // Properties
     var movieId: Int?
     private(set) var detailedMovie: Movie? {
         didSet {
             recommendationCollectionView.reloadData()
+            productionCompaniesCollectionView.reloadData()
             // If there is no trailer, hide trailer button
             if detailedMovie?.videos?.results?.isEmpty ?? true {
                 trailerButton.isHidden = true
@@ -23,6 +25,14 @@ class MovieDetailViewController: UIViewController {
     }
     private(set) var castList: [Cast]?
     
+    // IBOutlets
+    @IBOutlet private weak var homepageImageView: UIImageView! {
+        didSet {
+            homepageImageView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(homepageImageViewTapped))
+            homepageImageView.addGestureRecognizer(tapGesture)
+        }
+    }
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet private weak var moviePosterImageView: UIImageView! {
         didSet {
@@ -46,8 +56,6 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
-    
-    // CastCollectionView
     @IBOutlet private weak var castCollectionView: UICollectionView! {
         didSet {
             castCollectionView.delegate = self
@@ -55,7 +63,6 @@ class MovieDetailViewController: UIViewController {
             castCollectionView.registerNib(with: String(describing: CastCollectionViewCell.self))
         }
     }
-    // RecommendationView
     @IBOutlet private(set) weak var recommendationLabel: UILabel!
     @IBOutlet private weak var recommendationCollectionView: UICollectionView! {
         didSet {
@@ -64,8 +71,15 @@ class MovieDetailViewController: UIViewController {
             recommendationCollectionView.registerNib(with: String(describing: RecommendedCollectionViewCell.self))
         }
     }
+    @IBOutlet private(set) weak var productionCompaniesLabel: UILabel!
+    @IBOutlet private weak var productionCompaniesCollectionView: UICollectionView! {
+        didSet {
+            productionCompaniesCollectionView.delegate = self
+            productionCompaniesCollectionView.dataSource = self
+            productionCompaniesCollectionView.registerNib(with: String(describing: ProductionCompanyCollectionViewCell.self))
+        }
+    }
     @IBOutlet private weak var watchProvidersView: WatchProviderView!
-
     @IBOutlet weak var trailerButton: UIImageView! {
         didSet {
             // add tapture gesture
@@ -82,18 +96,27 @@ class MovieDetailViewController: UIViewController {
             addListButton.addGestureRecognizer(tapGesture)
         }
     }
-
+    
+    // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showLoading()
         setupNavbarButtons()
         fetchMovie()
     }
-
+    
+    // Custom methods
     func setupNavbarButtons() {
         let favouriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favouriteButtonTapped))
         favouriteButton.tintColor = UIColor.systemPink
         self.navigationItem.rightBarButtonItem = favouriteButton
+    }
+    
+    @objc func homepageImageViewTapped() {
+        guard let detailedMovie = detailedMovie else { return }
+        if let url = URL(string: detailedMovie.homepage ?? "") {
+            UIApplication.shared.open(url)
+        }
     }
     
     @objc func trailerButtonTapped() {
@@ -111,7 +134,7 @@ class MovieDetailViewController: UIViewController {
     
     @objc func addListButtonTapped() {
         AlertManager.shared.addMovieToCustomListAlert(viewController: self, movieId: detailedMovie?.id ?? 0) { result in
- 
+            
         }
     }
     
@@ -156,7 +179,14 @@ class MovieDetailViewController: UIViewController {
         // If the movie has any recommendation set isHidden false for label
         if detailedMovie.recommendations?.results?.count ?? 0 > 0 {
             self.recommendationLabel.isHidden = false
+            self.recommendationCollectionView.isHidden = false
         }
+        
+        if detailedMovie.productionCompanies?.count ?? 0 > 0 {
+            self.productionCompaniesLabel.isHidden = false
+            self.productionCompaniesCollectionView.isHidden = false
+        }
+        
         
         // Add watchProviders if there is any
         self.watchProvidersView.addWatchProviderIcon(watchProviders: detailedMovie.watchProviders)
@@ -179,7 +209,7 @@ class MovieDetailViewController: UIViewController {
         }
         flagLabel.text = detailedMovie.originalLanguage?.uppercased()
         flagImageView.image = Flag(countryCode: detailedMovie.productionCompanies?.first?.originCountry ?? "")?.image(style: .roundedRect)
-
+        
         moviePosterImageView.setImageFromPath(isOriginalSize: true, path: detailedMovie.backdropPath ?? "") { image in
             self.moviePosterImageView.hideLoading()
         }
@@ -187,7 +217,7 @@ class MovieDetailViewController: UIViewController {
         revenueLabel.text = String(detailedMovie.revenue ?? 0).convertToShortNumberFormat()
         runtimeLabel.text = String(detailedMovie.runtime ?? 0) + NSLocalizedString("shortMin", comment: "that describes minutes")
     }
-
+    
     
 }
 

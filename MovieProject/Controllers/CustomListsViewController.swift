@@ -8,13 +8,21 @@
 import UIKit
 
 class CustomListsViewController: UIViewController {
-    private(set) var customLists: [CustomList] = [] {
+    // Properties
+    private var customLists: [CustomList] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    private var isSearching = false
+    private var filteredCustomLists: [CustomList] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     private var refreshController = UIRefreshControl()
     
+    // IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.refreshControl = self.refreshController
@@ -27,11 +35,11 @@ class CustomListsViewController: UIViewController {
     }
     @IBOutlet private weak var searchBar: UITableView!
     
+    // Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         let newListButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(newListButtonTapped))
         self.navigationItem.rightBarButtonItem = newListButton
-        
         getCustomLists()
     }
     
@@ -40,9 +48,10 @@ class CustomListsViewController: UIViewController {
         getCustomLists()
     }
     
+    // Custom methods
     @objc func newListButtonTapped() {
         AlertManager.shared.showNewCustomListAlert(viewController: self) { status in
-                self.getCustomLists()
+            self.getCustomLists()
         }
     }
     
@@ -57,12 +66,14 @@ class CustomListsViewController: UIViewController {
 
 extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return customLists.count
+        return isSearching ? filteredCustomLists.count : customLists.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CustomListTableViewCell.self), for: indexPath) as? CustomListTableViewCell {
-            cell.configure(with: customLists[indexPath.row])
+            let list = isSearching ? filteredCustomLists[indexPath.row] : customLists[indexPath.row]
+            cell.configure(with: list)
             cell.selectionStyle = .none
             return cell
         }
@@ -79,7 +90,7 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     
     // disable delete for first row which is favs
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        let list = customLists[indexPath.row]
+        let list = isSearching ? filteredCustomLists[indexPath.row] : customLists[indexPath.row]
         return list.customListId == CLConstants.idForFavouritesList ? false : true
     }
     
@@ -116,10 +127,28 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
 // MARK: Search Bar Delegate
 extension CustomListsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //TODO: Will be implemented
+        performSearch(searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+    
+    func performSearch(_ searchText: String) {
+        if (searchText.isEmpty || searchText == "") {
+            isSearching = false
+            filteredCustomLists = []
+            tableView.reloadData()
+            return
+        }
+        isSearching = true
+        filteredCustomLists = customLists.filter({
+            if let name = $0.customListName?.lowercased() {
+                return name.contains(searchText.lowercased())
+            }
+            return false
+        })
+        tableView.reloadData()
+    }
+    
 }

@@ -9,7 +9,11 @@
 import UIKit
 
 class RecommendedCollectionViewCell: UICollectionViewCell {
-    @IBOutlet private weak var posterImageView: UIImageView!
+    @IBOutlet private weak var posterImageView: UIImageView! {
+        didSet {
+            self.showLoading()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,13 +21,12 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(_ movie: Movie) {
-        if let posterPath = movie.posterPath {
-            posterImageView.setCornerRadius(10)
-            posterImageView.setImageFromPath(path: posterPath) { image in
-                if image == nil {
-                    
-                }
-                return
+        
+        posterImageView.setCornerRadius(10)
+        posterImageView.setImageFromPath(path: movie.posterPath ?? "") { image in
+            self.hideLoading()
+            if image == nil {
+                self.posterImageView.image = UIImage(named: "noImage")
             }
         }
     }

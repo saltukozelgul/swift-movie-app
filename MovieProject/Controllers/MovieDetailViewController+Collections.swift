@@ -14,6 +14,8 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
                 return self.castList?.count ?? 0
             case Constants.recommendedCollectionViewRestorationId:
                 return self.detailedMovie?.recommendations?.results?.count ?? 0
+            case Constants.productionCompaniesCollectionViewRestoreationId:
+                return self.detailedMovie?.productionCompanies?.count ?? 0
             default:
                 return 0
         }
@@ -34,6 +36,12 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
                     cell.configure(recommendation)
                 }
                 return cell
+            case Constants.productionCompaniesCollectionViewRestoreationId:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductionCompanyCollectionViewCell.self), for: indexPath) as! ProductionCompanyCollectionViewCell
+                if let productionCompany = self.detailedMovie?.productionCompanies?[indexPath.row] {
+                    cell.configure(with: productionCompany)
+                }
+                return cell
             default:
                 return UICollectionViewCell()
         }
@@ -46,7 +54,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
                 navigateToMovieDetail(movie: recommendation)
             }
         }
-        else {
+        else if collectionView.restorationIdentifier == Constants.castCollectionViewRestorationId {
             if let cast = self.castList?[indexPath.row] {
                 navigateToCastDetail(cast: cast)
             }
@@ -54,6 +62,14 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: TableConstants.widthForCastCell , height: TableConstants.heightForCastCell)
+        if collectionView.restorationIdentifier == Constants.castCollectionViewRestorationId {
+            return CGSize(width: TableConstants.widthForCastCell , height: TableConstants.heightForCastCell)
+        }
+        else if collectionView.restorationIdentifier == Constants.recommendedCollectionViewRestorationId {
+            return CGSize(width: TableConstants.widthForRecommendedCell , height: TableConstants.heightForRecommendedCell)
+        }
+        else {
+            return CGSize(width: TableConstants.widthForProductionCompanyCell , height: TableConstants.heightForProductionCompanyCell)
+        }
     }
 }

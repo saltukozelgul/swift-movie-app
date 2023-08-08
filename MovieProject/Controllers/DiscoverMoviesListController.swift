@@ -9,16 +9,7 @@ import UIKit
 import Alamofire
 
 class DiscoverMoviesListController: UIViewController {
-    @IBOutlet private weak var tableView: UITableView! {
-        didSet {
-            self.tableView.showLoading()
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.keyboardDismissMode = .onDrag
-            self.tableView.registerNib(with: String(describing: MovieTableViewCell.self))
-        }
-    }
-    
+    // Properties
     var genreString: String = ""
     var releaseDateGte: String = ""
     var releaseDateLte: String = ""
@@ -46,7 +37,7 @@ class DiscoverMoviesListController: UIViewController {
                 default:
                     sortingTypeEnum = .popularityDesc
             }
-        
+            
         }
     }
     var sortingTypeEnum: MovieListSortingOptions!
@@ -57,6 +48,17 @@ class DiscoverMoviesListController: UIViewController {
     }
     var totalPage = 1
     var currentPage = 1
+    
+    // IBOutlets
+    @IBOutlet private weak var tableView: UITableView! {
+        didSet {
+            self.tableView.showLoading()
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
+            self.tableView.keyboardDismissMode = .onDrag
+            self.tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+        }
+    }
     
     // Life cylce methods
     override func viewDidLoad() {

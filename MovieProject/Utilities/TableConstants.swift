@@ -14,4 +14,9 @@ struct TableConstants {
     static let widthForCastCell: CGFloat = 135
     static let heightForGenreCell: CGFloat = 30
     static let widthForGenreCell: CGFloat = 90
+    static let widthForRecommendedCell: CGFloat = 100
+    static let heightForRecommendedCell: CGFloat = 150
+    static let widthForProductionCompanyCell: CGFloat = 100
+    static let heightForProductionCompanyCell: CGFloat = 125
+    
 }
