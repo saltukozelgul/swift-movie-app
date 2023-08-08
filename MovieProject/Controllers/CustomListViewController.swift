@@ -28,10 +28,18 @@ class CustomListViewController: UIViewController {
             tableView.keyboardDismissMode = .onDrag
         }
     }
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.registerNib(with: String(describing: MovieCollectionViewCell.self))
+            collectionView.delegate = self
+            collectionView.dataSource = self
+        }
+    }
     
     // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        createSwapToGridButton()
         getCustomListMovies()
     }
     
@@ -56,6 +64,19 @@ class CustomListViewController: UIViewController {
             // check for not fetched movies and fetch
             self.fetchCustomListMovies()
         }
+    }
+    
+    func createSwapToGridButton() {
+        let swapToGridButton = UIBarButtonItem(image: UIImage(systemName: "square.grid.2x2"), style: .plain, target: self, action: #selector(swapToGridButtonTapped))
+        self.navigationItem.rightBarButtonItem = swapToGridButton
+    }
+    
+    @objc func swapToGridButtonTapped() {
+        tableView.isHidden = !tableView.isHidden
+        collectionView.isHidden = !collectionView.isHidden
+        tableView.reloadData()
+        collectionView.reloadData()
+        self.navigationItem.rightBarButtonItem?.image = collectionView.isHidden ? UIImage(systemName: "square.grid.2x2") : UIImage(systemName: "list.dash")
     }
     
     func fetchCustomListMovies() {
@@ -124,5 +145,39 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+}
+
+//MARK: GridView Collection View Delagates
+extension CustomListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return listedMovies.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MovieCollectionViewCell.self), for: indexPath) as! MovieCollectionViewCell
+        let movie = listedMovies[indexPath.row]
+        cell.configure(with: movie)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = listedMovies[indexPath.row]
+        navigateToMovieDetail(movie: movie)
+    }
+    
+    // Set the sizes for cells 3 on 1 row
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (UIScreen.main.bounds.width - 30 - 20) / 3
+        let height = width * 1.5
+        return CGSize(width: width, height: height)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if fetchStatus.values.contains(false) {
+            if indexPath.row == listedMovies.count - 1 {
+                fetchCustomListMovies()
+            }
+        }
+    }
 }

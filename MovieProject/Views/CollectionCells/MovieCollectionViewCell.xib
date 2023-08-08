@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MovieCollectionViewCell" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="MovieProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-la-9Jz" userLabel="Content View">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jpy-wU-Drj">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jpy-wU-Drj" secondAttribute="trailing" id="8Rk-Vc-aS4"/>
+                            <constraint firstAttribute="bottom" secondItem="jpy-wU-Drj" secondAttribute="bottom" id="Wus-gg-AXD"/>
+                            <constraint firstItem="jpy-wU-Drj" firstAttribute="top" secondItem="E7i-la-9Jz" secondAttribute="top" id="tEC-bX-PNj"/>
+                            <constraint firstItem="jpy-wU-Drj" firstAttribute="leading" secondItem="E7i-la-9Jz" secondAttribute="leading" id="xYV-XJ-Hdy"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="E7i-la-9Jz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5Wo-is-ZTm"/>
+                <constraint firstAttribute="bottom" secondItem="E7i-la-9Jz" secondAttribute="bottom" id="U8f-JF-HEE"/>
+                <constraint firstAttribute="trailing" secondItem="E7i-la-9Jz" secondAttribute="trailing" id="qBS-a1-AAF"/>
+                <constraint firstItem="E7i-la-9Jz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="uPQ-MO-lQG"/>
+            </constraints>
+            <connections>
+                <outlet property="posterImageView" destination="jpy-wU-Drj" id="WdW-VR-X5Z"/>
+            </connections>
+            <point key="canvasLocation" x="-105" y="21"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

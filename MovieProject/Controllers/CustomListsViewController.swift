@@ -105,7 +105,7 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
             }
             completionHandler(true)
         }
-        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.image = UIImage(systemName: "trash")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .bold, scale: .large))
         deleteAction.backgroundColor = .systemRed
         let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
             AlertManager.shared.editCustomListAlert(viewController: self, customListId: list.customListId ?? "") { result in
@@ -115,7 +115,7 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
             }
             completionHandler(true)
         }
-        editAction.image = UIImage(systemName: "pencil")
+        editAction.image = UIImage(systemName: "pencil")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 25, weight: .regular, scale: .large))
         editAction.backgroundColor = .systemOrange
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         configuration.performsFirstActionWithFullSwipe = false

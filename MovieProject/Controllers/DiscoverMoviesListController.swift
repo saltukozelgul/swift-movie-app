@@ -109,7 +109,6 @@ extension DiscoverMoviesListController: UITableViewDataSource {
 }
 
 // MARK: - TableView Delegate
-
 extension DiscoverMoviesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == movies.count - 1 {
