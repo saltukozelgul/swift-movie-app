@@ -25,6 +25,7 @@ extension UIImageView {
                     image = value.image
                     completion(image)
                 case .failure(let error):
+                    print(error)
                     completion(nil)
             }
         }

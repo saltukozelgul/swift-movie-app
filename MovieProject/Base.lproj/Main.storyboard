@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,16 +71,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MN5-TY-8nf">
                                 <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="GE6-j4-qdb">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GE6-j4-qdb" id="C3h-ev-b6E">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j4l-oN-uTE"/>
@@ -294,16 +285,16 @@
                                                                 <rect key="frame" x="0.0" y="40.5" width="384" height="20.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hc2-rj-Kev" userLabel="LeadingContainer">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="80.5" height="20.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JG1-Hx-L5C" userLabel="item1">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="80.5" height="20.5"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0CO-Te-VpX">
-                                                                                        <rect key="frame" x="0.0" y="-0.5" width="14.5" height="21.5"/>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0CO-Te-VpX">
+                                                                                        <rect key="frame" x="0.0" y="0.5" width="20" height="19.5"/>
                                                                                     </imageView>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnP-ma-ehy" userLabel="Budget">
-                                                                                        <rect key="frame" x="19.5" y="0.0" width="55.5" height="20.5"/>
+                                                                                        <rect key="frame" x="25" y="0.0" width="55.5" height="20.5"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -313,7 +304,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Iyi-Bq-lZI" userLabel="TrailingContainer">
-                                                                        <rect key="frame" x="291" y="0.0" width="93" height="20.5"/>
+                                                                        <rect key="frame" x="293" y="0.0" width="91" height="20.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Revenue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hr1-IT-DKb" userLabel="Revenue">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="66" height="20.5"/>
@@ -321,8 +312,8 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.arrow.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xj8-xT-5YI">
-                                                                                <rect key="frame" x="71" y="0.5" width="22" height="19.5"/>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xj8-xT-5YI">
+                                                                                <rect key="frame" x="71" y="0.5" width="20" height="19.5"/>
                                                                             </imageView>
                                                                         </subviews>
                                                                     </stackView>
@@ -342,7 +333,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o4Y-fv-2Dv" userLabel="TrailingContainer">
                                                                         <rect key="frame" x="360" y="0.0" width="24" height="50"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homekit" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WKc-VH-xO1">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WKc-VH-xO1">
                                                                                 <rect key="frame" x="0.0" y="-1" width="24" height="50"/>
                                                                             </imageView>
                                                                         </subviews>
@@ -694,7 +685,7 @@
         <scene sceneID="8k8-2u-aXc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Geh-zH-xfi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Movies" image="play.rectangle.on.rectangle.fill" catalog="system" id="afr-od-DBq"/>
+                    <tabBarItem key="tabBarItem" title="Movies" image="play.fill" catalog="system" id="afr-od-DBq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EHk-3h-RKZ">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -737,7 +728,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SND-Iv-apg" userLabel="RootStackView">
-                                <rect key="frame" x="15" y="92" width="384" height="666"/>
+                                <rect key="frame" x="15" y="92" width="384" height="661.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3qR-l5-PIn" userLabel="Release Date Title">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="31.5"/>
@@ -895,18 +886,18 @@
                                         <cells/>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOd-Ss-ih4">
-                                        <rect key="frame" x="0.0" y="395" width="384" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Add new genre">
-                                            <color key="baseForegroundColor" name="genreLabel"/>
-                                            <color key="baseBackgroundColor" name="genreBackground"/>
-                                        </buttonConfiguration>
+                                        <rect key="frame" x="0.0" y="395" width="384" height="30"/>
+                                        <color key="backgroundColor" name="genreBackground"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Add new genre">
+                                            <color key="titleColor" name="genreLabel"/>
+                                        </state>
                                         <connections>
                                             <action selector="addNewGenreButtonTapped:" destination="YF1-A9-MJ7" eventType="touchUpInside" id="vGB-GT-ggp"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-jN-mO0" userLabel="Sort by Title">
-                                        <rect key="frame" x="0.0" y="439.5" width="384" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="435" width="384" height="36.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mj6-7Q-M7X">
                                                 <rect key="frame" x="0.0" y="0.0" width="102" height="25.5"/>
@@ -917,8 +908,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-mL-jDD">
-                                                        <rect key="frame" x="81" y="2.5" width="21" height="20.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list.bullet" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ajL-mL-jDD">
+                                                        <rect key="frame" x="81" y="2.5" width="21" height="20"/>
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
@@ -932,7 +923,7 @@
                                         </subviews>
                                     </stackView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02E-YY-8xO">
-                                        <rect key="frame" x="0.0" y="486" width="384" height="180"/>
+                                        <rect key="frame" x="0.0" y="481.5" width="384" height="180"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="180" id="HkH-Yd-BMu"/>
                                         </constraints>
@@ -954,9 +945,13 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iZ-7d-4up">
-                                <rect key="frame" x="15" y="763.5" width="384" height="34.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system" title="Discover"/>
+                                <rect key="frame" x="15" y="772.5" width="384" height="25.5"/>
+                                <color key="backgroundColor" name="genreLabel"/>
+                                <color key="tintColor" systemColor="systemGray6Color"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Discover" image="magnifyingglass" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                </state>
                                 <connections>
                                     <action selector="discoverButtonTapped:" destination="YF1-A9-MJ7" eventType="touchUpInside" id="HOv-ie-lxt"/>
                                 </connections>
@@ -1041,14 +1036,13 @@
     <resources>
         <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
-        <image name="dollarsign" catalog="system" width="89" height="128"/>
-        <image name="dollarsign.arrow.circlepath" catalog="system" width="128" height="112"/>
-        <image name="homekit" catalog="system" width="128" height="104"/>
+        <image name="dollarsign.circle" catalog="system" width="128" height="123"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
-        <image name="list.triangle" catalog="system" width="128" height="91"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="play.rectangle.on.rectangle.fill" catalog="system" width="128" height="98"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="tag.fill" catalog="system" width="128" height="118"/>
@@ -1064,6 +1058,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
