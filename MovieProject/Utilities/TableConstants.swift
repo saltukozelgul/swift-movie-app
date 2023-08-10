@@ -7,6 +7,7 @@
 
 import Foundation
 
+// sadece ekranı ilgilemdiren seyleri ekrana almak daha mantıklı olabilr
 struct TableConstants {
     static let heightForCustomListCell: CGFloat = 80
     static let heightForPopularMovieRow: CGFloat = 210

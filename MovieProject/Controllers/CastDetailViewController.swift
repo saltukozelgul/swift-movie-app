@@ -26,7 +26,7 @@ class CastDetailViewController: UIViewController {
         didSet {
             moviesCollectionView.delegate = self
             moviesCollectionView.dataSource = self
-            moviesCollectionView.registerNib(with: String(describing: RecommendedCollectionViewCell.self))
+            moviesCollectionView.registerNib(with: RecommendedCollectionViewCell.self)
         }
     }
     @IBOutlet weak var bottomCardView: UIView! {

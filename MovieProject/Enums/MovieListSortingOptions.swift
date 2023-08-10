@@ -16,4 +16,6 @@ enum MovieListSortingOptions {
     case voteCountDesc
     case voteAverageDesc
     case releaseDateDesc
+    
+    // TODO: Description text functionu yazıp return edileceği tipi belirlemek gibi bir yöntem gibi izlenebilir
 }

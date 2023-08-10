@@ -25,6 +25,7 @@ extension UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    // Aşağıdaki fonksyionlar domain spesific oldığı için her yerde olmasına gerek yok.
     func navigateToMovieDetail(movie: Movie) {
         navigateToViewController(withIdentifier: String(describing: MovieDetailViewController.self)) { (vc: MovieDetailViewController) in
             vc.movieId = movie.id

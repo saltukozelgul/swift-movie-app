@@ -43,7 +43,8 @@ class CustomListManager {
     }
     
     // This methods add movie to custom lists that id has been given
-    func addMovieToCustomList(movieId: Int, customListId: String) -> Bool {
+
+   @discardableResult func addMovieToCustomList(movieId: Int, customListId: String) -> Bool {
         guard let context = context else { return false }
         if let customList = checkCustomList(customListId: customListId), var movies = customList.movies {
             if !movies.contains(movieId) {
@@ -101,6 +102,7 @@ class CustomListManager {
     func createCustomList(listId: String = UUID().uuidString, listName: String, completion: @escaping (String?) -> Void) {
         guard let context else { return completion(nil) }
         if let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) {
+            // Managed Object yaratıp oradan yürümek daha mantıklı olabilir.
             let newCustomList = NSManagedObject(entity: entity, insertInto: context)
             newCustomList.setValue(listName, forKey: CustomListConstants.keyValueForCustomListName)
             newCustomList.setValue(listId, forKey: CustomListConstants.keyValueForCustomListId)

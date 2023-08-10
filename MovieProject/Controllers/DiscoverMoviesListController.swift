@@ -56,7 +56,7 @@ class DiscoverMoviesListController: UIViewController {
             self.tableView.delegate = self
             self.tableView.dataSource = self
             self.tableView.keyboardDismissMode = .onDrag
-            self.tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+            self.tableView.registerNib(with: MovieTableViewCell.self)
         }
     }
     

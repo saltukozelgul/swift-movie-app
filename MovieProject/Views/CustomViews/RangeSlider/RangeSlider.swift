@@ -20,6 +20,7 @@ class RangeSlider: UIControl {
     let upperThumbLayer = RangeSliderThumbLayer()
     var previousLocation = CGPoint()
     
+    //
     var trackTintColor = UIColor(white: 0.9, alpha: 1.0)
     var trackHighlightTintColor = UIColor(red: 0.0, green: 0.45, blue: 0.94, alpha: 1.0)
     var thumbTintColor = UIColor.white

@@ -22,7 +22,7 @@ class MovieListViewController: UIViewController {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.keyboardDismissMode = .onDrag
-            tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+            tableView.registerNib(with: MovieTableViewCell.self)
         }
     }
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -39,6 +39,7 @@ class MovieListViewController: UIViewController {
     
     // Custom methods
     private func fetchData() {
+        // TODO: Bir movieservice katmanı yazılıp, o servis burada tüketilebir.
         guard let url = APIManager.shared.getPopularMoviesUrl(page: currentPage) else { return }
         NetworkManager.shared.fetchData(url: url) { [weak self] (result: Result<PopularMovies, AFError>) in
             guard let self = self else { return }
@@ -65,7 +66,6 @@ extension MovieListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as? MovieTableViewCell {
             cell.configureCellForDisplay(movie: userIsSearching ? searchedMovies[indexPath.row] : listedMovies[indexPath.row])
-            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
@@ -171,6 +171,7 @@ extension MovieListViewController: UISearchBarDelegate {
         performSearch(query)
     }
     
+    // Bunu network katmanına almak çok daha mnatıklı
     private func cancelPreviousSearchRequests() {
         AF.withAllRequests { requests in
             requests.forEach { request in

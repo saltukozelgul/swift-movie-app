@@ -1,5 +1,5 @@
 //
-//  EmptyTableView.swift
+//  EmptyViewForTableView.swift
 //  MovieProject
 //
 //  Created by Saltuk Bugra OZELGUL on 6.08.2023.
@@ -7,7 +7,8 @@
 
 import UIKit
 
-class EmptyTableView: UIView {
+// daha farkı bir isiöm olabilir
+class EmptyViewForTableView: UIView {
     // Create a view that has image on center of it
     private let imageView: UIImageView = {
         let imageView = UIImageView()

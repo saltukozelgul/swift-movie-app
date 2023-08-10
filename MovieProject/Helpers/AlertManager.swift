@@ -41,6 +41,7 @@ class AlertManager {
         viewController.present(alert, animated: true, completion: nil)
     }
     
+    //
     func addMovieToCustomListAlert(viewController: UIViewController, movieId: Int, completion: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: NSLocalizedString("addMovieToList", comment: "add movie title"), message: NSLocalizedString("addMovieToListMessage", comment: "add movie message"), preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: "cancel"), style: .cancel, handler: nil)

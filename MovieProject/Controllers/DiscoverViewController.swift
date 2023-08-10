@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Alamofire
+import Alamofire   
 
 class DiscoverViewController: UIViewController {
     // Properties
@@ -41,7 +41,7 @@ class DiscoverViewController: UIViewController {
         didSet {
             genresCollectionView.delegate = self
             genresCollectionView.dataSource = self
-            genresCollectionView.registerNib(with: String(describing: GenreCollectionViewCell.self))
+            genresCollectionView.registerNib(with: GenreCollectionViewCell.self)
         }
     }
     @IBOutlet private weak var ratingSliderLowerLabel: UILabel!

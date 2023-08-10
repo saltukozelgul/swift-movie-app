@@ -22,7 +22,7 @@ class CustomListViewController: UIViewController {
     // IBOutlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
-            tableView.registerNib(with: String(describing: MovieTableViewCell.self))
+            tableView.registerNib(with: MovieTableViewCell.self)
             tableView.delegate = self
             tableView.dataSource = self
             tableView.keyboardDismissMode = .onDrag
@@ -30,7 +30,7 @@ class CustomListViewController: UIViewController {
     }
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
-            collectionView.registerNib(with: String(describing: MovieCollectionViewCell.self))
+            collectionView.registerNib(with: MovieCollectionViewCell.self)
             collectionView.delegate = self
             collectionView.dataSource = self
         }
@@ -74,8 +74,12 @@ class CustomListViewController: UIViewController {
     @objc func swapToGridButtonTapped() {
         tableView.isHidden = !tableView.isHidden
         collectionView.isHidden = !collectionView.isHidden
-        tableView.reloadData()
-        collectionView.reloadData()
+        if tableView.isHidden {
+            collectionView.reloadData()
+        } else {
+            tableView.reloadData()
+        }
+        
         self.navigationItem.rightBarButtonItem?.image = collectionView.isHidden ? UIImage(systemName: "square.grid.2x2") : UIImage(systemName: "list.dash")
     }
     
@@ -130,7 +134,6 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as? MovieTableViewCell {
             let movie = listedMovies[indexPath.row]
             cell.configureCellForDisplay(movie: movie)
-            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
@@ -172,7 +175,9 @@ extension CustomListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     // Set the sizes for cells 3 on 1 row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - 30 - 20) / 3
+        let spaceBetweenCells = 10.0
+        let spaceAroundCollectionView = 15.0
+        let width = (UIScreen.main.bounds.width - (2 * spaceAroundCollectionView) - (2 * spaceBetweenCells)) / 3
         let height = width * 1.5
         return CGSize(width: width, height: height)
     }

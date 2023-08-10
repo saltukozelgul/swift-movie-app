@@ -12,6 +12,7 @@ class APIManager {
     private var components = URLComponents()
     static let shared = APIManager()
     
+    // Burada çok fazla tekralrayan pattern var bunlarıu tek fonskyioın yapıp aparemete alamk daha mantıklı
     private init() {
         self.components.scheme = "https"
         self.components.host = "api.themoviedb.org"

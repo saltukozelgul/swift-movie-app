@@ -19,6 +19,7 @@ class GenreView: UIView {
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
+        // TODO: Renkleri tutan/ helper vs kullanılabilir.
         self.backgroundColor = UIColor(named: "genreBackground")
         self.addSubview(genreLabel)
         NSLayoutConstraint.activate([

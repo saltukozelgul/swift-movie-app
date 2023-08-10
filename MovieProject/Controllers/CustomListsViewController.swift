@@ -26,7 +26,7 @@ class CustomListsViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.refreshControl = self.refreshController
-            tableView.registerNib(with: String(describing: CustomListTableViewCell.self))
+            tableView.registerNib(with: CustomListTableViewCell.self)
             tableView.delegate = self
             tableView.dataSource = self
             tableView.keyboardDismissMode = .onDrag
@@ -74,7 +74,6 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CustomListTableViewCell.self), for: indexPath) as? CustomListTableViewCell {
             let list = isSearching ? filteredCustomLists[indexPath.row] : customLists[indexPath.row]
             cell.configure(with: list)
-            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()

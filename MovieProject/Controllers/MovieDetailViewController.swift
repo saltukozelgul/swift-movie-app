@@ -56,27 +56,27 @@ class MovieDetailViewController: UIViewController {
             }
         }
     }
-    @IBOutlet private weak var castCollectionView: UICollectionView! {
+    @IBOutlet private(set) weak var castCollectionView: UICollectionView! {
         didSet {
             castCollectionView.delegate = self
             castCollectionView.dataSource = self
-            castCollectionView.registerNib(with: String(describing: CastCollectionViewCell.self))
+            castCollectionView.registerNib(with: CastCollectionViewCell.self)
         }
     }
     @IBOutlet private(set) weak var recommendationLabel: UILabel!
-    @IBOutlet private weak var recommendationCollectionView: UICollectionView! {
+    @IBOutlet private(set) weak var recommendationCollectionView: UICollectionView! {
         didSet {
             recommendationCollectionView.delegate = self
             recommendationCollectionView.dataSource = self
-            recommendationCollectionView.registerNib(with: String(describing: RecommendedCollectionViewCell.self))
+            recommendationCollectionView.registerNib(with: RecommendedCollectionViewCell.self)
         }
     }
     @IBOutlet private(set) weak var productionCompaniesLabel: UILabel!
-    @IBOutlet private weak var productionCompaniesCollectionView: UICollectionView! {
+    @IBOutlet private(set) weak var productionCompaniesCollectionView: UICollectionView! {
         didSet {
             productionCompaniesCollectionView.delegate = self
             productionCompaniesCollectionView.dataSource = self
-            productionCompaniesCollectionView.registerNib(with: String(describing: ProductionCompanyCollectionViewCell.self))
+            productionCompaniesCollectionView.registerNib(with: ProductionCompanyCollectionViewCell.self)
         }
     }
     @IBOutlet private weak var watchProvidersView: WatchProviderView!
