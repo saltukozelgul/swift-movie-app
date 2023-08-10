@@ -121,7 +121,7 @@ extension CustomListViewController: UITableViewDelegate, UITableViewDataSource {
         if fetchStatus.isEmpty {
             tableView.setEmptyView(title: NSLocalizedString("emptyListTitle", comment: ""), message: NSLocalizedString("emptyListMessage", comment: ""), isCustomList: true)
         } else {
-            tableView.restore()
+            tableView.restoreBackground()
         }
         return listedMovies.count
     }

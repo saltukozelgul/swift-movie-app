@@ -53,7 +53,6 @@ class CastDetailViewController: UIViewController {
                         self.view.hideLoading()
                     case .failure(let error):
                         AlertManager.shared.showErrorAlert(title: NSLocalizedString("error", comment: "an error title"), message: error.localizedDescription, viewController: self)
-                        
                 }
             }
         }

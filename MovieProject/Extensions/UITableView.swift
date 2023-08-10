@@ -15,7 +15,7 @@ extension UITableView {
         self.backgroundView = emptyView
     }
     
-    func restore() {
+    func restoreBackground() {
         self.backgroundView = nil
     }
     

@@ -28,6 +28,7 @@ extension String {
         return convertedString
     }
     
+    // This function is useful on discover page. Because we need to send date in format of "yyyy-MM-dd" to API.
     func toApiDateFormat(month: String = "01", day: String = "01") -> String {
         return "\(self)-\(month)-\(day)"
     }

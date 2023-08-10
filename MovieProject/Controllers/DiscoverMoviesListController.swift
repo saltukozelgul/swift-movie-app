@@ -93,7 +93,7 @@ extension DiscoverMoviesListController: UITableViewDataSource {
         if movies.count == 0 {
             tableView.setEmptyView()
         } else {
-            tableView.restore()
+            tableView.restoreBackground()
         }
         return movies.count
     }
