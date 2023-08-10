@@ -160,6 +160,7 @@ extension MovieListViewController: UISearchBarDelegate {
         userIsSearching = false
         previousSearchQuery = ""
         tableView.reloadData()
+        // Scroll to last position on popular list
         tableView.scrollToRow(at: IndexPath(row: lastPreservedRow, section: 0), at: .bottom, animated: false)
     }
     

@@ -50,7 +50,6 @@ class MovieTableViewCell: UITableViewCell {
         checkFavouriteState()
     }
     
-    
     func checkFavouriteState() {
         guard let movieId = movieId else { return }
         addFavouriteButton.setImageForFavouriteButton(with: FavouriteManager.shared.isFavourite(movieId: movieId))

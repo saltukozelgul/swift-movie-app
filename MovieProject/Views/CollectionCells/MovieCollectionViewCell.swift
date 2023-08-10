@@ -10,6 +10,7 @@ import UIKit
 class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var posterImageView: UIImageView! {
         didSet {
+            posterImageView.setCornerRadius(10)
             self.showLoading()
         }
     }

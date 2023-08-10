@@ -17,12 +17,6 @@ class CustomListTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     func configure(with list: CustomList) {
         if list.customListId == CustomListConstants.idForFavouritesList {
             self.listName.text = NSLocalizedString("favList", comment: "a text for table name for favourites")
