@@ -91,7 +91,7 @@ extension CustomListsViewController: UITableViewDelegate, UITableViewDataSource 
     // disable delete for first row which is favs
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let list = isSearching ? filteredCustomLists[indexPath.row] : customLists[indexPath.row]
-        return list.customListId == CLConstants.idForFavouritesList ? false : true
+        return list.customListId == CustomListConstants.idForFavouritesList ? false : true
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

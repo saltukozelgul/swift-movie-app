@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CLConstants {
+struct CustomListConstants {
     static let entityNameForCustomList = "CustomList"
     static let keyValueForMovies = "movies"
     static let keyValueForCustomListId = "customListId"

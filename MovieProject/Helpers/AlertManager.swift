@@ -47,7 +47,7 @@ class AlertManager {
         // Get all custom lists and add an option for every one
         CustomListManager.shared.getAllCustomLists { customLists in
             // Remove the fav custom lists from this section and create new array
-            let customLists = customLists.filter { $0.customListId != CLConstants.idForFavouritesList }
+            let customLists = customLists.filter { $0.customListId != CustomListConstants.idForFavouritesList }
             for customList in customLists {
                 if let customListId = customList.customListId {
                     let actionTitle = customList.customListName

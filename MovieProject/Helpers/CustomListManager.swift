@@ -12,7 +12,7 @@ class CustomListManager {
     
     static let shared = CustomListManager()
     private var context: NSManagedObjectContext?
-    private var entityName = CLConstants.entityNameForCustomList
+    private var entityName = CustomListConstants.entityNameForCustomList
     
     private init () {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -23,7 +23,7 @@ class CustomListManager {
     func checkCustomList(customListId: String) -> CustomList? {
         guard let context else { return nil }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: "\(CLConstants.keyValueForCustomListId) == %@", customListId)
+        fetchRequest.predicate = NSPredicate(format: "\(CustomListConstants.keyValueForCustomListId) == %@", customListId)
         fetchRequest.fetchLimit = 1
         if let result = try? context.fetch(fetchRequest) {
             if let customList = result.first as? CustomList {
@@ -94,9 +94,9 @@ class CustomListManager {
         guard let context else { return completion(nil) }
         if let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) {
             let newCustomList = NSManagedObject(entity: entity, insertInto: context)
-            newCustomList.setValue(listName, forKey: CLConstants.keyValueForCustomListName)
-            newCustomList.setValue(listId, forKey: CLConstants.keyValueForCustomListId)
-            newCustomList.setValue([], forKey: CLConstants.keyValueForMovies)
+            newCustomList.setValue(listName, forKey: CustomListConstants.keyValueForCustomListName)
+            newCustomList.setValue(listId, forKey: CustomListConstants.keyValueForCustomListId)
+            newCustomList.setValue([], forKey: CustomListConstants.keyValueForMovies)
             do {
                 try context.save()
                 completion(listId)
@@ -132,7 +132,7 @@ class CustomListManager {
     func updateCustomList(customListId: String, customListName: String, completion: @escaping (Bool) -> Void) {
         guard let context else { return completion(false) }
         if let customList = checkCustomList(customListId: customListId) {
-            customList.setValue(customListName, forKey: CLConstants.keyValueForCustomListName)
+            customList.setValue(customListName, forKey: CustomListConstants.keyValueForCustomListName)
             return completion(saveContext(context))
         }
     }

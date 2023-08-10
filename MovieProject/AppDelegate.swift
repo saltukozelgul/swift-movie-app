@@ -58,10 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Check if there is a favourites list, if not create one
-        if let _ = CustomListManager.shared.checkCustomList(customListId: CLConstants.idForFavouritesList) {
+        if let _ = CustomListManager.shared.checkCustomList(customListId: CustomListConstants.idForFavouritesList) {
             //do nothing
         } else {
-            CustomListManager.shared.createCustomList(listId: CLConstants.idForFavouritesList, listName: CLConstants.nameForFavouritesList) { result in
+            CustomListManager.shared.createCustomList(listId: CustomListConstants.idForFavouritesList, listName: CustomListConstants.nameForFavouritesList) { result in
                 if result != nil {
                     //do nothing
                 }
