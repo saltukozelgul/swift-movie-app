@@ -63,10 +63,12 @@ extension MovieListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as! MovieTableViewCell
-        cell.configureCellForDisplay(movie: userIsSearching ? searchedMovies[indexPath.row] : listedMovies[indexPath.row])
-        cell.selectionStyle = .none
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieTableViewCell.self), for: indexPath) as? MovieTableViewCell {
+            cell.configureCellForDisplay(movie: userIsSearching ? searchedMovies[indexPath.row] : listedMovies[indexPath.row])
+            cell.selectionStyle = .none
+            return cell
+        }
+        return UITableViewCell()
     }
 }
 

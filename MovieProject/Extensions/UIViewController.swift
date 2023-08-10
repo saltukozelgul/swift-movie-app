@@ -5,7 +5,7 @@ extension UIViewController {
     
     func navigateToViewController<T: UIViewController>(withIdentifier identifier: String, configure: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: identifier) as! T
+        guard let vc = storyboard.instantiateViewController(withIdentifier: identifier) as? T else { return }
         
         configure?(vc)
         
@@ -18,7 +18,7 @@ extension UIViewController {
     
     func presentViewController<T: UIViewController>(withIdentifier identifier: String, configure: ((T) -> Void)? = nil) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: identifier) as! T
+        guard let vc = storyboard.instantiateViewController(withIdentifier: identifier) as? T else { return }
         
         configure?(vc)
         

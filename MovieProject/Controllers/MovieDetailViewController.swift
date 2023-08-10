@@ -124,7 +124,7 @@ class MovieDetailViewController: UIViewController {
         // look for detailedMovie.vides.results and if the site is youtube and key is not null get key
         detailedMovie.videos?.results?.forEach({ (video) in
             if video.site == "YouTube" && video.key != nil {
-                if let url = URL(string: "https://www.youtube.com/watch?v=\(video.key!)") {
+                if let url = URL(string: "https://www.youtube.com/watch?v=\(video.key ?? "")") {
                     UIApplication.shared.open(url)
                     return
                 }
@@ -134,7 +134,6 @@ class MovieDetailViewController: UIViewController {
     
     @objc func addListButtonTapped() {
         AlertManager.shared.addMovieToCustomListAlert(viewController: self, movieId: detailedMovie?.id ?? 0) { result in
-            
         }
     }
     

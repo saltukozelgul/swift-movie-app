@@ -25,19 +25,19 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.restorationIdentifier {
             case Constants.castCollectionViewRestorationId:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as! CastCollectionViewCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CastCollectionViewCell.self), for: indexPath) as? CastCollectionViewCell else { return UICollectionViewCell()}
                 if let cast = self.castList?[indexPath.row] {
                     cell.configure(with: cast)
                 }
                 return cell
             case Constants.recommendedCollectionViewRestorationId:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecommendedCollectionViewCell.self), for: indexPath) as! RecommendedCollectionViewCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RecommendedCollectionViewCell.self), for: indexPath) as? RecommendedCollectionViewCell else { return UICollectionViewCell()}
                 if let recommendation = self.detailedMovie?.recommendations?.results?[indexPath.row] {
                     cell.configure(recommendation)
                 }
                 return cell
             case Constants.productionCompaniesCollectionViewRestoreationId:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductionCompanyCollectionViewCell.self), for: indexPath) as! ProductionCompanyCollectionViewCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductionCompanyCollectionViewCell.self), for: indexPath) as? ProductionCompanyCollectionViewCell else { return UICollectionViewCell()}
                 if let productionCompany = self.detailedMovie?.productionCompanies?[indexPath.row] {
                     cell.configure(with: productionCompany)
                 }
