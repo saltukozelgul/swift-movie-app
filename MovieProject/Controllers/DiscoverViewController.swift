@@ -7,7 +7,6 @@
 
 import UIKit
 import Alamofire
-import MultiSlider
 
 class DiscoverViewController: UIViewController {
     // Properties
