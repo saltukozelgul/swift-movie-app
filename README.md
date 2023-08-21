@@ -95,12 +95,12 @@ A new feature in the Movie Explorer app is the ability to create custom movie li
 Here are some screenshots from the Movie Explorer app:
 
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0;">
-  <img src="/previews/main-screen.png" alt="Screenshot 1" style="width: 15%; max-width: 300px;">
-  <img src="/previews/detail-screen-1.png" alt="Screenshot 2" style="width: 15%; max-width: 300px;">
-  <img src="/previews/detail-screen-2.png" alt="Screenshot 3" style="width: 15%; max-width: 300px;">
-  <img src="/previews/cast-screen.png" alt="Screenshot 4" style="width: 15%; max-width: 300px;">
-  <img src="/previews/custom-list-screen.png" alt="Screenshot 5" style="width: 15%; max-width: 300px;">
-  <img src="/previews/discover-screen.png" alt="Screenshot 6" style="width: 15%; max-width: 300px;">
+  <img src="/previews/main-screen.png" alt="Screenshot 1" style="width: 23%; max-width: 300px;">
+  <img src="/previews/detail-screen-1.png" alt="Screenshot 2" style="width: 23%; max-width: 300px;">
+  <img src="/previews/detail-screen-2.png" alt="Screenshot 3" style="width: 23%; max-width: 300px;">
+  <img src="/previews/cast-screen.png" alt="Screenshot 4" style="width: 23%; max-width: 300px;">
+  <img src="/previews/custom-list-screen.png" alt="Screenshot 5" style="width: 23%; max-width: 300px;">
+  <img src="/previews/discover-screen.png" alt="Screenshot 6" style="width: 23%; max-width: 300px;">
 </div>
 
 ## Usage
