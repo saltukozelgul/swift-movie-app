@@ -4,7 +4,7 @@
 ![Alamofire](https://img.shields.io/badge/Library-Alamofire-red.svg)
 ![Kingfisher](https://img.shields.io/badge/Library-Kingfisher-red.svg)
 
-Movie Explorer is an iOS application that allows users to explore and discover movies. It fetches data from The Movie Database API to provide information about popular movies, search for movies, view movie details, explore cast members, and manage custom movie lists.
+Movie Explorer is an iOS application that allows users to explore and discover movies. It fetches data from The Movie Database API to provide information about popular movies, search for movies, view movie details, explore cast members, and manage custom movie lists. App supports **dark and light mode** and has **localization** support
 
 ## Table of Contents
 - [Introduction](#introduction)
