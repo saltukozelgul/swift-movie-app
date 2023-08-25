@@ -1,7 +1,6 @@
 # Movie Explorer App
 
 ![iOS Version](https://img.shields.io/badge/iOS-13%2B-green.svg)
-![UIKit](https://img.shields.io/badge/Library-UIKit-red.svg)
 ![Alamofire](https://img.shields.io/badge/Library-Alamofire-red.svg)
 ![Kingfisher](https://img.shields.io/badge/Library-Kingfisher-red.svg)
 
